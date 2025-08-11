@@ -8,9 +8,15 @@
         <span>Status: <span class="font-semibold">{{ ucfirst($post->status) }}</span></span> |
         <span>Publikasi: {{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d-m-Y') : '-' }}</span>
     </div>
-    <div class="mb-4">
-        <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">Tags: {{ $post->tags }}</span>
+   <div class="mb-4">
+    <div class="flex flex-wrap gap-2">
+        @foreach($post->tags as $tag)
+            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                {{ $tag->name }}
+            </span>
+        @endforeach
     </div>
+</div>
     @if($post->thumbnail)
         <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="Thumbnail" class="mb-4 rounded shadow h-48 object-cover">
     @endif

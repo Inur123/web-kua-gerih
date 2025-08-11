@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Admin\Posts;
 
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\PostImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->latest()->paginate(10);
+        $posts = Post::with(['category', 'tags'])->latest()->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -43,13 +45,31 @@ class PostController extends Controller
 
         $post = Post::create([
             'title'        => $request->title,
+            'slug'         => Str::slug($request->title),
             'status'       => $request->status,
             'content'      => $request->content,
             'thumbnail'    => $thumbnailPath,
             'category_id'  => $request->category_id,
             'published_at' => $request->published_at,
-            'tags'         => $request->tags
         ]);
+
+        // Handle tags
+        if ($request->tags) {
+            $tags = array_map('trim', explode(',', $request->tags));
+            $tagIds = [];
+
+            foreach ($tags as $tagName) {
+                if (!empty($tagName)) {
+                    $tag = Tag::firstOrCreate([
+                        'name' => $tagName,
+                        'slug' => Str::slug($tagName)
+                    ]);
+                    $tagIds[] = $tag->id;
+                }
+            }
+
+            $post->tags()->sync($tagIds);
+        }
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $img) {
@@ -67,7 +87,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $postTags = $post->tags->pluck('name')->implode(', ');
+
+        return view('admin.posts.edit', compact('post', 'categories', 'postTags'));
     }
 
     public function update(Request $request, Post $post)
@@ -98,13 +120,31 @@ class PostController extends Controller
         // Update post data
         $post->update([
             'title'        => $request->title,
+            'slug'         => Str::slug($request->title),
             'status'       => $request->status,
             'content'      => $request->content,
             'thumbnail'    => $thumbnailPath,
             'category_id'  => $request->category_id,
             'published_at' => $request->published_at,
-            'tags'         => $request->tags
         ]);
+
+        // Handle tags
+        $tagIds = [];
+        if ($request->tags) {
+            $tags = array_map('trim', explode(',', $request->tags));
+
+            foreach ($tags as $tagName) {
+                if (!empty($tagName)) {
+                    $tag = Tag::firstOrCreate([
+                        'name' => $tagName,
+                        'slug' => Str::slug($tagName)
+                    ]);
+                    $tagIds[] = $tag->id;
+                }
+            }
+        }
+
+        $post->tags()->sync($tagIds);
 
         // Handle deleted images
         if ($request->deleted_images) {
@@ -151,12 +191,18 @@ class PostController extends Controller
             $image->delete();
         }
 
+        // Detach all tags
+        $post->tags()->detach();
+
         $post->delete();
         return back()->with('success', 'Berita berhasil dihapus.');
     }
 
-    public function show(Post $post)
-    {
-        return view('admin.posts.show', compact('post'));
-    }
+   public function show(Post $post)
+{
+    $post->load(['category', 'tags', 'images']);
+    $tagsString = $post->tags->pluck('name')->implode(', ');
+
+    return view('admin.posts.show', compact('post', 'tagsString'));
+}
 }

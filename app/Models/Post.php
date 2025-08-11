@@ -12,7 +12,7 @@ class Post extends Model
 
     protected $fillable = [
         'title', 'slug', 'status', 'content',
-        'thumbnail', 'category_id', 'published_at', 'tags'
+        'thumbnail', 'category_id', 'published_at',
     ];
 
     protected static function boot()
@@ -52,5 +52,14 @@ class Post extends Model
     {
         return $this->hasMany(PostImage::class);
     }
+   public function tags()
+{
+    return $this->belongsToMany(Tag::class)->withTimestamps();
+}
+public function getTagsListAttribute()
+{
+    return $this->tags->pluck('name')->implode(', ');
+}
+
 }
 
