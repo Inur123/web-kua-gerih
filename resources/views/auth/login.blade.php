@@ -157,27 +157,6 @@
                                 <i class="fas fa-sign-in-alt mr-2"></i>
                                 Masuk
                             </button>
-
-                            <!-- Divider -->
-                            <div class="relative">
-                                <div class="absolute inset-0 flex items-center">
-                                    <div class="w-full border-t border-gray-300"></div>
-                                </div>
-                                <div class="relative flex justify-center text-sm">
-                                    <span class="px-2 bg-white text-gray-500">atau</span>
-                                </div>
-                            </div>
-
-                            <!-- Register Link -->
-                            <div class="text-center">
-                                <p class="text-gray-600 text-sm">
-                                    Belum punya akun?
-                                    <a href="{{ route('register') }}"
-                                        class="text-kemenag-green font-semibold hover:text-kemenag-light-green transition-colors">
-                                        Daftar di sini
-                                    </a>
-                                </p>
-                            </div>
                         </form>
                     </div>
                 </div>
