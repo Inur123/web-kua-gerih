@@ -53,6 +53,82 @@
             }, 200);
         }
     });
+     // Dropdown functionality for sidebar menus
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mobile sidebar toggle
+        const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
+        const sidebarMobile = document.getElementById("sidebarMobile");
+        const sidebarMobileOverlay = document.getElementById("sidebarMobileOverlay");
+        const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+
+        if (sidebarToggleBtn && sidebarMobile && sidebarMobileOverlay && closeSidebarBtn) {
+            function openSidebar() {
+                sidebarMobile.classList.remove("-translate-x-full");
+                sidebarMobileOverlay.classList.remove("hidden");
+            }
+
+            function closeSidebar() {
+                sidebarMobile.classList.add("-translate-x-full");
+                sidebarMobileOverlay.classList.add("hidden");
+            }
+
+            sidebarToggleBtn.addEventListener("click", openSidebar);
+            closeSidebarBtn.addEventListener("click", closeSidebar);
+            sidebarMobileOverlay.addEventListener("click", closeSidebar);
+
+            // Close sidebar with ESC key
+            document.addEventListener("keydown", function(e) {
+                if (e.key === "Escape") closeSidebar();
+            });
+        }
+
+        // Sidebar dropdown functionality
+        document.querySelectorAll('.dropdown-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const dropdownGroup = this.closest('.dropdown-group');
+                const dropdownContent = dropdownGroup.querySelector('.dropdown-content');
+                const chevron = this.querySelector('.fa-chevron-down');
+
+                // Toggle the dropdown content
+                dropdownContent.classList.toggle('hidden');
+
+                // Rotate the chevron icon
+                chevron.classList.toggle('rotate-180');
+
+                // Close other open dropdowns
+                document.querySelectorAll('.dropdown-group').forEach(group => {
+                    if (group !== dropdownGroup) {
+                        group.querySelector('.dropdown-content').classList.add('hidden');
+                        group.querySelector('.fa-chevron-down').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown-group')) {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.querySelectorAll('.dropdown-btn .fa-chevron-down').forEach(chevron => {
+                    chevron.classList.remove('rotate-180');
+                });
+            }
+        });
+
+        // Auto-open dropdown if child is active (for Laravel route highlighting)
+        document.querySelectorAll('.dropdown-content a').forEach(link => {
+            if (link.classList.contains('bg-kemenag-light-green')) {
+                const dropdownGroup = link.closest('.dropdown-group');
+                dropdownGroup.querySelector('.dropdown-content').classList.remove('hidden');
+                dropdownGroup.querySelector('.fa-chevron-down').classList.add('rotate-180');
+            }
+        });
+    });
 
     // Close dropdown when clicking outside
     document.addEventListener("click", function(e) {
@@ -67,4 +143,26 @@
             }, 200);
         }
     });
+
+     // Notification close functionality (manual and auto-close after 3 seconds)
+        document.querySelectorAll('.notification').forEach(notification => {
+            // Manual close
+            const closeButton = notification.querySelector('.notification-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    notification.remove();
+                });
+            }
+
+            // Auto-close after 3 seconds
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+
+                // Remove the element after the fade out completes
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        });
 </script>

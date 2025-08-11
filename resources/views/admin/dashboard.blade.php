@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
     <div class="grid grid-cols-1 gap-4 md:gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm border-l-4 border-kemenag-gold">
             <div class="flex justify-between items-center">

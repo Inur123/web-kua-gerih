@@ -143,7 +143,7 @@
                                         placeholder="Masukkan password">
                                     <button type="button" onclick="togglePassword()"
                                         class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-kemenag-green transition-colors">
-                                        <i id="toggle-icon" class="fas fa-eye"></i>
+                                        <i id="toggle-icon" class="fas fa-eye cursor-pointer"></i>
                                     </button>
                                 </div>
                                 @error('password')
@@ -153,7 +153,7 @@
 
                             <!-- Login Button -->
                             <button type="submit"
-                                class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2">
+                                class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2 cursor-pointer">
                                 <i class="fas fa-sign-in-alt mr-2"></i>
                                 Masuk
                             </button>

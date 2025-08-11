@@ -148,7 +148,7 @@
                                         placeholder="Minimal 8 karakter" oninput="checkPasswordMatch()">
                                     <button type="button" onclick="togglePassword('password', 'toggle-icon-1')"
                                         class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-kemenag-green transition-colors">
-                                        <i id="toggle-icon-1" class="fas fa-eye"></i>
+                                        <i id="toggle-icon-1" class="fas fa-eye cursor-pointer"></i>
                                     </button>
                                 </div>
                             </div>
@@ -164,14 +164,14 @@
                                         placeholder="Ulangi password" oninput="checkPasswordMatch()">
                                     <button type="button" onclick="togglePassword('confirm-password', 'toggle-icon-2')"
                                         class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-kemenag-green transition-colors">
-                                        <i id="toggle-icon-2" class="fas fa-eye"></i>
+                                        <i id="toggle-icon-2" class="fas fa-eye cursor-pointer"></i>
                                     </button>
                                 </div>
                                 <div id="password-match" class="mt-2"></div>
                             </div>
                             <!-- Register Button -->
                             <button type="submit"
-                                class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2">
+                                class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2 cursor-pointer">
                                 <i class="fas fa-user-plus mr-2"></i>
                                 Daftar Sekarang
                             </button>
