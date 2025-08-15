@@ -60,6 +60,8 @@ public function getTagsListAttribute()
 {
     return $this->tags->pluck('name')->implode(', ');
 }
-
+protected $casts = [
+    'published_at' => 'datetime',
+];
 }
 
