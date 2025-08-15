@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LayananController as AdminLayananController;
 use App\Http\Controllers\Admin\Posts\PostController;
 use App\Http\Controllers\Admin\Posts\CategoryController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LayananController;
+
 use App\Http\Controllers\Profile\SejarahController;
 use App\Http\Controllers\Profile\StrukturOrganisasiController;
 use App\Http\Controllers\Profile\VisiMisiController;
@@ -25,6 +27,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('posts', PostController::class);
+    Route::resource('layanans', AdminLayananController::class);
+    // Tambah persyaratan dari detail layanan
+    Route::post('layanans/{layanan}/persyaratans', [AdminLayananController::class, 'storePersyaratan'])
+        ->name('layanans.persyaratans.store');
 });
 
 
@@ -32,6 +38,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
+Route::get('/layanan/{slug}', [LayananController::class, 'show'])->name('layanan.show');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');

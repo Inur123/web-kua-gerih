@@ -27,12 +27,8 @@ class BeritaController extends Controller
         $categories = Category::withCount(['posts' => function ($query) {
             $query->where('status', 'active');
         }])->get();
-          $popularPosts = Post::where('status', 'active')
-        ->orderBy('views', 'desc')
-        ->take(5)
-        ->get();
 
-        return view('user.posts.index', compact('featuredPost', 'otherPosts', 'categories', 'popularPosts'));
+        return view('user.posts.index', compact('featuredPost', 'otherPosts', 'categories', ));
     }
 
 
@@ -51,13 +47,7 @@ class BeritaController extends Controller
         $query->where('status', 'active');
     }])->get();
 
-    // Ambil 5 berita terpopuler (views terbanyak)
-    $popularPosts = Post::where('status', 'active')
-        ->orderBy('views', 'desc')
-        ->take(5)
-        ->get();
-
-    return view('user.posts.show', compact('post', 'categories', 'popularPosts'));
+    return view('user.posts.show', compact('post', 'categories', ));
 }
 
 }

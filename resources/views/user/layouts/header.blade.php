@@ -1,24 +1,24 @@
   <header class="bg-white shadow-md">
       <!-- Top Bar -->
-     <div class="bg-kemenag-green text-white py-2">
-    <div class="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm">
-        <div class="flex items-center space-x-2 sm:space-x-4">
-            <span class="flex items-center">
-                <i class="fas fa-envelope mr-1"></i>
-                <span class="hidden sm:inline">kua@kemenag.go.id</span>
-                <span class="sm:hidden">kua@kemenag.go.id</span>
-            </span>
-            <span class="flex items-center">
-                <i class="fas fa-phone mr-1"></i>
-                <span class="hidden sm:inline">(021) 123-4567</span>
-                <span class="sm:hidden">(021) 123-4567</span>
-            </span>
-        </div>
-        <div class="flex items-center space-x-2">
-            <span id="realtime-date" class="text-xs sm:text-sm"></span>
-        </div>
-    </div>
-</div>
+      <div class="bg-kemenag-green text-white py-2">
+          <div class="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm">
+              <div class="flex items-center space-x-2 sm:space-x-4">
+                  <span class="flex items-center">
+                      <i class="fas fa-envelope mr-1"></i>
+                      <span class="hidden sm:inline">kua@kemenag.go.id</span>
+                      <span class="sm:hidden">kua@kemenag.go.id</span>
+                  </span>
+                  <span class="flex items-center">
+                      <i class="fas fa-phone mr-1"></i>
+                      <span class="hidden sm:inline">(021) 123-4567</span>
+                      <span class="sm:hidden">(021) 123-4567</span>
+                  </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                  <span id="realtime-date" class="text-xs sm:text-sm"></span>
+              </div>
+          </div>
+      </div>
 
       <!-- Main Header -->
       <div class="container mx-auto px-4 py-4">
@@ -84,7 +84,7 @@
                       </li>
                       <li>
                           <a href="{{ route('layanan.index') }}"
-                              class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base @if (request()->routeIs('layanan.index')) bg-kemenag-green @endif">Layanan</a>
+                              class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base @if (request()->routeIs('layanan.*')) bg-kemenag-green @endif">Layanan</a>
                       </li>
                       <li>
                           <a href="{{ route('berita.index') }}"
@@ -172,11 +172,14 @@
                   <!-- Layanan -->
                   <li class="border-t border-white border-opacity-10">
                       <a href="{{ route('layanan.index') }}"
-                          class="flex items-center py-4 px-6 text-white hover:bg-white hover:bg-opacity-10 transition-colors border-l-4 @if (request()->routeIs('layanan.index')) border-kemenag-gold  bg-opacity-10 @else border-transparent hover:border-kemenag-gold @endif group">
+                          class="flex items-center py-4 px-6 text-white hover:bg-white hover:bg-opacity-10 transition-colors border-l-4
+       @if (request()->is('layanan') || request()->is('layanan/*')) border-kemenag-gold bg-opacity-10
+       @else border-transparent hover:border-kemenag-gold @endif group">
                           <i class="fas fa-cogs w-6 mr-4 text-kemenag-gold"></i>
                           <span class="font-medium">Layanan</span>
                       </a>
                   </li>
+
 
                   <li class="border-t border-white border-opacity-10">
                       <a href="{{ route('berita.index') }}"
@@ -201,41 +204,41 @@
       </div>
   </header>
   <script>
-    function updateDateTime() {
-        const now = new Date();
-        const isMobile = window.innerWidth < 640; // Tailwind's sm breakpoint
+      function updateDateTime() {
+          const now = new Date();
+          const isMobile = window.innerWidth < 640; // Tailwind's sm breakpoint
 
-        if (isMobile) {
-            // Format untuk mobile: "Jumat, 15 Agustus 2025"
-            const options = {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            };
-            document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
-        } else {
-            // Format untuk desktop: dengan jam
-            const options = {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            };
-            document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
-        }
-    }
+          if (isMobile) {
+              // Format untuk mobile: "Jumat, 15 Agustus 2025"
+              const options = {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+              };
+              document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
+          } else {
+              // Format untuk desktop: dengan jam
+              const options = {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: false
+              };
+              document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
+          }
+      }
 
-    // Update immediately
-    updateDateTime();
+      // Update immediately
+      updateDateTime();
 
-    // Update every second
-    setInterval(updateDateTime, 1000);
+      // Update every second
+      setInterval(updateDateTime, 1000);
 
-    // Update saat ukuran layar berubah
-    window.addEventListener('resize', updateDateTime);
-</script>
+      // Update saat ukuran layar berubah
+      window.addEventListener('resize', updateDateTime);
+  </script>
