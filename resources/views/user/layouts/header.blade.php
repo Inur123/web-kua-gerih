@@ -1,28 +1,24 @@
   <header class="bg-white shadow-md">
       <!-- Top Bar -->
-      <div class="bg-kemenag-green text-white py-2">
-          <div class="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm">
-              <div class="flex items-center space-x-2 sm:space-x-4">
-                  <span class="flex items-center">
-                      <i class="fas fa-envelope mr-1"></i>
-                      <span class="hidden sm:inline">kua@kemenag.go.id</span>
-                      <span class="sm:hidden">kua@kemenag.go.id</span>
-                  </span>
-                  <span class="flex items-center">
-                      <i class="fas fa-phone mr-1"></i>
-                      <span class="hidden sm:inline">(021) 123-4567</span>
-                      <span class="sm:hidden">(021) 123-4567</span>
-                  </span>
-              </div>
-              <div class="flex items-center space-x-2">
-                  <span class="hidden sm:inline">Bahasa:</span>
-                  <select class="bg-transparent border border-white rounded px-1 sm:px-2 py-1 text-xs">
-                      <option value="id" class="text-black">ID</option>
-                      <option value="en" class="text-black">EN</option>
-                  </select>
-              </div>
-          </div>
-      </div>
+     <div class="bg-kemenag-green text-white py-2">
+    <div class="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm">
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <span class="flex items-center">
+                <i class="fas fa-envelope mr-1"></i>
+                <span class="hidden sm:inline">kua@kemenag.go.id</span>
+                <span class="sm:hidden">kua@kemenag.go.id</span>
+            </span>
+            <span class="flex items-center">
+                <i class="fas fa-phone mr-1"></i>
+                <span class="hidden sm:inline">(021) 123-4567</span>
+                <span class="sm:hidden">(021) 123-4567</span>
+            </span>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span id="realtime-date" class="text-xs sm:text-sm"></span>
+        </div>
+    </div>
+</div>
 
       <!-- Main Header -->
       <div class="container mx-auto px-4 py-4">
@@ -204,3 +200,42 @@
           </div>
       </div>
   </header>
+  <script>
+    function updateDateTime() {
+        const now = new Date();
+        const isMobile = window.innerWidth < 640; // Tailwind's sm breakpoint
+
+        if (isMobile) {
+            // Format untuk mobile: "Jumat, 15 Agustus 2025"
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
+        } else {
+            // Format untuk desktop: dengan jam
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            document.getElementById('realtime-date').textContent = now.toLocaleDateString('id-ID', options);
+        }
+    }
+
+    // Update immediately
+    updateDateTime();
+
+    // Update every second
+    setInterval(updateDateTime, 1000);
+
+    // Update saat ukuran layar berubah
+    window.addEventListener('resize', updateDateTime);
+</script>
