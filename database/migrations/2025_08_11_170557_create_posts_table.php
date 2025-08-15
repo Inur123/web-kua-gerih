@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->date('published_at')->nullable();
+            $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });
     }

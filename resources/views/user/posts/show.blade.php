@@ -78,7 +78,7 @@
                         </div>
 
                         <!-- Categories -->
-                          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                             <h3 class="font-bold text-kemenag-green mb-4">Kategori</h3>
                             <ul class="space-y-2 text-sm">
                                 <li>
@@ -101,17 +101,24 @@
                         <div class="bg-white rounded-lg shadow-lg p-6">
                             <h3 class="font-bold text-kemenag-green mb-4">Berita Terpopuler</h3>
                             <div class="space-y-4">
-                                <article class="flex space-x-3">
-                                    <img src="{{ asset('images/gambar-kua.png') }}" alt="Berita"
-                                        class="w-20 h-15 object-cover rounded">
-                                    <div class="flex-1">
-                                        <h4 class="text-sm font-semibold text-gray-800 mb-1">Jadwal Pelayanan Ramadan 2024
-                                        </h4>
-                                        <span class="text-xs text-gray-500">5 Januari 2024</span>
-                                    </div>
-                                </article>
+                                @foreach ($popularPosts as $popular)
+                                    <article class="flex space-x-3">
+                                        <img src="{{ $popular->thumbnail ? asset('storage/' . $popular->thumbnail) : asset('images/gambar-kua.png') }}"
+                                            alt="{{ $popular->title }}" class="w-20 h-15 object-cover rounded">
+                                        <div class="flex-1">
+                                            <h4 class="text-sm font-semibold text-gray-800 mb-1">
+                                                <a href="{{ route('berita.show', $popular->slug) }}"
+                                                    class="hover:underline">
+                                                    {{ $popular->title }}
+                                                </a>
+                                            </h4>
+                                            <p class="text-xs text-gray-500">{{ $popular->views }} views</p>
+                                        </div>
+                                    </article>
+                                @endforeach
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

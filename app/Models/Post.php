@@ -12,7 +12,8 @@ class Post extends Model
 
     protected $fillable = [
         'title', 'slug', 'status', 'content',
-        'thumbnail', 'category_id', 'published_at',
+        'thumbnail', 'category_id', 'published_at','views',
+
     ];
 
     protected static function boot()
