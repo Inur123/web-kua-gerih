@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>KUA Kecamatan Gerih - Kantor Urusan Agama</title>
+    <title>@yield('title', 'KUA Kecamatan Gerih - Kantor Urusan Agama')</title>
     <meta name="description" content="Kantor Urusan Agama (KUA) Kecamatan Gerih menyediakan layanan pernikahan islami, pencatatan nikah, dispensasi nikah, rujuk, dan layanan keagamaan resmi di wilayah Kecamatan Gerih">
     <meta name="keywords" content="KUA Gerih, Nikah Gerih, Kantor Urusan Agama Gerih, Pernikahan Islam, Pencatatan Nikah, Dispensasi Nikah, Rujuk, Layanan KUA, Kecamatan Gerih, Kabupaten Ngawi">
     <meta name="author" content="KUA Kecamatan Gerih">
@@ -22,7 +22,7 @@
     <meta property="og:title" content="KUA Kecamatan Gerih | Layanan Nikah & Catatan Sipil Islam">
     <meta property="og:description" content="Pelayanan resmi pernikahan islami, pencatatan nikah, dispensasi nikah dan layanan keagamaan di Kecamatan Gerih">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.kua-gerih.com">
+    <meta property="og:url" content="https://veltira.tech/">
     <meta property="og:image" content="{{ asset('images/logo-kua.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">

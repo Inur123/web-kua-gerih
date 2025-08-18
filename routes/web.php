@@ -17,8 +17,8 @@ use App\Http\Controllers\Admin\Posts\CategoryController;
 use App\Http\Controllers\Profile\StrukturOrganisasiController;
 use App\Http\Controllers\Admin\LayananController as AdminLayananController;
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+// Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
