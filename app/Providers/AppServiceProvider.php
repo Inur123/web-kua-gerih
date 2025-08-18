@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\Category;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,12 +24,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       View::composer([
-    'user.*',
-], function ($view) {
-    $categories = Category::withCount('posts')->get();
-    $popularPosts = Post::orderByDesc('views')->take(5)->get();
-    $view->with(compact('categories', 'popularPosts'));
-});
+        View::composer([
+            'user.*',
+        ], function ($view) {
+            $categories = Category::withCount('posts')->get();
+            $popularPosts = Post::orderByDesc('views')->take(5)->get();
+            $view->with(compact('categories', 'popularPosts'));
+        });
+
+        Carbon::setLocale('id');
+        CarbonInterval::setLocale('id');
+
     }
 }

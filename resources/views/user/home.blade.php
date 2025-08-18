@@ -1,6 +1,72 @@
 @extends('user.layouts.app')
 @section('title', 'Beranda - Kua Gerih')
 @section('content')
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .popup-image-only {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        .popup-overlay.active .popup-image-only {
+            transform: scale(1);
+        }
+
+        .image-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .image-close-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+    </style>
     <section
         class="hero-section relative bg-gradient-to-r from-kemenag-green to-kemenag-light-green text-white py-12 md:py-16 lg:py-20">
         <div class="container mx-auto px-4">
@@ -115,8 +181,11 @@
                                     {{ $post->category->name }}
                                 </span>
                                 <span class="text-xs text-gray-500 ml-auto">
-                                    {{ $post->published_at ? $post->published_at->format('d F Y') : $post->created_at->format('d F Y') }}
+                                    {{ $post->published_at
+                                        ? $post->published_at->translatedFormat('d F Y')
+                                        : $post->created_at->translatedFormat('d F Y') }}
                                 </span>
+
                             </div>
                             <div class="h-48 md:h-56 rounded-lg mb-4 overflow-hidden">
                                 <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}"
@@ -124,7 +193,6 @@
                             </div>
                             <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
                                 {{ Str::limit($post->title, 40) }}
-
                             </h4>
                             <p class="text-xs md:text-sm text-gray-600 mb-3">
                                 {{ Str::limit(strip_tags($post->content), 100) }}
@@ -366,4 +434,38 @@
             </div>
         </div>
     </section>
+    @if ($banner && $banner->status)
+        <div class="popup-overlay active" id="popupBanner">
+            <div class="popup-container">
+                <!-- Banner gambar bisa diklik -->
+                <a href="{{ $banner->link ?? '#' }}" target="_blank">
+                    <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}"
+                        class="popup-image-only" />
+                </a>
+                <!-- Tombol close -->
+                <button class="image-close-btn" id="closePopup">×</button>
+            </div>
+        </div>
+    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('popupBanner');
+            const closeBtn = document.getElementById('closePopup');
+
+            if (popup) {
+                popup.classList.add('active'); // tampilkan otomatis saat home
+
+                closeBtn.addEventListener('click', function() {
+                    popup.classList.remove('active');
+                });
+
+                // klik luar container untuk close
+                popup.addEventListener('click', function(e) {
+                    if (e.target === popup) {
+                        popup.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

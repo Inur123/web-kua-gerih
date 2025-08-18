@@ -51,6 +51,19 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-700">Isi Berita</label>
+                        <textarea id="content" name="content" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('content') border-red-500 @enderror"
+                            placeholder="Masukkan isi berita">{{ old('content') }}</textarea>
+                        @error('content')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                {{-- Kanan --}}
+                <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tags (pisahkan dengan koma)</label>
                         <input type="text" name="tags" value="{{ old('tags') }}"
@@ -60,9 +73,6 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                </div>
-                {{-- Kanan --}}
-                <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Thumbnail</label>
                         <input type="file" name="thumbnail" accept="image/*"
@@ -73,15 +83,7 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Isi Berita</label>
-                        <textarea name="content" rows="6" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('content') border-red-500 @enderror"
-                            placeholder="Masukkan isi berita">{{ old('content') }}</textarea>
-                        @error('content')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Gambar Lain (opsional)</label>
                         <div id="image-input-group">
@@ -181,5 +183,23 @@
         `;
             }
         }
+    </script>
+    <script src="https://cdn.tiny.cloud/1/mimr482vltcpcta1nd94dwlkgbsdgmcyz4n3tve4ydvf4l83/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#content', // target textarea
+            menubar: true, // menubar atas
+            plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern help emoticons',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
+            toolbar_sticky: true,
+            height: 400,
+            autosave_ask_before_unload: true,
+            autosave_interval: "30s",
+            autosave_prefix: "{path}{query}-{id}-",
+            image_advtab: true,
+            importcss_append: true,
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+        });
     </script>
 @endsection

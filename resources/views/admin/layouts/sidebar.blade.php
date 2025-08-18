@@ -46,7 +46,23 @@
                     <i class="fas fa-kaaba w-5"></i>
                     <span>Layanan</span>
                 </a>
-
+                <div class="dropdown-group">
+                    <button
+                        class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-users w-5"></i>
+                            <span>Pengaturan</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div class="dropdown-content hidden pl-4 mt-1 space-y-1">
+                        <a href="{{ route('banner.edit') }}"
+                            class="flex items-center space-x-3 {{ request()->routeIs('banner.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                            <i class="fas fa-list w-5"></i>
+                            <span>Banner</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

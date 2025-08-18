@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +20,9 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        return view('user.home', compact('posts'));
+        $banner = Banner::where('status', true)->first();
+
+        return view('user.home', compact('posts', 'banner'));
     }
 
 }

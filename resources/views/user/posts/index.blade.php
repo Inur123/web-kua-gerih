@@ -22,11 +22,13 @@
                                         <span
                                             class="bg-kemenag-green text-white px-3 py-1 rounded-full text-xs">UTAMA</span>
                                         <span class="text-gray-500 text-sm">
-                                            {{ $featuredPost->created_at->format('d F Y') }}
+                                            {{ $featuredPost->created_at->translatedFormat('d F Y') }}
                                         </span>
                                     </div>
                                     <h2 class="text-2xl font-bold text-kemenag-green mb-3">{{ $featuredPost->title }}</h2>
-                                    <p class="text-gray-700 mb-4">{{ Str::limit($featuredPost->content, 150) }}</p>
+                                    <p class="text-gray-700 mb-4">{{ Str::limit(strip_tags($featuredPost->content), 150) }}
+                                    </p>
+
                                     <span class="text-kemenag-green font-semibold group-hover:underline">
                                         Baca Selengkapnya →
                                     </span>
@@ -51,11 +53,13 @@
                                                     {{ $post->category->name ?? 'KEGIATAN' }}
                                                 </span>
                                                 <span class="text-gray-500 text-sm">
-                                                    {{ $post->created_at->format('d F Y') }}
+                                                    {{ $post->created_at->translatedFormat('d F Y') }}
                                                 </span>
+
                                             </div>
                                             <h3 class="text-xl font-bold text-kemenag-green mb-2">{{ $post->title }}</h3>
-                                            <p class="text-gray-700 mb-3">{{ Str::limit($post->content, 100) }}</p>
+                                            <p class="text-gray-700 mb-3">{{ Str::limit(strip_tags($post->content), 150) }}
+                                            </p>
                                             <span class="text-kemenag-green font-semibold group-hover:underline">
                                                 Baca Selengkapnya →
                                             </span>
