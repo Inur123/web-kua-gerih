@@ -6,16 +6,18 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\RegulasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Profile\SejarahController;
-use App\Http\Controllers\Admin\Posts\PostController;
 
+use App\Http\Controllers\Admin\Posts\PostController;
 use App\Http\Controllers\Profile\VisiMisiController;
 use App\Http\Controllers\Admin\Posts\CategoryController;
 use App\Http\Controllers\Profile\StrukturOrganisasiController;
 use App\Http\Controllers\Admin\LayananController as AdminLayananController;
+use App\Http\Controllers\Admin\RegulasiController as AdminRegulasiController;
 
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 // Route::post('/register', [AuthController::class, 'register']);
@@ -29,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('posts', PostController::class);
     Route::resource('layanans', AdminLayananController::class);
+     Route::resource('regulasis', AdminRegulasiController::class);
+
     // Tambah persyaratan dari detail layanan
     Route::post('layanans/{layanan}/persyaratans', [AdminLayananController::class, 'storePersyaratan'])
         ->name('layanans.persyaratans.store');
@@ -52,6 +56,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/survey', [App\Http\Controllers\SurveyController::class, 'index'])->name('survey.index');
 Route::post('/survey', [App\Http\Controllers\SurveyController::class, 'store'])->name('survey.store');
+Route::get('/regulasi', [RegulasiController::class, 'index'])->name('regulasi.index');
+Route::get('/regulasi/{slug}', [RegulasiController::class, 'show'])->name('regulasi.show');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');

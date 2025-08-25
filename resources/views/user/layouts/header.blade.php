@@ -87,6 +87,14 @@
                             class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base @if (request()->routeIs('layanan.*')) bg-kemenag-green @endif">Layanan</a>
                     </li>
                     <li>
+    <a href="{{ route('regulasi.index') }}"
+       class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base
+       @if (request()->routeIs('regulasi.*')) bg-kemenag-green @endif">
+       Regulasi
+    </a>
+</li>
+
+                    <li>
                         <a href="{{ route('berita.index') }}"
                             class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base @if (request()->routeIs('berita.*')) bg-kemenag-green @endif">
                             Berita
@@ -185,6 +193,17 @@
                         <span class="font-medium">Layanan</span>
                     </a>
                 </li>
+                <li class="border-t border-white border-opacity-10">
+    <a href="{{ route('regulasi.index') }}"
+       class="flex items-center py-4 px-6 text-white hover:bg-white hover:bg-opacity-10 transition-colors border-l-4
+       @if (request()->is('regulasi') || request()->is('regulasi/*')) border-kemenag-gold bg-opacity-10
+       @else border-transparent hover:border-kemenag-gold @endif group">
+        <i class="fas fa-file-alt w-6 mr-4 text-kemenag-gold"></i>
+        <span class="font-medium">Regulasi</span>
+    </a>
+</li>
+
+
 
                 <!-- Berita -->
                 <li class="border-t border-white border-opacity-10">

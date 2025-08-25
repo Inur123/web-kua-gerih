@@ -3,8 +3,14 @@
 @section('content')
 <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-gray-100 min-h-screen">
 
+    @php
+        $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+        $avg = round($stat['avg'] ?? 0);
+    @endphp
+
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <!-- Total Survey -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm border-l-4 border-kemenag-green">
             <div class="flex justify-between items-center">
                 <div>
@@ -21,18 +27,16 @@
                 <span class="text-green-500">+10%</span> dari bulan lalu
             </p>
         </div>
+
+        <!-- Average Rating -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm border-l-4 border-kemenag-light-green">
             <div class="flex justify-between items-center">
                 <div>
                     <p class="text-gray-500 text-xs sm:text-sm">Rata-rata Rating</p>
-                    @php
-                        $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
-                        $avg = round($stat['avg'] ?? 0);
-                    @endphp
                     <div class="flex items-center gap-2">
                         <span class="text-lg sm:text-xl md:text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
                         <span class="text-lg sm:text-xl md:text-2xl font-bold text-kemenag-green">
-                            {{ number_format($stat['avg'], 2) ?? 0 }}
+                            {{ number_format($stat['avg'] ?? 0, 2) }}
                         </span>
                     </div>
                 </div>
@@ -44,6 +48,8 @@
                 <span class="text-green-500">+0.5</span> dari bulan lalu
             </p>
         </div>
+
+        <!-- Most Rating -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm border-l-4 border-kemenag-gold">
             <div class="flex justify-between items-center">
                 <div>
@@ -60,12 +66,18 @@
                 <span class="text-green-500">+15%</span> dari bulan lalu
             </p>
         </div>
+
+        <!-- Latest Survey -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm border-l-4 border-kemenag-green">
             <div class="flex justify-between items-center">
                 <div>
                     <p class="text-gray-500 text-xs sm:text-sm">Survey Terbaru</p>
                     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-kemenag-green">
-                        {{ $surveys->first()->created_at->format('d M Y') ?? '-' }}
+                        @if($surveys->isNotEmpty())
+                            {{ $surveys->first()->created_at->format('d M Y') }}
+                        @else
+                            -
+                        @endif
                     </h3>
                 </div>
                 <div class="bg-kemenag-green bg-opacity-10 text-kemenag-green p-2 sm:p-3 rounded-lg">
@@ -78,7 +90,7 @@
         </div>
     </div>
 
-    <!-- Chart and Table -->
+    <!-- Chart and Recent Surveys -->
     <div class="grid grid-cols-1 gap-4 sm:gap-6 mb-8 lg:grid-cols-3">
         <!-- Chart -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm lg:col-span-2">
@@ -94,6 +106,7 @@
                 <canvas id="surveyChart" class="w-full h-40 sm:h-48 md:h-64"></canvas>
             </div>
         </div>
+
         <!-- Recent Surveys -->
         <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm">
             <h3 class="font-semibold text-kemenag-green mb-4 text-base sm:text-lg">Survey Terkini</h3>
@@ -107,7 +120,9 @@
                             <p class="text-xs sm:text-sm font-medium">
                                 {{ $survey->name ?? '-' }} - {{ $emojis[$survey->rating] ?? $survey->rating }}
                             </p>
-                            <p class="text-xs text-gray-500">{{ $survey->created_at->format('d M Y - H:i') }}</p>
+                            <p class="text-xs text-gray-500">
+                                {{ optional($survey->created_at)->format('d M Y - H:i') ?? '-' }}
+                            </p>
                         </div>
                     </div>
                 @empty
@@ -117,7 +132,7 @@
         </div>
     </div>
 
-    <!-- Table -->
+    <!-- Table Survey -->
     <div class="bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-sm">
         <h3 class="font-semibold text-kemenag-green mb-4 text-base sm:text-lg">Daftar Survey Kepuasan</h3>
         <div class="overflow-x-auto">
@@ -147,7 +162,7 @@
                                 <span class="text-lg sm:text-xl">{{ $emojis[$survey->rating] ?? $survey->rating }}</span>
                             </td>
                             <td class="px-3 sm:px-4 py-3 hidden md:table-cell">{{ $survey->feedback ?? '-' }}</td>
-                            <td class="px-3 sm:px-4 py-3 hidden lg:table-cell">{{ $survey->created_at->format('d M Y H:i') }}</td>
+                            <td class="px-3 sm:px-4 py-3 hidden lg:table-cell">{{ optional($survey->created_at)->format('d M Y H:i') ?? '-' }}</td>
                             <td class="px-3 sm:px-4 py-3 whitespace-nowrap flex items-center gap-2">
                                 <a href="{{ route('admin.survey.edit', $survey->id) }}"
                                    class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm bg-kemenag-light-green text-white rounded-md hover:bg-green-500 transition-colors duration-150">
@@ -175,9 +190,9 @@
         <div class="p-3 sm:p-4 border-t border-gray-200">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="text-xs sm:text-sm text-gray-600">
-                    Menampilkan <span class="font-medium">{{ $surveys->firstItem() }}</span> -
-                    <span class="font-medium">{{ $surveys->lastItem() }}</span> dari
-                    <span class="font-medium">{{ $surveys->total() }}</span> survey
+                    Menampilkan <span class="font-medium">{{ $surveys->firstItem() ?? 0 }}</span> -
+                    <span class="font-medium">{{ $surveys->lastItem() ?? 0 }}</span> dari
+                    <span class="font-medium">{{ $surveys->total() ?? 0 }}</span> survey
                 </div>
                 <div class="flex items-center space-x-2">
                     @if ($surveys->onFirstPage())
@@ -209,9 +224,9 @@
                     </div>
 
                     <div class="sm:hidden flex items-center gap-2">
-                        <span class="px-3 py-1.5 rounded-md bg-gray-100 text-gray-700">{{ $surveys->currentPage() }}</span>
+                        <span class="px-3 py-1.5 rounded-md bg-gray-100 text-gray-700">{{ $surveys->currentPage() ?? 1 }}</span>
                         <span class="text-gray-500">/</span>
-                        <span class="text-gray-600">{{ $surveys->lastPage() }}</span>
+                        <span class="text-gray-600">{{ $surveys->lastPage() ?? 1 }}</span>
                     </div>
 
                     @if ($surveys->hasMorePages())
@@ -230,6 +245,7 @@
     </div>
 </div>
 
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('surveyChart').getContext('2d');
@@ -240,9 +256,7 @@
             datasets: [{
                 label: 'Jumlah Rating',
                 data: {!! json_encode(array_values($stat['chart'] ?? [0,0,0,0,0])) !!},
-                backgroundColor: [
-                    '#ef4444', '#f59e0b', '#6b7280', '#10b981', '#6366f1'
-                ],
+                backgroundColor: ['#ef4444', '#f59e0b', '#6b7280', '#10b981', '#6366f1'],
                 borderRadius: 8,
                 borderWidth: 1,
                 borderColor: '#e5e7eb'
@@ -280,5 +294,4 @@
         }
     });
 </script>
-
 @endsection

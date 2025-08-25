@@ -46,6 +46,11 @@
                     <i class="fas fa-kaaba w-5"></i>
                     <span>Layanan</span>
                 </a>
+                <a href="{{ route('regulasis.index') }}"
+    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-book w-5"></i>
+    <span>Regulasi</span>
+</a>
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
@@ -63,11 +68,11 @@
                         </a>
                     </div>
                 </div>
-              <a href="{{ route('admin.survey.index') }}"
-   class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-    <i class="fas fa-poll w-5"></i>
-    <span>Survey Layanan</span>
-</a>
+                <a href="{{ route('admin.survey.index') }}"
+                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-poll w-5"></i>
+                    <span>Survey Layanan</span>
+                </a>
 
 
             </div>
@@ -133,6 +138,11 @@
                     <i class="fas fa-kaaba w-5"></i>
                     <span>Layanan</span>
                 </a>
+                <a href="{{ route('regulasis.index') }}"
+    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-book w-5"></i>
+    <span>Regulasi</span>
+</a>
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
@@ -150,11 +160,11 @@
                         </a>
                     </div>
                 </div>
-<a href="{{ route('admin.survey.index') }}"
-   class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-    <i class="fas fa-poll w-5"></i>
-    <span>Survey Layanan</span>
-</a>
+                <a href="{{ route('admin.survey.index') }}"
+                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-poll w-5"></i>
+                    <span>Survey Layanan</span>
+                </a>
 
 
             </div>
