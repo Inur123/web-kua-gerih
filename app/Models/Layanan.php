@@ -10,7 +10,7 @@ class Layanan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'deskripsi', 'status', 'slug'];
+    protected $fillable = ['nama', 'deskripsi', 'status', 'slug','icon'];
 
     // Relasi persyaratan
     public function persyaratans()

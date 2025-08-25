@@ -14,6 +14,7 @@ use App\Http\Controllers\Profile\SejarahController;
 
 use App\Http\Controllers\Admin\Posts\PostController;
 use App\Http\Controllers\Profile\VisiMisiController;
+use App\Http\Controllers\Admin\TotalLayananController;
 use App\Http\Controllers\Admin\Posts\CategoryController;
 use App\Http\Controllers\Profile\StrukturOrganisasiController;
 use App\Http\Controllers\Admin\LayananController as AdminLayananController;
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::resource('layanans', AdminLayananController::class);
      Route::resource('regulasis', AdminRegulasiController::class);
+
+     Route::resource('total-layanan', TotalLayananController::class);
 
     // Tambah persyaratan dari detail layanan
     Route::post('layanans/{layanan}/persyaratans', [AdminLayananController::class, 'storePersyaratan'])

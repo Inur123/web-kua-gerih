@@ -47,10 +47,15 @@
                     <span>Layanan</span>
                 </a>
                 <a href="{{ route('regulasis.index') }}"
-    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-    <i class="fas fa-book w-5"></i>
-    <span>Regulasi</span>
-</a>
+                    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-book w-5"></i>
+                    <span>Regulasi</span>
+                </a>
+                 <a href="{{ route('admin.survey.index') }}"
+                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-poll w-5"></i>
+                    <span>Survey Layanan</span>
+                </a>
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
@@ -66,15 +71,14 @@
                             <i class="fas fa-list w-5"></i>
                             <span>Banner</span>
                         </a>
+                        <a href="{{ route('total-layanan.index') }}"
+                            class="flex items-center space-x-3 {{ request()->routeIs('total-layanan.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Total Layanan</span>
+                        </a>
                     </div>
+
                 </div>
-                <a href="{{ route('admin.survey.index') }}"
-                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-                    <i class="fas fa-poll w-5"></i>
-                    <span>Survey Layanan</span>
-                </a>
-
-
             </div>
         </div>
     </nav>
@@ -139,10 +143,15 @@
                     <span>Layanan</span>
                 </a>
                 <a href="{{ route('regulasis.index') }}"
-    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-    <i class="fas fa-book w-5"></i>
-    <span>Regulasi</span>
-</a>
+                    class="flex items-center space-x-3 {{ request()->routeIs('regulasis.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-book w-5"></i>
+                    <span>Regulasi</span>
+                </a>
+                 <a href="{{ route('admin.survey.index') }}"
+                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                    <i class="fas fa-poll w-5"></i>
+                    <span>Survey Layanan</span>
+                </a>
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
@@ -158,15 +167,13 @@
                             <i class="fas fa-list w-5"></i>
                             <span>Banner</span>
                         </a>
+                        <a href="{{ route('total-layanan.index') }}"
+                            class="flex items-center space-x-3 {{ request()->routeIs('total-layanan.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+                            <i class="fas fa-chart-bar w-5"></i>
+                            <span>Total Layanan</span>
+                        </a>
                     </div>
                 </div>
-                <a href="{{ route('admin.survey.index') }}"
-                    class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
-                    <i class="fas fa-poll w-5"></i>
-                    <span>Survey Layanan</span>
-                </a>
-
-
             </div>
         </div>
     </nav>

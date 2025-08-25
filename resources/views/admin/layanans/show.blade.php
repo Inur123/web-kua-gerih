@@ -2,13 +2,19 @@
 
 @section('content')
 <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
-    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
-        <div>
-            <h3 class="font-semibold text-kemenag-green text-2xl mb-2">{{ $layanan->nama }}</h3>
-            <span class="inline-block px-3 py-1 rounded-full text-xs {{ $layanan->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                {{ $layanan->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}
-            </span>
+    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-4">
+            @if($layanan->icon)
+                <span class="w-10 h-10">{!! $layanan->icon !!}</span>
+            @endif
+            <div>
+                <h3 class="font-semibold text-kemenag-green text-2xl mb-2">{{ $layanan->nama }}</h3>
+                <span class="inline-block px-3 py-1 rounded-full text-xs {{ $layanan->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                    {{ $layanan->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}
+                </span>
+            </div>
         </div>
+
         <div class="mt-4 md:mt-0 flex gap-2">
             <a href="{{ route('layanans.edit', $layanan->id) }}" class="px-4 py-2 rounded-lg bg-kemenag-green text-white hover:bg-green-700">Edit</a>
             <a href="{{ route('layanans.index') }}" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">Kembali</a>

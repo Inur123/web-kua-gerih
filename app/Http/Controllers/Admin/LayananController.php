@@ -29,9 +29,10 @@ class LayananController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
+            'icon' => 'nullable|string',
         ]);
 
-        $data = $request->only(['nama', 'deskripsi', 'status']);
+        $data = $request->only(['nama', 'deskripsi', 'status', 'icon']);
         $data['slug'] = Str::slug($request->nama);
 
         Layanan::create($data);
@@ -54,6 +55,7 @@ class LayananController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
+            'icon' => 'nullable|string',
 
             // Persyaratan
             'existing_persyaratan' => 'nullable|array',
@@ -72,7 +74,7 @@ class LayananController extends Controller
         ]);
 
         // Update layanan data
-        $data = $request->only(['nama', 'deskripsi', 'status']);
+        $data = $request->only(['nama', 'deskripsi', 'status', 'icon']);
         $data['slug'] = Str::slug($request->nama);
         $layanan->update($data);
 

@@ -50,6 +50,21 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Icon (SVG)</label>
+                <textarea id="icon-input" name="icon" rows="3"
+                    class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-kemenag-green focus:border-transparent border-gray-300"
+                    placeholder="Masukkan kode SVG disini">{{ old('icon', $layanan->icon) }}</textarea>
+                @error('icon')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+
+                <p class="text-sm text-gray-500 mt-1">Preview:</p>
+                <div id="icon-preview" class="mt-2 border rounded-md p-2 flex items-center justify-center"
+                    style="width: 50px; height: 50px;">
+                    {!! old('icon', $layanan->icon) !!}
+                </div>
+            </div>
 
             <!-- ================= Persyaratan ================= -->
             <div class="mt-6">
@@ -112,36 +127,35 @@
             </div>
 
             <!-- ================= Prosedur ================= -->
-          <div class="mt-6">
-    <div class="flex justify-between items-center mb-2">
-        <h4 class="font-semibold text-gray-700">Prosedur</h4>
-        <button type="button" onclick="addProsedurField()"
-            class="text-sm text-kemenag-green hover:underline">
-            + Tambah Prosedur
-        </button>
-    </div>
-
-    <div id="prosedurContainer" class="space-y-4">
-        @foreach ($layanan->prosedurs as $step)
-            <div class="prosedur-item p-3 border rounded-lg">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                    <input type="text" name="existing_prosedur[{{ $step->id }}][nama]"
-                        value="{{ $step->nama }}" placeholder="Nama Prosedur"
-                        class="px-3 py-2 border rounded-md w-full">
-                    <input type="text" name="existing_prosedur[{{ $step->id }}][deskripsi]"
-                        value="{{ $step->deskripsi }}" placeholder="Deskripsi"
-                        class="px-3 py-2 border rounded-md w-full">
-                    <input type="text" name="existing_prosedur[{{ $step->id }}][link_download]"
-                        value="{{ $step->link_download }}" placeholder="Link Download (Opsional)"
-                        class="px-3 py-2 border rounded-md w-full">
+            <div class="mt-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-semibold text-gray-700">Prosedur</h4>
+                    <button type="button" onclick="addProsedurField()"
+                        class="text-sm text-kemenag-green hover:underline">
+                        + Tambah Prosedur
+                    </button>
                 </div>
-                <button type="button"
-                    onclick="removeItem(this,'delete_prosedur',{{ $step->id }})"
-                    class="text-sm text-red-600 hover:text-red-800">Hapus</button>
+
+                <div id="prosedurContainer" class="space-y-4">
+                    @foreach ($layanan->prosedurs as $step)
+                        <div class="prosedur-item p-3 border rounded-lg">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
+                                <input type="text" name="existing_prosedur[{{ $step->id }}][nama]"
+                                    value="{{ $step->nama }}" placeholder="Nama Prosedur"
+                                    class="px-3 py-2 border rounded-md w-full">
+                                <input type="text" name="existing_prosedur[{{ $step->id }}][deskripsi]"
+                                    value="{{ $step->deskripsi }}" placeholder="Deskripsi"
+                                    class="px-3 py-2 border rounded-md w-full">
+                                <input type="text" name="existing_prosedur[{{ $step->id }}][link_download]"
+                                    value="{{ $step->link_download }}" placeholder="Link Download (Opsional)"
+                                    class="px-3 py-2 border rounded-md w-full">
+                            </div>
+                            <button type="button" onclick="removeItem(this,'delete_prosedur',{{ $step->id }})"
+                                class="text-sm text-red-600 hover:text-red-800">Hapus</button>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        @endforeach
-    </div>
-</div>
 
 
 
@@ -203,9 +217,9 @@
         `);
         }
 
-       function addProsedurField() {
-    prosedurCounter++;
-    document.getElementById('prosedurContainer').insertAdjacentHTML('beforeend', `
+        function addProsedurField() {
+            prosedurCounter++;
+            document.getElementById('prosedurContainer').insertAdjacentHTML('beforeend', `
         <div class="prosedur-item p-3 border rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                 <input type="text" name="new_prosedur[${prosedurCounter}][nama]"
@@ -219,7 +233,28 @@
                 class="text-sm text-red-600 hover:text-red-800">Hapus</button>
         </div>
     `);
-}
+        }
+    </script>
+    <script>
+        const iconInput = document.getElementById('icon-input');
+        const iconPreview = document.getElementById('icon-preview');
 
+        iconInput.addEventListener('input', function() {
+            iconPreview.innerHTML = this.value;
+            const svg = iconPreview.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('width', '40');
+                svg.setAttribute('height', '40');
+            }
+        });
+
+        // Set initial SVG size on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const svg = iconPreview.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('width', '40');
+                svg.setAttribute('height', '40');
+            }
+        });
     </script>
 @endsection

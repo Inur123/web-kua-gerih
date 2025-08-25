@@ -104,61 +104,32 @@
                 Layanan Utama
             </h3>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                <div
-                    class="text-center p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow hover:border-kemenag-light-green">
-                    <div
-                        class="bg-kemenag-green text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-ring text-2xl md:text-3xl"></i>
-                    </div>
-                    <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
-                        Pendaftaran Nikah
-                    </h4>
-                    <p class="text-xs md:text-sm text-gray-600">
-                        Layanan pendaftaran pernikahan dan penerbitan akta nikah
-                    </p>
-                </div>
-                <div
-                    class="text-center p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow hover:border-kemenag-light-green">
-                    <div
-                        class="bg-kemenag-green text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-handshake text-2xl md:text-3xl"></i>
-                    </div>
-                    <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
-                        Rujuk
-                    </h4>
-                    <p class="text-xs md:text-sm text-gray-600">
-                        Pelayanan rujuk dan administrasi terkait
-                    </p>
-                </div>
-                <div
-                    class="text-center p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow hover:border-kemenag-light-green">
-                    <div
-                        class="bg-kemenag-green text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-mosque text-2xl md:text-3xl"></i>
-                    </div>
-                    <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
-                        Wakaf
-                    </h4>
-                    <p class="text-xs md:text-sm text-gray-600">
-                        Pengelolaan dan administrasi wakaf
-                    </p>
-                </div>
-                <div
-                    class="text-center p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow hover:border-kemenag-light-green">
-                    <div
-                        class="bg-kemenag-green text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-kaaba text-2xl md:text-3xl"></i>
-                    </div>
-                    <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
-                        Haji & Umrah
-                    </h4>
-                    <p class="text-xs md:text-sm text-gray-600">
-                        Informasi dan bimbingan ibadah haji dan umrah
-                    </p>
-                </div>
+                @foreach ($layanans as $layanan)
+                    <a href="{{ route('layanan.show', $layanan->slug) }}"
+                        class="text-center p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow hover:border-kemenag-light-green block">
+
+                        <div
+                            class="bg-kemenag-green text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            @if ($layanan->icon)
+                                {!! str_replace('<svg', '<svg class="w-6 h-6 md:w-7 md:h-7"', $layanan->icon) !!}
+                            @else
+                                <i class="fas fa-ring text-2xl md:text-3xl"></i>
+                            @endif
+                        </div>
+
+                        <h4 class="font-semibold text-kemenag-green mb-2 text-sm md:text-base">
+                            {{ $layanan->nama }}
+                        </h4>
+                        <p class="text-xs md:text-sm text-gray-600">
+                            {{ $layanan->deskripsi ?? '-' }}
+                        </p>
+                    </a>
+                @endforeach
             </div>
+
         </div>
     </section>
+
 
     <!-- News & Features Section -->
     <section class="py-12 md:py-16 bg-gray-100">
@@ -219,50 +190,50 @@
         </div>
     </section>
     <section class="py-12 md:py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-8 md:mb-12">
-            <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
-                Statistik Survey Kepuasan
-            </h3>
-            <p class="text-gray-600 text-sm md:text-base">
-                Rekap data survey kepuasan layanan KUA Gerih
-            </p>
-        </div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8 md:mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
+                    Statistik Survey Kepuasan
+                </h3>
+                <p class="text-gray-600 text-sm md:text-base">
+                    Rekap data survey kepuasan layanan KUA Gerih
+                </p>
+            </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <!-- Statistik Card -->
-            <div class="flex flex-col gap-4">
-                <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
-                    <div class="text-sm text-gray-500 mb-1">Total Survey</div>
-                    <div class="text-2xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
-                </div>
-                <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
-                    <div class="text-sm text-gray-500 mb-1">Rata-rata Rating</div>
-                    @php
-                        $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
-                        $avg = round($stat['avg'] ?? 0);
-                    @endphp
-                    <div class="flex items-center gap-2">
-                        <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
-                        <span class="text-xl font-bold text-blue-700">{{ number_format($stat['avg'], 2) ?? 0 }}</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Statistik Card -->
+                <div class="flex flex-col gap-4">
+                    <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
+                        <div class="text-sm text-gray-500 mb-1">Total Survey</div>
+                        <div class="text-2xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
+                    </div>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
+                        <div class="text-sm text-gray-500 mb-1">Rata-rata Rating</div>
+                        @php
+                            $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+                            $avg = round($stat['avg'] ?? 0);
+                        @endphp
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
+                            <span class="text-xl font-bold text-blue-700">{{ number_format($stat['avg'], 2) ?? 0 }}</span>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
+                        <div class="text-sm text-gray-500 mb-1">Rating Terbanyak</div>
+                        <div class="text-2xl font-bold text-yellow-700">
+                            {{ $emojis[$stat['most']] ?? '-' }}
+                        </div>
                     </div>
                 </div>
-                <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
-                    <div class="text-sm text-gray-500 mb-1">Rating Terbanyak</div>
-                    <div class="text-2xl font-bold text-yellow-700">
-                        {{ $emojis[$stat['most']] ?? '-' }}
+                <!-- Chart -->
+                <div class="flex items-center justify-center">
+                    <div class="bg-white rounded-lg shadow p-4 w-full">
+                        <canvas id="surveyChart"></canvas>
                     </div>
-                </div>
-            </div>
-            <!-- Chart -->
-            <div class="flex items-center justify-center">
-                <div class="bg-white rounded-lg shadow p-4 w-full">
-                    <canvas id="surveyChart"></canvas>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <!-- Statistics -->
     <section class="py-12 md:py-16 bg-kemenag-green text-white">
         <div class="container mx-auto px-4">
@@ -270,33 +241,19 @@
                 Statistik Pelayanan
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-                <div>
-                    <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
-                        1,234
+                @foreach ($hit as $nama => $total)
+                    <div>
+                        <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
+                            {{ $total }}
+                        </div>
+                        <p class="text-xs md:text-sm">{{ $nama }}</p>
                     </div>
-                    <p class="text-xs md:text-sm">Pernikahan Tahun Ini</p>
-                </div>
-                <div>
-                    <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
-                        567
-                    </div>
-                    <p class="text-xs md:text-sm">Rujuk Diproses</p>
-                </div>
-                <div>
-                    <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
-                        89
-                    </div>
-                    <p class="text-xs md:text-sm">Wakaf Terdaftar</p>
-                </div>
-                <div>
-                    <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
-                        456
-                    </div>
-                    <p class="text-xs md:text-sm">Jamaah Haji</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+
+
 
     <!-- Contact Info -->
     <section class="py-12 md:py-16 bg-white">
@@ -381,30 +338,37 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('surveyChart').getContext('2d');
-    const surveyChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['😡', '😞', '😐', '😊', '😍'],
-            datasets: [{
-                label: 'Jumlah Rating',
-                data: {!! json_encode(array_values($stat['chart'] ?? [0,0,0,0,0])) !!},
-                backgroundColor: [
-                    '#f87171', '#fbbf24', '#a3a3a3', '#34d399', '#818cf8'
-                ],
-                borderRadius: 6,
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false }
+    <script>
+        const ctx = document.getElementById('surveyChart').getContext('2d');
+        const surveyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['😡', '😞', '😐', '😊', '😍'],
+                datasets: [{
+                    label: 'Jumlah Rating',
+                    data: {!! json_encode(array_values($stat['chart'] ?? [0, 0, 0, 0, 0])) !!},
+                    backgroundColor: [
+                        '#f87171', '#fbbf24', '#a3a3a3', '#34d399', '#818cf8'
+                    ],
+                    borderRadius: 6,
+                }]
             },
-            scales: {
-                y: { beginAtZero: true, ticks: { stepSize: 1 } }
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 @endsection
