@@ -63,6 +63,13 @@
                         </a>
                     </div>
                 </div>
+              <a href="{{ route('admin.survey.index') }}"
+   class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-poll w-5"></i>
+    <span>Survey Layanan</span>
+</a>
+
+
             </div>
         </div>
     </nav>
@@ -143,6 +150,12 @@
                         </a>
                     </div>
                 </div>
+<a href="{{ route('admin.survey.index') }}"
+   class="flex items-center space-x-3 {{ request()->routeIs('admin.survey.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-poll w-5"></i>
+    <span>Survey Layanan</span>
+</a>
+
 
             </div>
         </div>

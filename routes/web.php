@@ -34,10 +34,24 @@ Route::middleware(['auth'])->group(function () {
         ->name('layanans.persyaratans.store');
     Route::get('banner', [BannerController::class, 'edit'])->name('banner.edit');
     Route::put('banner', [BannerController::class, 'update'])->name('banner.update');
+
+    // Survey untuk Admin
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('survey', [App\Http\Controllers\Admin\SurveyController::class, 'index'])->name('survey.index');
+        Route::get('survey/{id}/edit', [App\Http\Controllers\Admin\SurveyController::class, 'edit'])->name('survey.edit');
+        Route::put('survey/{id}', [App\Http\Controllers\Admin\SurveyController::class, 'update'])->name('survey.update');
+        Route::delete('survey/{id}', [App\Http\Controllers\Admin\SurveyController::class, 'destroy'])->name('survey.destroy');
+    });
 });
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+
+Route::get('/survey', [App\Http\Controllers\SurveyController::class, 'index'])->name('survey.index');
+Route::post('/survey', [App\Http\Controllers\SurveyController::class, 'store'])->name('survey.store');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
