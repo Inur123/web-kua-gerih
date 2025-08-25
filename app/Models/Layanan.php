@@ -17,6 +17,15 @@ class Layanan extends Model
     {
         return $this->hasMany(Persyaratan::class);
     }
+    public function syaratKhusus()
+    {
+        return $this->hasMany(SyaratKhusus::class);
+    }
+
+    public function prosedurs()
+    {
+        return $this->hasMany(Prosedur::class);
+    }
 
     // Boot method untuk membuat slug otomatis
     protected static function booted()

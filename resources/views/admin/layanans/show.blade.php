@@ -20,7 +20,8 @@
         <div class="bg-gray-50 rounded p-4 text-gray-700">{{ $layanan->deskripsi }}</div>
     </div>
 
-    <div>
+    {{-- Persyaratan --}}
+    <div class="mb-6">
         <h4 class="font-semibold text-gray-700 mb-2">Persyaratan</h4>
         @if($layanan->persyaratans->count())
             <div class="grid md:grid-cols-2 gap-4">
@@ -38,6 +39,50 @@
             </div>
         @else
             <p class="text-gray-500">Belum ada persyaratan.</p>
+        @endif
+    </div>
+
+    {{-- Syarat Khusus --}}
+    <div class="mb-6">
+        <h4 class="font-semibold text-gray-700 mb-2">Syarat Khusus</h4>
+        @if($layanan->syaratKhusus->count())
+            <div class="grid md:grid-cols-2 gap-4">
+                @foreach($layanan->syaratKhusus as $syarat)
+                <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-sm flex flex-col gap-1">
+                    <span class="font-medium text-kemenag-green">{{ $syarat->nama }}</span>
+                    @if($syarat->deskripsi)
+                        <span class="text-sm text-gray-600">{{ $syarat->deskripsi }}</span>
+                    @endif
+                    @if($syarat->link_download)
+                        <a href="{{ $syarat->link_download }}" target="_blank" class="text-blue-500 text-xs hover:underline">Download</a>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-500">Belum ada syarat khusus.</p>
+        @endif
+    </div>
+
+    {{-- Prosedur --}}
+    <div>
+        <h4 class="font-semibold text-gray-700 mb-2">Prosedur</h4>
+        @if($layanan->prosedurs->count())
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                @foreach($layanan->prosedurs as $step)
+                    <li>
+                        <span class="font-medium text-kemenag-green">{{ $step->nama }}</span>
+                        @if($step->deskripsi)
+                            <div class="text-sm text-gray-600">{{ $step->deskripsi }}</div>
+                        @endif
+                        @if($step->link_download)
+                            <a href="{{ $step->link_download }}" target="_blank" class="text-blue-500 text-xs hover:underline">Download</a>
+                        @endif
+                    </li>
+                @endforeach
+            </ol>
+        @else
+            <p class="text-gray-500">Belum ada prosedur.</p>
         @endif
     </div>
 </div>

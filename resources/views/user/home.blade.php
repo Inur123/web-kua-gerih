@@ -219,138 +219,50 @@
         </div>
     </section>
     <section class="py-12 md:py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8 md:mb-12">
-                <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
-                    Informasi & Layanan Digital
-                </h3>
-                <p class="text-gray-600 text-sm md:text-base">
-                    Akses mudah ke berbagai informasi dan layanan KUA
-                </p>
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8 md:mb-12">
+            <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
+                Statistik Survey Kepuasan
+            </h3>
+            <p class="text-gray-600 text-sm md:text-base">
+                Rekap data survey kepuasan layanan KUA Gerih
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Statistik Card -->
+            <div class="flex flex-col gap-4">
+                <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
+                    <div class="text-sm text-gray-500 mb-1">Total Survey</div>
+                    <div class="text-2xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
+                    <div class="text-sm text-gray-500 mb-1">Rata-rata Rating</div>
+                    @php
+                        $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+                        $avg = round($stat['avg'] ?? 0);
+                    @endphp
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
+                        <span class="text-xl font-bold text-blue-700">{{ number_format($stat['avg'], 2) ?? 0 }}</span>
+                    </div>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
+                    <div class="text-sm text-gray-500 mb-1">Rating Terbanyak</div>
+                    <div class="text-2xl font-bold text-yellow-700">
+                        {{ $emojis[$stat['most']] ?? '-' }}
+                    </div>
+                </div>
             </div>
-
-            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <!-- Online Services -->
-                <div
-                    class="bg-gradient-to-r from-kemenag-gold to-yellow-400 p-6 rounded-xl text-kemenag-green hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-laptop text-2xl mr-3"></i>
-                        <h4 class="font-bold text-lg">Layanan Digital</h4>
-                    </div>
-                    <p class="text-sm mb-4">
-                        Akses layanan KUA secara online 24/7 untuk kemudahan Anda dalam
-                        mengurus berbagai keperluan administrasi
-                    </p>
-                    <button
-                        class="bg-kemenag-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-colors w-full">
-                        <i class="fas fa-external-link-alt mr-2"></i>Akses Sekarang
-                    </button>
-                </div>
-
-                <!-- Download Center -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-download text-kemenag-green text-2xl mr-3"></i>
-                        <h4 class="font-bold text-kemenag-green text-lg">
-                            Pusat Unduhan
-                        </h4>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-4">
-                        Download formulir dan dokumen penting untuk berbagai keperluan
-                        layanan KUA
-                    </p>
-                    <div class="space-y-3">
-                        <a href="#"
-                            class="flex items-center text-sm text-gray-600 hover:text-kemenag-green transition-colors p-2 rounded hover:bg-gray-50">
-                            <i class="fas fa-file-pdf mr-3 text-red-500"></i>
-                            <span>Formulir Pendaftaran Nikah</span>
-                        </a>
-                        <a href="#"
-                            class="flex items-center text-sm text-gray-600 hover:text-kemenag-green transition-colors p-2 rounded hover:bg-gray-50">
-                            <i class="fas fa-file-pdf mr-3 text-red-500"></i>
-                            <span>Persyaratan Dokumen</span>
-                        </a>
-                        <a href="#"
-                            class="flex items-center text-sm text-gray-600 hover:text-kemenag-green transition-colors p-2 rounded hover:bg-gray-50">
-                            <i class="fas fa-file-pdf mr-3 text-red-500"></i>
-                            <span>Panduan Layanan</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Contact -->
-                <div class="bg-kemenag-light-green p-6 rounded-xl text-white hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-headset text-2xl mr-3"></i>
-                        <h4 class="font-bold text-lg">Bantuan Cepat</h4>
-                    </div>
-                    <p class="text-sm mb-4">
-                        Butuh bantuan atau konsultasi? Tim customer service kami siap
-                        membantu Anda
-                    </p>
-                    <div class="space-y-3">
-                        <button
-                            class="bg-white text-kemenag-green px-4 py-2 rounded-lg text-sm font-medium w-full hover:bg-gray-100 transition-colors">
-                            <i class="fab fa-whatsapp mr-2"></i>Chat WhatsApp
-                        </button>
-                        <button
-                            class="border border-white px-4 py-2 rounded-lg text-sm font-medium w-full hover:bg-white hover:text-kemenag-green transition-colors">
-                            <i class="fas fa-phone mr-2"></i>Telepon Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- FAQ -->
-                <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-question-circle text-blue-600 text-2xl mr-3"></i>
-                        <h4 class="font-bold text-blue-800 text-lg">FAQ</h4>
-                    </div>
-                    <p class="text-sm text-blue-700 mb-4">
-                        Temukan jawaban untuk pertanyaan yang sering diajukan seputar
-                        layanan KUA
-                    </p>
-                    <button
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors w-full">
-                        <i class="fas fa-search mr-2"></i>Lihat FAQ
-                    </button>
-                </div>
-
-                <!-- Schedule -->
-                <div class="bg-green-50 p-6 rounded-xl border border-green-200 hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-calendar-alt text-green-600 text-2xl mr-3"></i>
-                        <h4 class="font-bold text-green-800 text-lg">Jadwal & Agenda</h4>
-                    </div>
-                    <p class="text-sm text-green-700 mb-4">
-                        Lihat jadwal kegiatan, agenda acara, dan jadwal pelayanan KUA
-                    </p>
-                    <button
-                        class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors w-full">
-                        <i class="fas fa-calendar mr-2"></i>Lihat Jadwal
-                    </button>
-                </div>
-
-                <!-- Feedback -->
-                <div class="bg-purple-50 p-6 rounded-xl border border-purple-200 hover:shadow-lg transition-shadow">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-star text-purple-600 text-2xl mr-3"></i>
-                        <h4 class="font-bold text-purple-800 text-lg">
-                            Feedback & Saran
-                        </h4>
-                    </div>
-                    <p class="text-sm text-purple-700 mb-4">
-                        Berikan masukan untuk membantu kami meningkatkan kualitas
-                        pelayanan
-                    </p>
-                    <button
-                        class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors w-full">
-                        <i class="fas fa-comment mr-2"></i>Kirim Feedback
-                    </button>
+            <!-- Chart -->
+            <div class="flex items-center justify-center">
+                <div class="bg-white rounded-lg shadow p-4 w-full">
+                    <canvas id="surveyChart"></canvas>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <!-- Statistics -->
     <section class="py-12 md:py-16 bg-kemenag-green text-white">
         <div class="container mx-auto px-4">
@@ -468,4 +380,31 @@
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('surveyChart').getContext('2d');
+    const surveyChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['😡', '😞', '😐', '😊', '😍'],
+            datasets: [{
+                label: 'Jumlah Rating',
+                data: {!! json_encode(array_values($stat['chart'] ?? [0,0,0,0,0])) !!},
+                backgroundColor: [
+                    '#f87171', '#fbbf24', '#a3a3a3', '#34d399', '#818cf8'
+                ],
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1 } }
+            }
+        }
+    });
+</script>
 @endsection
