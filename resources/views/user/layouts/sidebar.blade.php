@@ -32,7 +32,7 @@
     </div>
 
     <!-- Recent News  -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
         <h3 class="font-bold text-kemenag-green mb-4">Berita Terpopuler</h3>
         <div class="space-y-4">
             @foreach ($popularPosts as $popular)
@@ -51,4 +51,18 @@
             @endforeach
         </div>
     </div>
+        <!-- Tags -->
+<div class="bg-white rounded-lg shadow-lg p-6">
+    <h3 class="font-bold text-kemenag-green mb-4">Tag</h3>
+    <div class="flex flex-wrap gap-2">
+        @foreach ($tags->unique('name') as $tag)
+            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">
+               {{ $tag->name }}
+            </span>
+        @endforeach
+    </div>
+</div>
+
+
+
 </div>

@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-4 sm:space-y-0">
             <h3 class="font-semibold text-kemenag-green text-lg">Daftar Berita</h3>
             <a href="{{ route('posts.create') }}"
-               class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-full sm:w-auto text-center">
+               class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-kemenag-light-green transition-colors w-full sm:w-auto text-center">
                 + Tambah Berita
             </a>
         </div>
@@ -18,6 +18,8 @@
                         <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">Kategori</th>
                         <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">Status</th>
                         <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden lg:table-cell">Tanggal Publikasi</th>
+                        <!-- ✅ Kolom Views -->
+                        <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden md:table-cell">Views</th>
                         <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Aksi</th>
                     </tr>
                 </thead>
@@ -41,6 +43,9 @@
                                     <div class="mt-1">
                                         {{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d-m-Y') : '-' }}
                                     </div>
+                                    <div class="mt-1">
+                                        👁️ {{ $post->views ?? 0 }} views
+                                    </div>
                                 </div>
                             </td>
                             <td class="px-4 py-3 hidden sm:table-cell">{{ $post->category->name ?? '-' }}</td>
@@ -52,6 +57,10 @@
                             <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell">
                                 {{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d-m-Y') : '-' }}
                             </td>
+                            <!-- ✅ Tampilkan jumlah views -->
+                            <td class="px-4 py-3 hidden md:table-cell">
+                                {{ number_format($post->views ?? 0) }}
+                            </td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                                     <a href="{{ route('posts.show', $post->id) }}"
@@ -60,7 +69,7 @@
                                        class="text-kemenag-light-green hover:underline text-center">Edit</a>
                                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="inline">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:underline text-center"
+                                        <button type="submit" class="text-red-500 hover:underline text-center cursor-pointer"
                                             onclick="return confirm('Yakin hapus berita?')">Hapus</button>
                                     </form>
                                 </div>
@@ -68,7 +77,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-3 text-center text-gray-500">Belum ada berita.</td>
+                            <td colspan="7" class="px-4 py-3 text-center text-gray-500">Belum ada berita.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -109,7 +118,6 @@
                             @endif
                         @endforeach
 
-                        <!-- Add ellipsis if needed -->
                         @if ($posts->currentPage() < $posts->lastPage() - 2)
                             <span class="px-2 py-1 text-gray-500">...</span>
                             <a href="{{ $posts->url($posts->lastPage()) }}"
@@ -117,10 +125,9 @@
                         @endif
                     </div>
 
-                    <!-- Mobile Pagination (current page only) -->
+                    <!-- Mobile Pagination -->
                     <div class="sm:hidden flex items-center">
-                        <span
-                            class="px-3 py-1 rounded-md bg-gray-100 text-gray-700">{{ $posts->currentPage() }}</span>
+                        <span class="px-3 py-1 rounded-md bg-gray-100 text-gray-700">{{ $posts->currentPage() }}</span>
                         <span class="mx-1 text-gray-500">/</span>
                         <span class="text-gray-600">{{ $posts->lastPage() }}</span>
                     </div>

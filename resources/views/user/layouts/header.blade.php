@@ -10,13 +10,14 @@
                 </span>
                 <span class="flex items-center">
                     <i class="fas fa-phone mr-1"></i>
-                    <span class="hidden sm:inline">(021) 123-4567</span>
-                    <span class="sm:hidden">(021) 123-4567</span>
+                    <span class="hidden sm:inline">08113600791</span>
+                    <span class="sm:hidden">08113600791</span>
                 </span>
             </div>
-            <div class="flex items-center space-x-2">
+            <div class="hidden sm:flex items-center space-x-2">
                 <span id="realtime-date" class="text-xs sm:text-sm"></span>
             </div>
+
         </div>
     </div>
 
@@ -67,6 +68,11 @@
                         <ul
                             class="absolute top-full left-0 bg-white text-gray-800 shadow-lg min-w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                             <li>
+                                <a href="{{ route('profile.sejarah') }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 text-sm @if (request()->routeIs('profile.sejarah')) bg-gray-100 @endif">Profile
+                                    dan Sejarah</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('profile.visi-misi') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 text-sm @if (request()->routeIs('profile.visi-misi')) bg-gray-100 @endif">Visi
                                     & Misi</a>
@@ -76,10 +82,7 @@
                                     class="block px-4 py-2 hover:bg-gray-100 text-sm @if (request()->routeIs('profile.struktur-organisasi')) bg-gray-100 @endif">Struktur
                                     Organisasi</a>
                             </li>
-                            <li>
-                                <a href="{{ route('profile.sejarah') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100 text-sm @if (request()->routeIs('profile.sejarah')) bg-gray-100 @endif">Sejarah</a>
-                            </li>
+
                         </ul>
                     </li>
                     <li>
@@ -87,12 +90,12 @@
                             class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base @if (request()->routeIs('layanan.*')) bg-kemenag-green @endif">Layanan</a>
                     </li>
                     <li>
-    <a href="{{ route('regulasi.index') }}"
-       class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base
+                        <a href="{{ route('regulasi.index') }}"
+                            class="block py-4 px-2 lg:px-4 hover:bg-kemenag-green transition-colors text-sm lg:text-base
        @if (request()->routeIs('regulasi.*')) bg-kemenag-green @endif">
-       Regulasi
-    </a>
-</li>
+                            Regulasi
+                        </a>
+                    </li>
 
                     <li>
                         <a href="{{ route('berita.index') }}"
@@ -171,14 +174,16 @@
                         </button>
                         <div id="profil-submenu"
                             class="bg-kemenag-green bg-opacity-50 @if (request()->routeIs('profile.*')) block @else hidden @endif">
+                            <a href="{{ route('profile.sejarah') }}"
+                                class="block py-3 px-12 text-white text-sm hover:bg-white hover:bg-opacity-10 @if (request()->routeIs('profile.sejarah')) bg-opacity-10 @endif">Profil
+                                dan Sejarah</a>
                             <a href="{{ route('profile.visi-misi') }}"
                                 class="block py-3 px-12 text-white text-sm hover:bg-white hover:bg-opacity-10 @if (request()->routeIs('profile.visi-misi')) bg-opacity-10 @endif">Visi
                                 & Misi</a>
                             <a href="{{ route('profile.struktur-organisasi') }}"
                                 class="block py-3 px-12 text-white text-sm hover:bg-white hover:bg-opacity-10 @if (request()->routeIs('profile.struktur-organisasi')) bg-opacity-10 @endif">Struktur
                                 Organisasi</a>
-                            <a href="{{ route('profile.sejarah') }}"
-                                class="block py-3 px-12 text-white text-sm hover:bg-white hover:bg-opacity-10 @if (request()->routeIs('profile.sejarah')) bg-opacity-10 @endif">Sejarah</a>
+
                         </div>
                     </div>
                 </li>
@@ -194,14 +199,14 @@
                     </a>
                 </li>
                 <li class="border-t border-white border-opacity-10">
-    <a href="{{ route('regulasi.index') }}"
-       class="flex items-center py-4 px-6 text-white hover:bg-white hover:bg-opacity-10 transition-colors border-l-4
+                    <a href="{{ route('regulasi.index') }}"
+                        class="flex items-center py-4 px-6 text-white hover:bg-white hover:bg-opacity-10 transition-colors border-l-4
        @if (request()->is('regulasi') || request()->is('regulasi/*')) border-kemenag-gold bg-opacity-10
        @else border-transparent hover:border-kemenag-gold @endif group">
-        <i class="fas fa-file-alt w-6 mr-4 text-kemenag-gold"></i>
-        <span class="font-medium">Regulasi</span>
-    </a>
-</li>
+                        <i class="fas fa-file-alt w-6 mr-4 text-kemenag-gold"></i>
+                        <span class="font-medium">Regulasi</span>
+                    </a>
+                </li>
 
 
 

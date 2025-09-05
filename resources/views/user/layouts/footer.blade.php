@@ -2,15 +2,15 @@
       <div class="container mx-auto px-4">
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               <div>
-                <div class="flex items-center mb-3">
-                    <img src="{{ asset('images/logo-kua.png') }}" alt="Logo KUA Gerih Ngawi" class="h-12 mr-3">
-                    <h4 class="font-semibold text-lg">KUA Kecamatan<br>Gerih Ngawi</h4>
-                </div>
-                <p class="text-sm text-gray-300">
-                    Melayani masyarakat dalam urusan administrasi keagamaan dengan
-                    profesional dan amanah.
-                </p>
-            </div>
+                  <div class="flex items-center mb-3">
+                      <img src="{{ asset('images/logo-kua.png') }}" alt="Logo KUA Gerih Ngawi" class="h-12 mr-3">
+                      <h4 class="font-semibold text-lg">KUA Kecamatan<br>Gerih Ngawi</h4>
+                  </div>
+                  <p class="text-sm text-gray-300">
+                      Melayani masyarakat dalam urusan administrasi keagamaan dengan
+                      profesional dan amanah.
+                  </p>
+              </div>
               <div>
                   <h4 class="font-semibold mb-4">Layanan</h4>
                   <ul class="text-sm space-y-2 text-gray-300">
@@ -60,8 +60,13 @@
                       <a href="#" class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-youtube text-xl"></i>
                       </a>
+                      <!-- TikTok -->
+                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                          <i class="fab fa-tiktok text-xl"></i>
+                      </a>
                   </div>
               </div>
+
           </div>
           <div class="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-300">
               <p>

@@ -23,7 +23,6 @@
             position: relative;
             padding: 16px;
             padding-right: 40px;
-            /* Space for close button */
             margin-bottom: 12px;
             border-radius: 6px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -64,8 +63,8 @@
 </head>
 
 <body class="bg-gray-50 font-inter min-h-screen">
-    <!-- Notification Container (Top Right) -->
-    <div class="notification-container space-y-3">
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container space-y-3">
         @if ($errors->any())
             <div class="notification bg-red-50 text-red-700 border-l-4 border-red-500">
                 <i class="notification-icon fas fa-exclamation-circle"></i>
@@ -97,28 +96,22 @@
         @endif
     </div>
 
-
     <!-- Login Section -->
     <main class="py-8 md:py-16">
         <div class="container mx-auto px-4">
             <div class="max-w-md mx-auto">
-                <!-- Login Card -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <!-- Card Header -->
                     <div class="bg-gradient-to-r from-kemenag-green to-kemenag-light-green text-white p-6 text-center">
-                        <div
-                            class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-white text-kemenag-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-user text-2xl"></i>
                         </div>
                         <h2 class="text-2xl font-bold mb-2">Masuk ke Akun</h2>
                         <p class="text-white text-opacity-90 text-sm">Silakan masuk untuk mengakses layanan KUA</p>
                     </div>
 
-                    <!-- Card Body -->
                     <div class="p-6">
                         <form method="POST" action="{{ route('login') }}" class="space-y-6">
                             @csrf
-                            <!-- Email/Username Field -->
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                     <i class="fas fa-envelope mr-2 text-kemenag-green"></i>
@@ -132,7 +125,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Password Field -->
                             <div>
                                 <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                                     <i class="fas fa-lock mr-2 text-kemenag-green"></i>
@@ -152,7 +144,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Login Button -->
                             <button type="submit"
                                 class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2 cursor-pointer">
                                 <i class="fas fa-sign-in-alt mr-2"></i>
@@ -164,43 +155,64 @@
             </div>
         </div>
     </main>
-    <script>
-        // Notification close functionality (manual and auto-close after 3 seconds)
-        document.querySelectorAll('.notification').forEach(notification => {
-            // Manual close
-            const closeButton = notification.querySelector('.notification-close');
-            if (closeButton) {
-                closeButton.addEventListener('click', function() {
-                    notification.remove();
-                });
-            }
 
-            // Auto-close after 3 seconds
+    <script>
+        // Fungsi tampilkan notifikasi
+        function showNotification(message) {
+            const container = document.getElementById('notification-container');
+            const notification = document.createElement('div');
+            notification.className = 'notification bg-yellow-50 text-yellow-700 border-l-4 border-yellow-500';
+            notification.innerHTML = `
+                <i class="notification-icon fas fa-exclamation-triangle"></i>
+                <div>
+                    <p class="font-medium">Aksi Diblokir</p>
+                    <p class="mt-1 text-sm">${message}</p>
+                </div>
+                <button class="notification-close"><i class="fas fa-times"></i></button>
+            `;
+            container.appendChild(notification);
+
+            // Close manual
+            notification.querySelector('.notification-close').addEventListener('click', () => notification.remove());
+            // Auto close
             setTimeout(() => {
                 notification.style.transition = 'opacity 0.5s ease';
                 notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
 
-                // Remove the element after the fade out completes
-                setTimeout(() => {
-                    notification.remove();
-                }, 500);
+        // Disable klik kanan + tampilkan notifikasi
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            showNotification('Klik kanan dinonaktifkan di halaman ini.');
+        });
+
+        // Close notifikasi awal (errors/success)
+        document.querySelectorAll('.notification').forEach(notification => {
+            const closeButton = notification.querySelector('.notification-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', () => notification.remove());
+            }
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 500);
             }, 3000);
         });
+
         // Toggle password visibility
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('toggle-icon');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
             } else {
                 passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         }
     </script>
 </body>
-
 </html>

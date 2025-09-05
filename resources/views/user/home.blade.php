@@ -190,50 +190,39 @@
         </div>
     </section>
     <section class="py-12 md:py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8 md:mb-12">
-                <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
-                    Statistik Survey Kepuasan
-                </h3>
-                <p class="text-gray-600 text-sm md:text-base">
-                    Rekap data survey kepuasan layanan KUA Gerih
-                </p>
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8 md:mb-12">
+            <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
+                Statistik Survey Kepuasan
+            </h3>
+            <p class="text-gray-600 text-sm md:text-base">
+                Rekap data survey kepuasan layanan KUA Gerih
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Total Survey -->
+            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 flex flex-col items-center justify-center">
+                <div class="text-sm text-gray-500 mb-2">Total Survey</div>
+                <div class="text-3xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <!-- Statistik Card -->
-                <div class="flex flex-col gap-4">
-                    <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
-                        <div class="text-sm text-gray-500 mb-1">Total Survey</div>
-                        <div class="text-2xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
-                    </div>
-                    <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
-                        <div class="text-sm text-gray-500 mb-1">Rata-rata Rating</div>
-                        @php
-                            $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
-                            $avg = round($stat['avg'] ?? 0);
-                        @endphp
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
-                            <span class="text-xl font-bold text-blue-700">{{ number_format($stat['avg'], 2) ?? 0 }}</span>
-                        </div>
-                    </div>
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
-                        <div class="text-sm text-gray-500 mb-1">Rating Terbanyak</div>
-                        <div class="text-2xl font-bold text-yellow-700">
-                            {{ $emojis[$stat['most']] ?? '-' }}
-                        </div>
-                    </div>
-                </div>
-                <!-- Chart -->
-                <div class="flex items-center justify-center">
-                    <div class="bg-white rounded-lg shadow p-4 w-full">
-                        <canvas id="surveyChart"></canvas>
-                    </div>
+            <!-- Rata-rata Rating -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 flex flex-col items-center justify-center">
+                <div class="text-sm text-gray-500 mb-2">Rata-rata Rating</div>
+                @php
+                    $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+                    $avg = round($stat['avg'] ?? 0);
+                @endphp
+                <div class="flex items-center gap-2 text-xl font-bold text-blue-700">
+                    <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
+                    <span>{{ number_format($stat['avg'], 2) ?? 0 }}</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     <!-- Statistics -->
     <section class="py-12 md:py-16 bg-kemenag-green text-white">
         <div class="container mx-auto px-4">
@@ -271,8 +260,8 @@
                         Alamat
                     </h4>
                     <p class="text-xs md:text-sm text-gray-600">
-                        Jl. Raya Kecamatan No. 123<br />Kecamatan, Kabupaten<br />Kode Pos
-                        12345
+                        Jl. Raya Geneng-Kendal<br />Kecamatan Gerih, Kabupaten Ngawi<br />Kode Pos
+                        63253
                     </p>
                 </div>
                 <div class="text-center p-6">
@@ -284,8 +273,7 @@
                         Telepon
                     </h4>
                     <p class="text-xs md:text-sm text-gray-600">
-                        Telp: (021) 123-4567<br />Fax: (021) 123-4568<br />HP:
-                        0812-3456-7890
+                        Telp: 08113600791
                     </p>
                 </div>
                 <div class="text-center p-6">

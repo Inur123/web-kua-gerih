@@ -8,24 +8,35 @@ use App\Http\Controllers\Controller;
 
 class SurveyController extends Controller
 {
-    public function index()
-    {
+   public function index(Request $request)
+{
+    // Ambil tahun dari request, default tahun sekarang
+    $year = $request->get('year', now()->year);
 
-        $surveys = Survey::latest()->paginate(10);
-        $stat = [
-    'total' => Survey::count(),
-    'avg' => Survey::avg('rating'),
-    'most' => Survey::select('rating')->groupBy('rating')->orderByRaw('COUNT(*) DESC')->value('rating'),
-    'chart' => [
-        Survey::where('rating', 1)->count(),
-        Survey::where('rating', 2)->count(),
-        Survey::where('rating', 3)->count(),
-        Survey::where('rating', 4)->count(),
-        Survey::where('rating', 5)->count(),
-    ]
-];
-        return view('admin.survey.index', compact('surveys','stat'));
-    }
+    // Filter data survey berdasarkan tahun
+    $surveys = Survey::whereYear('created_at', $year)
+        ->latest()
+        ->paginate(10);
+
+    $stat = [
+        'total' => Survey::whereYear('created_at', $year)->count(),
+        'avg'   => Survey::whereYear('created_at', $year)->avg('rating'),
+        'most'  => Survey::whereYear('created_at', $year)
+            ->select('rating')
+            ->groupBy('rating')
+            ->orderByRaw('COUNT(*) DESC')
+            ->value('rating'),
+        'chart' => [
+            Survey::whereYear('created_at', $year)->where('rating', 1)->count(),
+            Survey::whereYear('created_at', $year)->where('rating', 2)->count(),
+            Survey::whereYear('created_at', $year)->where('rating', 3)->count(),
+            Survey::whereYear('created_at', $year)->where('rating', 4)->count(),
+            Survey::whereYear('created_at', $year)->where('rating', 5)->count(),
+        ]
+    ];
+
+    return view('admin.survey.index', compact('surveys', 'stat', 'year'));
+}
 
     public function edit($id)
     {

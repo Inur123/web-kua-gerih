@@ -7,9 +7,7 @@
     <title>Dashboard KUA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('images/logo-kua.png') }}" type="image/x-icon" />
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-
 
     <style>
         .sidebar-overlay::-webkit-scrollbar {
@@ -52,6 +50,8 @@
         .animate-fadeOut {
             animation: fadeOut 0.2s ease-out forwards;
         }
+
+        /* Notifikasi */
         .notification-container {
             position: fixed;
             top: 20px;
@@ -65,7 +65,6 @@
             position: relative;
             padding: 16px;
             padding-right: 40px;
-            /* Space for close button */
             margin-bottom: 12px;
             border-radius: 6px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -110,6 +109,8 @@
         @include('admin.layouts.sidebar')
         <div class="flex-1 flex flex-col md:ml-64">
             @include('admin.layouts.header')
+
+            <!-- Notifikasi -->
             <div class="notification-container space-y-3">
                 @if ($errors->any())
                     <div class="notification bg-red-50 text-red-700 border-l-4 border-red-500">
@@ -141,13 +142,17 @@
                     </div>
                 @endif
             </div>
+
             <main class="flex-1 overflow-y-auto p-2 sm:p-4 md:p-8mt-2">
                 @yield('content')
             </main>
+
             @include('admin.layouts.footer')
         </div>
     </div>
+
     @include('admin.layouts.scripts')
+
 </body>
 
 </html>

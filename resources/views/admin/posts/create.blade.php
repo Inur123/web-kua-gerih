@@ -11,7 +11,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Judul</label>
                         <input type="text" name="title" value="{{ old('title') }}" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('title') border-red-500 @enderror"
+                            class="w-full px-4 py-3 focus:outline-none border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent  @error('title')  @enderror"
                             placeholder="Masukkan judul berita">
                         @error('title')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -20,7 +20,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Status</label>
                         <select name="status" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('status') border-red-500 @enderror">
+                            class="w-full px-4 py-3 border focus:outline-none border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent  @error('status')  @enderror">
                             <option value="">Pilih Status</option>
                             <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
                             <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Publish</option>
@@ -32,7 +32,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Kategori</label>
                         <select name="category_id" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('category_id') border-red-500 @enderror">
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent focus:outline-none  @error('category_id')  @enderror">
                             <option value="">-- Pilih Kategori --</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>
@@ -46,15 +46,15 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tanggal Publikasi</label>
                         <input type="date" name="published_at" value="{{ old('published_at') }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('published_at') border-red-500 @enderror">
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent focus:outline-none  @error('published_at')  @enderror">
                         @error('published_at')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                     <div>
+                    <div>
                         <label class="block text-sm font-medium text-gray-700">Isi Berita</label>
                         <textarea id="content" name="content" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('content') border-red-500 @enderror"
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent  @error('content')  @enderror"
                             placeholder="Masukkan isi berita">{{ old('content') }}</textarea>
                         @error('content')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -67,8 +67,8 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tags (pisahkan dengan koma)</label>
                         <input type="text" name="tags" value="{{ old('tags') }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('tags') border-red-500 @enderror"
-                            placeholder="Contoh: magetan, ponorog">
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent focus:outline-none  @error('tags')  @enderror"
+                            placeholder="Contoh: magetan, ponorogo">
                         @error('tags')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -76,7 +76,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Thumbnail</label>
                         <input type="file" name="thumbnail" accept="image/*"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors @error('thumbnail') border-red-500 @enderror"
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent focus:outline-none  @error('thumbnail')  @enderror"
                             onchange="previewThumbnail(event)">
                         <img id="thumbnail-preview" class="mt-2 h-24 rounded shadow hidden" alt="Preview Thumbnail">
                         @error('thumbnail')
@@ -89,13 +89,13 @@
                         <div id="image-input-group">
                             <div class="flex items-center mb-2">
                                 <input type="file" name="images[]" accept="image/*"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors"
+                                    class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent focus:outline-none"
                                     onchange="previewImage(this)">
                                 <div class="flex ml-2">
                                     <button type="button" onclick="addImageInput()"
-                                        class="px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+                                        class="px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">+</button>
                                     <button type="button" onclick="removeImageInput(this)"
-                                        class="ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
+                                        class="ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer">-</button>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +106,20 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 flex justify-end">
+            <div class="mt-8 flex justify-end space-x-3">
+                <!-- Tombol Batal -->
+                <a href="{{ route('posts.index') }}"
+                    class="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">
+                    Batal
+                </a>
+
+                <!-- Tombol Simpan -->
                 <button type="submit"
-                    class="bg-kemenag-green text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">Simpan</button>
+                    class="bg-kemenag-green text-white px-6 py-3 rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">
+                    Simpan
+                </button>
             </div>
+
         </form>
     </div>
     <script>
@@ -154,10 +164,10 @@
             div.className = 'flex items-center mb-2';
             div.innerHTML = `
         <input type="file" name="images[]" accept="image/*"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors"
+            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors"
             onchange="previewImage(this)">
         <div class="flex ml-2">
-            <button type="button" onclick="addImageInput()" class="px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+            <button type="button" onclick="addImageInput()" class="px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">+</button>
             <button type="button" onclick="removeImageInput(this)" class="ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
         </div>
     `;
@@ -177,7 +187,7 @@
             if (inputGroups.length === 0) {
                 const group = document.getElementById('image-input-group');
                 group.innerHTML = `
-            <button type="button" onclick="addImageInput()" class="px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">
+            <button type="button" onclick="addImageInput()" class="px-3 py-2 bg-kemenag-green text-white rounded-lg transition-colors mb-2 cursor-pointer hover:bg-kemenag-light-green">
                 + Tambah Gambar
             </button>
         `;

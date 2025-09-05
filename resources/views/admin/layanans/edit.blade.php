@@ -13,7 +13,7 @@
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Layanan</label>
                 <input type="text" name="nama" id="nama" required value="{{ old('nama', $layanan->nama) }}"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+                    class="w-full px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
                 @error('nama')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -23,7 +23,7 @@
             <div>
                 <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
                 <textarea name="deskripsi" id="deskripsi" rows="4"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">{{ old('deskripsi', $layanan->deskripsi) }}</textarea>
+                    class="w-full px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">{{ old('deskripsi', $layanan->deskripsi) }}</textarea>
                 @error('deskripsi')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -36,31 +36,33 @@
                     <label class="inline-flex items-center">
                         <input type="radio" name="status" value="active"
                             {{ old('status', $layanan->status) == 'active' ? 'checked' : '' }}
-                            class="text-kemenag-green focus:ring-kemenag-green">
-                        <span class="ml-2">Active</span>
+                            class="accent-kemenag-green focus:ring-kemenag-green">
+                        <span class="ml-2 text-black">Aktif</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" name="status" value="inactive"
                             {{ old('status', $layanan->status) == 'inactive' ? 'checked' : '' }}
-                            class="text-kemenag-green focus:ring-kemenag-green">
-                        <span class="ml-2">Inactive</span>
+                            class="accent-kemenag-green focus:ring-kemenag-green">
+                        <span class="ml-2 text-red-500">Tidak Aktif</span>
                     </label>
                 </div>
                 @error('status')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Icon (SVG)</label>
                 <textarea id="icon-input" name="icon" rows="3"
-                    class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-kemenag-green focus:border-transparent border-gray-300"
+                    class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:outline-none focus:ring-kemenag-green focus:border-transparent border-kemenag-green"
                     placeholder="Masukkan kode SVG disini">{{ old('icon', $layanan->icon) }}</textarea>
                 @error('icon')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
                 <p class="text-sm text-gray-500 mt-1">Preview:</p>
-                <div id="icon-preview" class="mt-2 border rounded-md p-2 flex items-center justify-center"
+                <div id="icon-preview"
+                    class="mt-2 border border-kemenag-green rounded-md p-2 flex items-center justify-center"
                     style="width: 50px; height: 50px;">
                     {!! old('icon', $layanan->icon) !!}
                 </div>
@@ -81,13 +83,14 @@
                         <div class="persyaratan-item p-3 border rounded-lg">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_persyaratan[{{ $syarat->id }}][nama]"
-                                    value="{{ $syarat->nama }}" placeholder="Nama" class="px-3 py-2 border rounded-md">
+                                    value="{{ $syarat->nama }}" placeholder="Nama"
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <input type="text" name="existing_persyaratan[{{ $syarat->id }}][deskripsi]"
                                     value="{{ $syarat->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border rounded-md">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <input type="url" name="existing_persyaratan[{{ $syarat->id }}][link_download]"
                                     value="{{ $syarat->link_download }}" placeholder="Link Download"
-                                    class="px-3 py-2 border rounded-md">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                             </div>
                             <button type="button" onclick="removeItem(this,'delete_persyaratan',{{ $syarat->id }})"
                                 class="text-sm text-red-600 hover:text-red-800">Hapus</button>
@@ -111,13 +114,14 @@
                         <div class="syarat-khusus-item p-3 border rounded-lg">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_syarat_khusus[{{ $khusus->id }}][nama]"
-                                    value="{{ $khusus->nama }}" placeholder="Nama" class="px-3 py-2 border rounded-md">
+                                    value="{{ $khusus->nama }}" placeholder="Nama"
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <input type="text" name="existing_syarat_khusus[{{ $khusus->id }}][deskripsi]"
                                     value="{{ $khusus->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border rounded-md">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <input type="url" name="existing_syarat_khusus[{{ $khusus->id }}][link_download]"
                                     value="{{ $khusus->link_download }}" placeholder="Link Download"
-                                    class="px-3 py-2 border rounded-md">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">
                             </div>
                             <button type="button" onclick="removeItem(this,'delete_syarat_khusus',{{ $khusus->id }})"
                                 class="text-sm text-red-600 hover:text-red-800">Hapus</button>
@@ -142,13 +146,13 @@
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][nama]"
                                     value="{{ $step->nama }}" placeholder="Nama Prosedur"
-                                    class="px-3 py-2 border rounded-md w-full">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md w-full">
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][deskripsi]"
                                     value="{{ $step->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border rounded-md w-full">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md w-full">
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][link_download]"
                                     value="{{ $step->link_download }}" placeholder="Link Download (Opsional)"
-                                    class="px-3 py-2 border rounded-md w-full">
+                                    class="px-3 py-2 border border-kemenag-green rounded-md w-full">
                             </div>
                             <button type="button" onclick="removeItem(this,'delete_prosedur',{{ $step->id }})"
                                 class="text-sm text-red-600 hover:text-red-800">Hapus</button>
@@ -161,7 +165,8 @@
 
             <!-- Tombol -->
             <div class="flex gap-2 mt-6">
-                <button type="submit" class="px-4 py-2 bg-kemenag-green text-white rounded-md hover:bg-green-700">
+                <button type="submit"
+                    class="px-4 py-2 bg-kemenag-green text-white rounded-md hover:bg-kemenag-light-green">
                     Simpan Perubahan
                 </button>
                 <a href="{{ route('layanans.index') }}"
@@ -192,11 +197,11 @@
         function addPersyaratanField() {
             persyaratanCounter++;
             document.getElementById('persyaratanContainer').insertAdjacentHTML('beforeend', `
-            <div class="persyaratan-item p-3 border rounded-lg">
+            <div class="persyaratan-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                    <input type="text" name="new_persyaratan[${persyaratanCounter}][nama]" placeholder="Nama" class="px-3 py-2 border rounded-md" required>
-                    <input type="text" name="new_persyaratan[${persyaratanCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border rounded-md">
-                    <input type="url" name="new_persyaratan[${persyaratanCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border rounded-md">
+                    <input type="text" name="new_persyaratan[${persyaratanCounter}][nama]" placeholder="Nama" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
+                    <input type="text" name="new_persyaratan[${persyaratanCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+                    <input type="url" name="new_persyaratan[${persyaratanCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
                 </div>
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
@@ -206,11 +211,11 @@
         function addSyaratKhususField() {
             syaratKhususCounter++;
             document.getElementById('syaratKhususContainer').insertAdjacentHTML('beforeend', `
-            <div class="syarat-khusus-item p-3 border rounded-lg">
+            <div class="syarat-khusus-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][nama]" placeholder="Nama" class="px-3 py-2 border rounded-md" required>
-                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border rounded-md">
-                    <input type="url" name="new_syarat_khusus[${syaratKhususCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border rounded-md">
+                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][nama]" placeholder="Nama" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
+                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+                    <input type="url" name="new_syarat_khusus[${syaratKhususCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
                 </div>
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
@@ -220,7 +225,7 @@
         function addProsedurField() {
             prosedurCounter++;
             document.getElementById('prosedurContainer').insertAdjacentHTML('beforeend', `
-        <div class="prosedur-item p-3 border rounded-lg">
+        <div class="prosedur-item p-3 border border-kemenag-green rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                 <input type="text" name="new_prosedur[${prosedurCounter}][nama]"
                        placeholder="Nama Prosedur" class="px-3 py-2 border rounded-md w-full" required>

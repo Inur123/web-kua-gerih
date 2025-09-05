@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
             <h3 class="font-semibold text-kemenag-green text-lg">Daftar Layanan</h3>
             <a href="{{ route('layanans.create') }}"
-               class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-full sm:w-auto text-center">
+               class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-kemenag-light-green  transition-colors w-full sm:w-auto text-center">
                 + Tambah Layanan
             </a>
         </div>
@@ -24,10 +24,10 @@
                     @forelse($layanans as $layanan)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3 whitespace-nowrap">
-                                <p class="text-sm font-medium text-gray-800">{{ $loop->iteration }}</p>
+                                <p class="text-sm  text-gray-800">{{ $loop->iteration }}</p>
                             </td>
                             <td class="px-4 py-3">
-                                <div class="text-sm font-semibold text-gray-800">{{ $layanan->nama }}</div>
+                                <div class="text-sm  text-gray-800">{{ $layanan->nama }}</div>
                                 <div class="text-xs text-gray-500 sm:hidden mt-1">
                                     <div>{{ Str::limit($layanan->deskripsi, 60) }}</div>
                                     <div class="mt-1">

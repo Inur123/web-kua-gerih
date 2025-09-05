@@ -93,9 +93,99 @@
         }
     });
     </script>
+   <script>
+    function showNotification(message) {
+        const container = document.getElementById('notification-container');
+
+        const notification = document.createElement('div');
+        notification.className = 'notification bg-yellow-50 text-yellow-700 border-l-4 border-yellow-500';
+        notification.innerHTML = `
+            <i class="notification-icon fas fa-exclamation-triangle"></i>
+            <div>
+                <p class="font-medium">Aksi Diblokir</p>
+                <p class="mt-1 text-sm">${message}</p>
+            </div>
+            <button class="notification-close"><i class="fas fa-times"></i></button>
+        `;
+
+        container.appendChild(notification);
+
+        // Tombol close manual
+        const closeButton = notification.querySelector('.notification-close');
+        closeButton.addEventListener('click', () => {
+            notification.remove();
+        });
+
+        // Auto close setelah 3 detik
+        setTimeout(() => {
+            notification.style.transition = 'opacity 0.5s ease';
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 500);
+        }, 3000);
+    }
+
+    // Disable klik kanan + tampilkan notifikasi
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        showNotification('Klik kanan dinonaktifkan di halaman ini.');
+    });
+</script>
+<style>
+    .notification-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .notification {
+        position: relative;
+        padding: 16px;
+        padding-right: 40px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .notification-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: inherit;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+    .notification-close:hover {
+        opacity: 1;
+    }
+
+    .notification-icon {
+        margin-right: 12px;
+        font-size: 18px;
+        margin-top: 2px;
+    }
+
+    @media (max-width: 640px) {
+        .notification-container {
+            max-width: calc(100% - 40px);
+            left: 20px;
+            right: 20px;
+        }
+    }
+</style>
+
 </head>
 
 <body class="bg-gray-50 font-inter">
+    <div id="notification-container" class="notification-container space-y-3"></div>
     <!-- Header -->
      @include('user.layouts.header')
 

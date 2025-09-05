@@ -5,7 +5,7 @@
     <div class="flex justify-between items-center mb-4">
         <h3 class="font-semibold text-kemenag-green text-lg">Daftar Total Layanan</h3>
         <a href="{{ route('total-layanan.create') }}"
-            class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+            class="bg-kemenag-green text-white px-4 py-2 rounded-lg hover:bg-kemenag-light-green  transition-colors">
             + Tambah Data
         </a>
     </div>
@@ -37,7 +37,7 @@
                             <form action="{{ route('total-layanan.destroy', $item->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline"
+                                <button type="submit" class="text-red-500 hover:underline cursor-pointer"
                                     onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
                             </form>
                         </td>

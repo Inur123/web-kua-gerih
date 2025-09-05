@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
-     public function index()
+    public function index()
     {
         return view('user.survey');
     }
@@ -16,14 +16,21 @@ class SurveyController extends Controller
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'name' => 'nullable|string|max:100',
+            'name' => 'required|string|max:100',
             'email' => 'nullable|email',
             'feedback' => 'nullable|string',
+        ], [
+            'rating.required' => 'Silakan pilih tingkat kepuasan Anda!',
+            'rating.integer' => 'Rating tidak valid.',
+            'rating.min' => 'Rating tidak valid.',
+            'rating.max' => 'Rating tidak valid.',
+            'name.required' => 'Nama wajib diisi.',
+            'name.max' => 'Nama terlalu panjang.',
+            'email.email' => 'Email tidak valid.',
         ]);
 
         Survey::create($request->all());
 
         return redirect()->back()->with('success', 'Terima kasih sudah mengisi survei!');
     }
-
 }

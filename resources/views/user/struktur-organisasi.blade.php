@@ -12,9 +12,9 @@
                          <!-- Kepala KUA  -->
                         <div class="inline-block bg-kemenag-green text-white p-6 rounded-lg mb-6">
                             <img src="/placeholder.svg?height=100&width=100" alt="Kepala KUA" class="w-20 h-20 rounded-full mx-auto mb-3 bg-white">
-                            <h3 class="font-bold text-lg">Drs. H. Ahmad Suharto, M.Ag</h3>
+                            <h3 class="font-bold text-lg">Wachid Budi Santoso, S.Ag</h3>
                             <p class="text-sm">Kepala KUA</p>
-                            <p class="text-xs mt-1">NIP: 196501011990031001</p>
+                            <p class="text-xs mt-1">NIP: 19740924 2009121001</p>
                         </div>
                     </div>
 

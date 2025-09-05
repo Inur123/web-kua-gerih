@@ -119,7 +119,7 @@
                                 </div>
                             @else
                                 <button type="button" onclick="addImageInput()"
-                                        class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">
+                                        class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg transition-colors hover:bg-kemenag-light-green cursor-pointer">
                                     + Tambah Gambar Baru
                                 </button>
                             @endif
@@ -136,7 +136,7 @@
                 <a href="{{ route('posts.index') }}"
                    class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-center">Batal</a>
                 <button type="submit"
-                        class="w-full sm:w-auto px-6 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">Update</button>
+                        class="w-full sm:w-auto px-6 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">Update</button>
             </div>
         </form>
     </div>
@@ -184,13 +184,13 @@
                 group.innerHTML = `
                     <div class="flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-2">
                         <input type="file" name="images[]" accept="image/*"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent transition-colors"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent "
                                onchange="previewImage(this)">
                         <div class="flex sm:ml-2 w-full sm:w-auto">
                             <button type="button" onclick="addImageInput()"
-                                    class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+                                    class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">+</button>
                             <button type="button" onclick="removeImageInput(this)"
-                                    class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
+                                    class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer">-</button>
                         </div>
                     </div>
                 `;
@@ -203,9 +203,9 @@
                            onchange="previewImage(this)">
                     <div class="flex sm:ml-2 w-full sm:w-auto">
                         <button type="button" onclick="addImageInput()"
-                                class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+                                class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">+</button>
                         <button type="button" onclick="removeImageInput(this)"
-                                class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
+                                class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer">-</button>
                     </div>
                 `;
                 group.appendChild(div);
@@ -223,7 +223,7 @@
             if (inputGroups.length === 0 && existingImages.length === 0) {
                 const group = document.getElementById('image-input-group');
                 group.innerHTML = `
-                    <button type="button" onclick="addImageInput()" class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">
+                    <button type="button" onclick="addImageInput()" class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer ">
                         + Tambah Gambar Baru
                     </button>
                 `;
