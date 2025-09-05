@@ -59,9 +59,9 @@
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-1">Jam Pelayanan</h3>
                                 <p class="text-gray-600">
-                                    Senin - Jumat: 08:00 - 16:00<br>
-                                    Sabtu: 08:00 - 12:00<br>
-                                    Minggu: Tutup
+                                    Senin - Kamis: 07:30 - 16:00<br>
+                                    Jumat: 07:30 - 16:30<br>
+                                    Sabtu & Minggu: Tutup
                                 </p>
                             </div>
                         </div>

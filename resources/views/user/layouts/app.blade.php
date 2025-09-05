@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'KUA Kecamatan Gerih - Kantor Urusan Agama')</title>
-    <meta name="description" content="Kantor Urusan Agama (KUA) Kecamatan Gerih menyediakan layanan pernikahan islami, pencatatan nikah, dispensasi nikah, rujuk, dan layanan keagamaan resmi di wilayah Kecamatan Gerih">
-    <meta name="keywords" content="KUA Gerih, Nikah Gerih, Kantor Urusan Agama Gerih, Pernikahan Islam, Pencatatan Nikah, Dispensasi Nikah, Rujuk, Layanan KUA, Kecamatan Gerih, Kabupaten Ngawi">
+    <title>@yield('title', 'KUA Gerih - KUA Kecamatan Gerih Kabupaten Ngawi')</title>
+    <meta name="description" content="Kantor Urusan Agama (KUA) Kecamatan Gerih Kabupaten Ngawi menyediakan layanan pernikahan islami, pencatatan nikah, dispensasi nikah, rujuk, dan layanan keagamaan resmi.">
+    <meta name="keywords" content="KUA Gerih, KUA Ngawi, Nikah Gerih, Kantor Urusan Agama Ngawi, Pernikahan Islam Ngawi, Pencatatan Nikah Ngawi, Dispensasi Nikah, Rujuk, Layanan KUA, Kecamatan Gerih, Kabupaten Ngawi">
     <meta name="author" content="KUA Kecamatan Gerih">
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="7 days">
     <meta name="language" content="Indonesian">
     <meta name="geo.region" content="ID-JI">
     <meta name="geo.placename" content="Gerih, Ngawi, Jawa Timur">
+
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}" />
+
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/logo-kua.png') }}" type="image/x-icon" />
     <link rel="apple-touch-icon" href="{{ asset('images/logo-kua.png') }}">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="KUA Kecamatan Gerih | Layanan Nikah & Catatan Sipil Islam">
-    <meta property="og:description" content="Pelayanan resmi pernikahan islami, pencatatan nikah, dispensasi nikah dan layanan keagamaan di Kecamatan Gerih">
+    <meta property="og:title" content="KUA Gerih Kabupaten Ngawi | Layanan Nikah & Catatan Sipil Islam">
+    <meta property="og:description" content="Pelayanan resmi pernikahan islami, pencatatan nikah, dispensasi nikah dan layanan keagamaan di Kecamatan Gerih, Kabupaten Ngawi.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://veltira.tech/">
+    <meta property="og:url" content="https://kuagerih.id/">
     <meta property="og:image" content="{{ asset('images/logo-kua.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="KUA Kecamatan Gerih">
+    <meta property="og:site_name" content="KUA Gerih Kabupaten Ngawi">
     <meta property="og:locale" content="id_ID">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KUA Kecamatan Gerih | Layanan Nikah & Catatan Sipil Islam">
-    <meta name="twitter:description" content="Pelayanan resmi pernikahan islami dan catatan sipil untuk Kecamatan Gerih">
+    <meta name="twitter:title" content="KUA Gerih Kabupaten Ngawi | Layanan Nikah & Catatan Sipil Islam">
+    <meta name="twitter:description" content="Pelayanan resmi pernikahan islami dan catatan sipil untuk Kecamatan Gerih, Kabupaten Ngawi.">
     <meta name="twitter:image" content="{{ asset('images/logo-kua.png') }}">
 
     <!-- CSS & Fonts -->

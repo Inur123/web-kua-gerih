@@ -44,8 +44,8 @@
                     <p class="text-sm font-semibold text-kemenag-green">
                         Jam Pelayanan
                     </p>
-                    <p class="text-xs text-gray-600">Senin - Jumat: 08:00 - 16:00</p>
-                    <p class="text-xs text-gray-600">Sabtu: 08:00 - 12:00</p>
+                    <p class="text-xs text-gray-600">Senin - Kamis: 07:30 - 16:00</p>
+                    <p class="text-xs text-gray-600">Jumat: 07:30 - 16:30</p>
                 </div>
             </div>
         </div>
