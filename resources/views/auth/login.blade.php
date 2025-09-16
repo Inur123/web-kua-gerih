@@ -102,7 +102,8 @@
             <div class="max-w-md mx-auto">
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="bg-gradient-to-r from-kemenag-green to-kemenag-light-green text-white p-6 text-center">
-                        <div class="w-16 h-16 bg-white text-kemenag-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div
+                            class="w-16 h-16 bg-white text-kemenag-green bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-user text-2xl"></i>
                         </div>
                         <h2 class="text-2xl font-bold mb-2">Masuk ke Akun</h2>
@@ -112,6 +113,7 @@
                     <div class="p-6">
                         <form method="POST" action="{{ route('login') }}" class="space-y-6">
                             @csrf
+                            <!-- Email -->
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                     <i class="fas fa-envelope mr-2 text-kemenag-green"></i>
@@ -125,6 +127,7 @@
                                 @enderror
                             </div>
 
+                            <!-- Password -->
                             <div>
                                 <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                                     <i class="fas fa-lock mr-2 text-kemenag-green"></i>
@@ -144,6 +147,10 @@
                                 @enderror
                             </div>
 
+                            <!-- Turnstile -->
+                            <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
+
+                            <!-- Button -->
                             <button type="submit"
                                 class="w-full bg-kemenag-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors focus:ring-2 focus:ring-kemenag-green focus:ring-offset-2 cursor-pointer">
                                 <i class="fas fa-sign-in-alt mr-2"></i>
@@ -183,7 +190,7 @@
         }
 
         // Disable klik kanan + tampilkan notifikasi
-        document.addEventListener('contextmenu', function (e) {
+        document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             showNotification('Klik kanan dinonaktifkan di halaman ini.');
         });
@@ -214,5 +221,7 @@
             }
         }
     </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
+
 </html>

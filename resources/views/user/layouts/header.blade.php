@@ -5,8 +5,8 @@
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <span class="flex items-center">
                     <i class="fas fa-envelope mr-1"></i>
-                    <span class="hidden sm:inline">kua@kemenag.go.id</span>
-                    <span class="sm:hidden">kua@kemenag.go.id</span>
+                    <span class="hidden sm:inline">kua.gerih@gmail.com</span>
+                    <span class="sm:hidden">kua.gerih@gmail.com</span>
                 </span>
                 <span class="flex items-center">
                     <i class="fas fa-phone mr-1"></i>

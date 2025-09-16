@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -37,22 +38,38 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
+   public function login(Request $request)
+{
+    $credentials = $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required',
+        'cf-turnstile-response' => 'required', // field dari turnstile
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Anda telah berhasil login.');
-        }
+    // Validasi Turnstile
+    $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+        'secret'   => config('services.turnstile.secret_key'),
+        'response' => $request->input('cf-turnstile-response'),
+        'remoteip' => $request->ip(),
+    ]);
 
+    if (!$response->json('success')) {
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'email' => 'Verifikasi keamanan gagal, coba lagi.',
         ]);
     }
+
+    // Jika validasi Turnstile sukses → cek login
+    if (Auth::attempt($request->only('email', 'password'))) {
+        $request->session()->regenerate();
+        return redirect()->route('dashboard')->with('success', 'Anda telah berhasil login.');
+    }
+
+    return back()->withErrors([
+        'email' => 'Email atau password salah.',
+    ]);
+}
+
 
     public function logout(Request $request)
     {

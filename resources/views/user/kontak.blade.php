@@ -45,8 +45,7 @@
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-1">Email</h3>
                                 <p class="text-gray-600">
-                                    kua@kemenag.go.id<br>
-                                    info@kua-kecamatan.go.id
+                                    kua.gerih@gmail.com
                                 </p>
                             </div>
                         </div>
