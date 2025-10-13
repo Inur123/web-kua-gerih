@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <img src="{{ asset('images/gambar-kua.png') }}" alt="KUA Hero Image"
+                    <img src="{{ asset('images/foto-depan.png') }}" alt="KUA Hero Image"
                         class="w-full h-auto rounded-lg shadow-lg" />
                 </div>
             </div>

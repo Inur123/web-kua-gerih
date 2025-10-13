@@ -4,12 +4,10 @@
     <div class="bg-white p-4 sm:p-6 rounded-lg shadow-sm mb-8">
         <h3 class="font-semibold text-kemenag-green text-xl sm:text-2xl mb-4">Edit Layanan</h3>
 
-        <!-- Form Edit Layanan -->
         <form action="{{ route('layanans.update', $layanan) }}" method="POST" id="layananForm" class="space-y-6">
             @csrf
             @method('PUT')
 
-            <!-- Nama -->
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Layanan</label>
                 <input type="text" name="nama" id="nama" required value="{{ old('nama', $layanan->nama) }}"
@@ -19,7 +17,6 @@
                 @enderror
             </div>
 
-            <!-- Deskripsi -->
             <div>
                 <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
                 <textarea name="deskripsi" id="deskripsi" rows="4"
@@ -29,7 +26,6 @@
                 @enderror
             </div>
 
-            <!-- Status -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
                 <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
@@ -68,7 +64,6 @@
                 </div>
             </div>
 
-            <!-- ================= Persyaratan ================= -->
             <div class="mt-6">
                 <div class="flex justify-between items-center mb-2">
                     <h4 class="font-semibold text-gray-700">Persyaratan</h4>
@@ -79,15 +74,16 @@
                 </div>
 
                 <div id="persyaratanContainer" class="space-y-4">
-                    @foreach ($layanan->persyaratans as $syarat)
+                    @foreach ($layanan->persyaratans as $key => $syarat)
                         <div class="persyaratan-item p-3 border rounded-lg">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_persyaratan[{{ $syarat->id }}][nama]"
                                     value="{{ $syarat->nama }}" placeholder="Nama"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
-                                <input type="text" name="existing_persyaratan[{{ $syarat->id }}][deskripsi]"
-                                    value="{{ $syarat->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border border-kemenag-green rounded-md">
+                                <textarea name="existing_persyaratan[{{ $syarat->id }}][deskripsi]"
+                                    id="existing_persyaratan_deskripsi_{{ $syarat->id }}"
+                                    placeholder="Deskripsi"
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">{{ $syarat->deskripsi }}</textarea>
                                 <input type="url" name="existing_persyaratan[{{ $syarat->id }}][link_download]"
                                     value="{{ $syarat->link_download }}" placeholder="Link Download"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
@@ -99,7 +95,6 @@
                 </div>
             </div>
 
-            <!-- ================= Syarat Khusus ================= -->
             <div class="mt-6">
                 <div class="flex justify-between items-center mb-2">
                     <h4 class="font-semibold text-gray-700">Syarat Khusus / Tambahan</h4>
@@ -110,15 +105,16 @@
                 </div>
 
                 <div id="syaratKhususContainer" class="space-y-4">
-                    @foreach ($layanan->syaratKhusus as $khusus)
+                    @foreach ($layanan->syaratKhusus as $key => $khusus)
                         <div class="syarat-khusus-item p-3 border rounded-lg">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_syarat_khusus[{{ $khusus->id }}][nama]"
                                     value="{{ $khusus->nama }}" placeholder="Nama"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
-                                <input type="text" name="existing_syarat_khusus[{{ $khusus->id }}][deskripsi]"
-                                    value="{{ $khusus->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border border-kemenag-green rounded-md">
+                                <textarea name="existing_syarat_khusus[{{ $khusus->id }}][deskripsi]"
+                                    id="existing_syarat_khusus_deskripsi_{{ $khusus->id }}"
+                                    placeholder="Deskripsi"
+                                    class="px-3 py-2 border border-kemenag-green rounded-md">{{ $khusus->deskripsi }}</textarea>
                                 <input type="url" name="existing_syarat_khusus[{{ $khusus->id }}][link_download]"
                                     value="{{ $khusus->link_download }}" placeholder="Link Download"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
@@ -130,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- ================= Prosedur ================= -->
             <div class="mt-6">
                 <div class="flex justify-between items-center mb-2">
                     <h4 class="font-semibold text-gray-700">Prosedur</h4>
@@ -141,15 +136,16 @@
                 </div>
 
                 <div id="prosedurContainer" class="space-y-4">
-                    @foreach ($layanan->prosedurs as $step)
+                    @foreach ($layanan->prosedurs as $key => $step)
                         <div class="prosedur-item p-3 border rounded-lg">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][nama]"
                                     value="{{ $step->nama }}" placeholder="Nama Prosedur"
                                     class="px-3 py-2 border border-kemenag-green rounded-md w-full">
-                                <input type="text" name="existing_prosedur[{{ $step->id }}][deskripsi]"
-                                    value="{{ $step->deskripsi }}" placeholder="Deskripsi"
-                                    class="px-3 py-2 border border-kemenag-green rounded-md w-full">
+                                <textarea name="existing_prosedur[{{ $step->id }}][deskripsi]"
+                                    id="existing_prosedur_deskripsi_{{ $step->id }}"
+                                    placeholder="Deskripsi"
+                                    class="px-3 py-2 border border-kemenag-green rounded-md w-full">{{ $step->deskripsi }}</textarea>
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][link_download]"
                                     value="{{ $step->link_download }}" placeholder="Link Download (Opsional)"
                                     class="px-3 py-2 border border-kemenag-green rounded-md w-full">
@@ -161,9 +157,6 @@
                 </div>
             </div>
 
-
-
-            <!-- Tombol -->
             <div class="flex gap-2 mt-6">
                 <button type="submit"
                     class="px-4 py-2 bg-kemenag-green text-white rounded-md hover:bg-kemenag-light-green">
@@ -177,69 +170,138 @@
         </form>
     </div>
 
-    <script>
-        let persyaratanCounter = 0;
-        let syaratKhususCounter = 0;
-        let prosedurCounter = 0;
+   <script src="https://cdn.tiny.cloud/1/mimr482vltcpcta1nd94dwlkgbsdgmcyz4n3tve4ydvf4l83/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-        function removeItem(button, deleteName, id = null) {
-            const item = button.closest('div');
-            if (id) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = `${deleteName}[]`;
-                input.value = id;
-                document.getElementById('layananForm').appendChild(input);
-            }
-            item.remove();
+<script>
+    let persyaratanCounter = 0;
+    let syaratKhususCounter = 0;
+    let prosedurCounter = 0;
+
+    // === Inisialisasi TinyMCE global ===
+  function initTiny(selector) {
+    tinymce.init({
+        selector: selector,
+        height: 200,
+        menubar: false,
+        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern help emoticons',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
+        setup: (editor) => {
+            editor.on('change', function () {
+                tinymce.triggerSave(); // supaya isi tersimpan ke textarea
+            });
         }
+    });
+}
 
-        function addPersyaratanField() {
-            persyaratanCounter++;
-            document.getElementById('persyaratanContainer').insertAdjacentHTML('beforeend', `
+
+    // MODIFIED: Initialize TinyMCE for all existing textareas on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Main description
+
+
+        // Existing Persyaratan descriptions
+        @foreach ($layanan->persyaratans as $syarat)
+            initTiny('#existing_persyaratan_deskripsi_{{ $syarat->id }}');
+        @endforeach
+
+        // Existing Syarat Khusus descriptions
+        @foreach ($layanan->syaratKhusus as $khusus)
+            initTiny('#existing_syarat_khusus_deskripsi_{{ $khusus->id }}');
+        @endforeach
+
+        // Existing Prosedur descriptions
+        @foreach ($layanan->prosedurs as $step)
+            initTiny('#existing_prosedur_deskripsi_{{ $step->id }}');
+        @endforeach
+    });
+
+
+    function removeItem(button, deleteName, id = null) {
+        const item = button.closest('div.border.rounded-lg'); // Target the parent container more specifically
+        if (id) {
+            // Before removing, check if it's a TinyMCE instance and destroy it
+            const textarea = item.querySelector('textarea');
+            if (textarea && tinymce.get(textarea.id)) {
+                tinymce.get(textarea.id).remove();
+            }
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `${deleteName}[]`;
+            input.value = id;
+            document.getElementById('layananForm').appendChild(input);
+        }
+        item.remove();
+    }
+
+
+    // === Tambah Persyaratan ===
+    function addPersyaratanField() {
+        persyaratanCounter++;
+        const container = document.getElementById('persyaratanContainer');
+        const id = `persyaratan_deskripsi_${persyaratanCounter}`;
+
+        container.insertAdjacentHTML('beforeend', `
             <div class="persyaratan-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                    <input type="text" name="new_persyaratan[${persyaratanCounter}][nama]" placeholder="Nama" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
-                    <input type="text" name="new_persyaratan[${persyaratanCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
-                    <input type="url" name="new_persyaratan[${persyaratanCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+                    <input type="text" name="new_persyaratan[${persyaratanCounter}][nama]" placeholder="Nama"
+                        class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
+                    <textarea id="${id}" name="new_persyaratan[${persyaratanCounter}][deskripsi]"
+                        placeholder="Deskripsi"></textarea>
+                    <input type="url" name="new_persyaratan[${persyaratanCounter}][link_download]" placeholder="Link Download"
+                        class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
                 </div>
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
         `);
-        }
+        initTiny(`#${id}`);
+    }
 
-        function addSyaratKhususField() {
-            syaratKhususCounter++;
-            document.getElementById('syaratKhususContainer').insertAdjacentHTML('beforeend', `
+    // === Tambah Syarat Khusus ===
+    function addSyaratKhususField() {
+        syaratKhususCounter++;
+        const container = document.getElementById('syaratKhususContainer');
+        const id = `syaratKhusus_deskripsi_${syaratKhususCounter}`;
+
+        container.insertAdjacentHTML('beforeend', `
             <div class="syarat-khusus-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][nama]" placeholder="Nama" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
-                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][deskripsi]" placeholder="Deskripsi" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
-                    <input type="url" name="new_syarat_khusus[${syaratKhususCounter}][link_download]" placeholder="Link Download" class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+                    <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][nama]" placeholder="Nama"
+                        class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent" required>
+                    <textarea id="${id}" name="new_syarat_khusus[${syaratKhususCounter}][deskripsi]"
+                        placeholder="Deskripsi"></textarea>
+                    <input type="url" name="new_syarat_khusus[${syaratKhususCounter}][link_download]" placeholder="Link Download"
+                        class="px-3 py-2 border border-kemenag-green rounded-md focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
                 </div>
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
         `);
-        }
+        initTiny(`#${id}`);
+    }
 
-        function addProsedurField() {
-            prosedurCounter++;
-            document.getElementById('prosedurContainer').insertAdjacentHTML('beforeend', `
-        <div class="prosedur-item p-3 border border-kemenag-green rounded-lg">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
-                <input type="text" name="new_prosedur[${prosedurCounter}][nama]"
-                       placeholder="Nama Prosedur" class="px-3 py-2 border rounded-md w-full" required>
-                <input type="text" name="new_prosedur[${prosedurCounter}][deskripsi]"
-                       placeholder="Deskripsi" class="px-3 py-2 border rounded-md w-full">
-                <input type="text" name="new_prosedur[${prosedurCounter}][link_download]"
-                       placeholder="Link Download (Opsional)" class="px-3 py-2 border rounded-md w-full">
+    // === Tambah Prosedur ===
+    function addProsedurField() {
+        prosedurCounter++;
+        const container = document.getElementById('prosedurContainer');
+        const id = `prosedur_deskripsi_${prosedurCounter}`;
+
+        container.insertAdjacentHTML('beforeend', `
+            <div class="prosedur-item p-3 border border-kemenag-green rounded-lg">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
+                    <input type="text" name="new_prosedur[${prosedurCounter}][nama]"
+                        placeholder="Nama Prosedur" class="px-3 py-2 border border-kemenag-green rounded-md w-full" required>
+                    <textarea id="${id}" name="new_prosedur[${prosedurCounter}][deskripsi]"
+                        placeholder="Deskripsi"></textarea>
+                    <input type="text" name="new_prosedur[${prosedurCounter}][link_download]"
+                        placeholder="Link Download (Opsional)" class="px-3 py-2 border border-kemenag-green rounded-md w-full">
+                </div>
+                <button type="button" onclick="removeItem(this)" class="text-sm text-red-600 hover:text-red-800">Hapus</button>
             </div>
-            <button type="button" onclick="removeItem(this)"
-                class="text-sm text-red-600 hover:text-red-800">Hapus</button>
-        </div>
-    `);
-        }
-    </script>
+        `);
+        initTiny(`#${id}`);
+    }
+</script>
+
     <script>
         const iconInput = document.getElementById('icon-input');
         const iconPreview = document.getElementById('icon-preview');

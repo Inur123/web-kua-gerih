@@ -8,7 +8,7 @@
 
                 <!-- Hero Image -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-                    <img src="{{ asset('images/gambar-kua.png') }}" alt="Gedung KUA Gerih" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/foto-depan.png') }}" alt="Gedung KUA Gerih" class="w-full h-full object-cover">
                     <div class="p-6 text-center text-gray-600 italic">
                         Gedung KUA Kecamatan Gerih yang berdiri sejak tahun 2009
                     </div>
@@ -45,7 +45,7 @@
                     </p>
 
                     <div class="text-right text-gray-700">
-                        <p>Gerih, 15 Desember 2023</p>
+                        <p>Gerih, 1 oktober 2025</p>
                         <p>Kepala KUA Kecamatan Gerih</p>
                         <br>
                         <p class="font-semibold">Wachid Budi Santoso, S.Ag</p>
