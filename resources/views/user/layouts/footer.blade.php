@@ -91,9 +91,17 @@
                           <i class="fab fa-tiktok text-xl"></i>
                       </a>
                   </div>
+
+                  <!-- Total Views -->
+                  <div class="mt-6 text-sm text-gray-300">
+                      <i class="fas fa-eye mr-1"></i> Total Pengunjung Website: <span
+                          class="font-semibold">{{ $totalViews ?? 0 }}</span>
+                  </div>
               </div>
 
+
           </div>
+
           <div class="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-300">
               <p>
                   &copy; {{ date('Y') }} KUA Kecamatan Gerih - Kementerian Agama Republik Indonesia.

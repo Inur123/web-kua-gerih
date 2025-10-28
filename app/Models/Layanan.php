@@ -38,4 +38,8 @@ class Layanan extends Model
             $layanan->slug = Str::slug($layanan->nama);
         });
     }
+     public function surveys()
+    {
+        return $this->hasMany(Survey::class);
+    }
 }

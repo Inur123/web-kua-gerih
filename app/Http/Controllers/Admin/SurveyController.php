@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Survey;
+use App\Models\Layanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,26 +39,30 @@ class SurveyController extends Controller
     return view('admin.survey.index', compact('surveys', 'stat', 'year'));
 }
 
-    public function edit($id)
-    {
-        $survey = Survey::findOrFail($id);
-        return view('admin.survey.edit', compact('survey'));
-    }
+  public function edit($id)
+{
+    $survey = Survey::findOrFail($id);
+    $layanans = Layanan::where('status', 'active')->orderBy('nama')->get();
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'name' => 'nullable|string|max:100',
-            'email' => 'nullable|email',
-            'feedback' => 'nullable|string',
-        ]);
+    return view('admin.survey.edit', compact('survey', 'layanans'));
+}
 
-        $survey = Survey::findOrFail($id);
-        $survey->update($request->all());
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'layanan_id' => 'required|exists:layanans,id',
+        'rating' => 'required|integer|min:1|max:5',
+        'name' => 'nullable|string|max:100',
+        'email' => 'nullable|email',
+        'feedback' => 'nullable|string',
+    ]);
 
-        return redirect()->route('admin.survey.index')->with('success', 'Survey berhasil diperbarui!');
-    }
+    $survey = Survey::findOrFail($id);
+    $survey->update($request->only(['layanan_id','rating','name','email','feedback']));
+
+    return redirect()->route('admin.survey.index')->with('success', 'Survey berhasil diperbarui!');
+}
+
 
     public function destroy($id)
     {

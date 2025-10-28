@@ -117,67 +117,87 @@
 
         <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm max-w-3xl mx-auto">
             <form id="satisfaction-form" action="{{ route('survey.store') }}" method="POST">
-                @csrf
+    @csrf
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2" for="name">
-                        Nama *
-                    </label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" required placeholder="Nama Anda">
-                    @error('name')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="name">
+            Nama *
+        </label>
+        <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" required placeholder="Nama Anda">
+        @error('name')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
+    </div>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2" for="email">
-                        Email (opsional)
-                    </label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" placeholder="Email Anda">
-                    @error('email')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="email">
+            Email (opsional)
+        </label>
+        <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" placeholder="Email Anda">
+        @error('email')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
+    </div>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2">
-                        Tingkat Kepuasan *
-                    </label>
-                    <div class="rating-emojis flex justify-center space-x-4">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <input type="radio" id="emoji{{ $i }}" name="rating" value="{{ $i }}" {{ old('rating') == $i ? 'checked' : '' }}>
-                            @php
-                                $titles = ['Sangat Tidak Puas', 'Tidak Puas', 'Biasa Saja', 'Puas', 'Sangat Puas'];
-                                $emojis = ['😡','😞','😐','😊','😍'];
-                            @endphp
-                            <label for="emoji{{ $i }}" title="{{ $titles[$i-1] }}">{{ $emojis[$i-1] }}</label>
-                        @endfor
-                    </div>
-                    <div class="flex justify-between text-xs text-gray-500 mt-2">
-                        <span>Sangat Tidak Puas</span>
-                        <span>Sangat Puas</span>
-                    </div>
-                </div>
+    {{-- Select Layanan --}}
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="layanan_id">
+            Pilih Layanan *
+        </label>
+        <select name="layanan_id" id="layanan_id" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green">
+            <option value="">-- Pilih Layanan --</option>
+            @foreach ($layanans as $layanan)
+                <option value="{{ $layanan->id }}" {{ old('layanan_id') == $layanan->id ? 'selected' : '' }}>
+                    {{ $layanan->nama }}
+                </option>
+            @endforeach
+        </select>
+        @error('layanan_id')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
+    </div>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-medium mb-2" for="feedback">
-                        Masukan dan Saran (opsional)
-                    </label>
-                    <textarea id="feedback" name="feedback" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" placeholder="Berikan masukan dan saran untuk meningkatkan kualitas layanan kami...">{{ old('feedback') }}</textarea>
-                    @error('feedback')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-6 flex">
-                    <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
-                </div>
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-medium mb-2">
+            Tingkat Kepuasan *
+        </label>
+        <div class="rating-emojis flex justify-center space-x-4">
+            @for ($i = 1; $i <= 5; $i++)
+                <input type="radio" id="emoji{{ $i }}" name="rating" value="{{ $i }}" {{ old('rating') == $i ? 'checked' : '' }}>
+                @php
+                    $titles = ['Sangat Tidak Puas', 'Tidak Puas', 'Biasa Saja', 'Puas', 'Sangat Puas'];
+                    $emojis = ['😡','😞','😐','😊','😍'];
+                @endphp
+                <label for="emoji{{ $i }}" title="{{ $titles[$i-1] }}">{{ $emojis[$i-1] }}</label>
+            @endfor
+        </div>
+        <div class="flex justify-between text-xs text-gray-500 mt-2">
+            <span>Sangat Tidak Puas</span>
+            <span>Sangat Puas</span>
+        </div>
+    </div>
 
-                <div class="text-center">
-                    <button type="submit" class="bg-kemenag-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors">
-                        <i class="fas fa-paper-plane mr-2"></i>Kirim Penilaian
-                    </button>
-                </div>
-            </form>
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-medium mb-2" for="feedback">
+            Masukan dan Saran (opsional)
+        </label>
+        <textarea id="feedback" name="feedback" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green" placeholder="Berikan masukan dan saran untuk meningkatkan kualitas layanan kami...">{{ old('feedback') }}</textarea>
+        @error('feedback')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="mb-6 flex">
+        <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="bg-kemenag-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors">
+            <i class="fas fa-paper-plane mr-2"></i>Kirim Penilaian
+        </button>
+    </div>
+</form>
+
         </div>
     </div>
 </section>

@@ -24,6 +24,20 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">Layanan</label>
+    <select name="layanan_id" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent">
+        <option value="">-- Pilih Layanan --</option>
+        @foreach($layanans as $layanan)
+            <option value="{{ $layanan->id }}" {{ old('layanan_id', $survey->layanan_id) == $layanan->id ? 'selected' : '' }}>
+                {{ $layanan->nama }}
+            </option>
+        @endforeach
+    </select>
+    @error('layanan_id')
+        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+    @enderror
+</div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>

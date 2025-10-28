@@ -141,67 +141,62 @@
             <h3 class="font-semibold text-kemenag-green mb-4 text-base sm:text-lg">Daftar Survey Kepuasan</h3>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">No
-                            </th>
-                            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Nama
-                            </th>
-                            <th
-                                class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden sm:table-cell">
-                                Email</th>
-                            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">
-                                Rating</th>
-                            <th
-                                class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden md:table-cell">
-                                Feedback</th>
-                            <th
-                                class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden lg:table-cell">
-                                Tanggal</th>
-                            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        @forelse($surveys as $survey)
-                            <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                <td class="px-3 sm:px-4 py-3 whitespace-nowrap">
-                                    <span class="text-xs sm:text-sm font-medium text-gray-800">
-                                        {{ ($surveys->currentPage() - 1) * $surveys->perPage() + $loop->iteration }}
-                                    </span>
-                                </td>
-                                <td class="px-3 sm:px-4 py-3">{{ $survey->name ?? '-' }}</td>
-                                <td class="px-3 sm:px-4 py-3 hidden sm:table-cell">{{ $survey->email ?? '-' }}</td>
-                                <td class="px-3 sm:px-4 py-3 text-center">
-                                    <span
-                                        class="text-lg sm:text-xl">{{ $emojis[$survey->rating] ?? $survey->rating }}</span>
-                                </td>
-                                <td class="px-3 sm:px-4 py-3 hidden md:table-cell">{{ $survey->feedback ?? '-' }}</td>
-                                <td class="px-3 sm:px-4 py-3 hidden lg:table-cell">
-                                    {{ optional($survey->created_at)->format('d M Y H:i') ?? '-' }}</td>
-                                <td class="px-3 sm:px-4 py-3 whitespace-nowrap flex items-center gap-2">
-                                    <a href="{{ route('admin.survey.edit', $survey->id) }}"
-                                        class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm bg-kemenag-light-green text-white rounded-md hover:bg-green-500 transition-colors duration-150">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.survey.destroy', $survey->id) }}" method="POST"
-                                        class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-150 cursor-pointer"
-                                            onclick="return confirm('Yakin hapus data survey?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="px-3 sm:px-4 py-4 text-center text-gray-500 text-xs sm:text-sm">
-                                    Belum ada data survey.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">No</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Nama</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden sm:table-cell">Email</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Layanan</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Rating</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden md:table-cell">Feedback</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider hidden lg:table-cell">Tanggal</th>
+            <th class="px-3 sm:px-4 py-3 text-left font-medium text-gray-600 uppercase tracking-wider">Aksi</th>
+        </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+        @php
+            $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+        @endphp
+        @forelse($surveys as $survey)
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                <td class="px-3 sm:px-4 py-3 whitespace-nowrap">
+                    <span class="text-xs sm:text-sm font-medium text-gray-800">
+                        {{ ($surveys->currentPage() - 1) * $surveys->perPage() + $loop->iteration }}
+                    </span>
+                </td>
+                <td class="px-3 sm:px-4 py-3">{{ $survey->name ?? '-' }}</td>
+                <td class="px-3 sm:px-4 py-3 hidden sm:table-cell">{{ $survey->email ?? '-' }}</td>
+                <td class="px-3 sm:px-4 py-3">{{ $survey->layanan->nama ?? '-' }}</td>
+                <td class="px-3 sm:px-4 py-3 text-center">
+                    <span class="text-lg sm:text-xl">{{ $emojis[$survey->rating] ?? $survey->rating }}</span>
+                </td>
+                <td class="px-3 sm:px-4 py-3 hidden md:table-cell">{{ $survey->feedback ?? '-' }}</td>
+                <td class="px-3 sm:px-4 py-3 hidden lg:table-cell">
+                    {{ optional($survey->created_at)->format('d M Y H:i') ?? '-' }}
+                </td>
+                <td class="px-3 sm:px-4 py-3 whitespace-nowrap flex items-center gap-2">
+                    <a href="{{ route('admin.survey.edit', $survey->id) }}"
+                        class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm bg-kemenag-light-green text-white rounded-md hover:bg-green-500 transition-colors duration-150">
+                        Edit
+                    </a>
+                    <form action="{{ route('admin.survey.destroy', $survey->id) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-150 cursor-pointer"
+                            onclick="return confirm('Yakin hapus data survey?')">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="8" class="px-3 sm:px-4 py-4 text-center text-gray-500 text-xs sm:text-sm">
+                    Belum ada data survey.
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
             </div>
 
             <!-- Pagination -->

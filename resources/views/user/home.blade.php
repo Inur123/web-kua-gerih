@@ -89,6 +89,7 @@
                             <i class="fas fa-phone mr-2"></i>Hubungi Kami
                         </a>
                     </div>
+
                 </div>
                 <div class="hidden md:block">
                     <img src="{{ asset('images/foto-depan.png') }}" alt="KUA Hero Image"
@@ -189,6 +190,7 @@
             </div>
         </div>
     </section>
+
     <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-8 md:mb-12">
@@ -223,6 +225,7 @@
             </div>
         </div>
     </section>
+
     <section class="py-12 md:py-16 bg-kemenag-green text-white">
         <div class="container mx-auto px-4">
             <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
