@@ -10,8 +10,8 @@
                 </span>
                 <span class="flex items-center">
                     <i class="fas fa-phone mr-1"></i>
-                    <span class="hidden sm:inline">08113600791</span>
-                    <span class="sm:hidden">08113600791</span>
+                    <span class="hidden sm:inline">081335852579</span>
+                    <span class="sm:hidden">081335852579</span>
                 </span>
             </div>
             <div class="hidden sm:flex items-center space-x-2">

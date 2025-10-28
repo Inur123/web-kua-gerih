@@ -12,6 +12,7 @@
     <meta name="language" content="Indonesian">
     <meta name="geo.region" content="ID-JI">
     <meta name="geo.placename" content="Gerih, Ngawi, Jawa Timur">
+     @yield('meta')
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}" />
@@ -36,6 +37,7 @@
     <meta name="twitter:title" content="KUA Gerih Kabupaten Ngawi | Layanan Nikah & Catatan Sipil Islam">
     <meta name="twitter:description" content="Pelayanan resmi pernikahan islami dan catatan sipil untuk Kecamatan Gerih, Kabupaten Ngawi.">
     <meta name="twitter:image" content="{{ asset('images/logo-kua.png') }}">
+    <meta name="google-adsense-account" content="ca-pub-2907888650160055">
 
     <!-- CSS & Fonts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -127,10 +129,10 @@
     }
 
     // Disable klik kanan + tampilkan notifikasi
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-        showNotification('Klik kanan dinonaktifkan di halaman ini.');
-    });
+    // document.addEventListener('contextmenu', function (e) {
+    //     e.preventDefault();
+    //     showNotification('Klik kanan dinonaktifkan di halaman ini.');
+    // });
 </script>
 <style>
     .notification-container {

@@ -168,6 +168,9 @@
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+                <div class="mb-6 flex">
+                    <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
+                </div>
 
                 <div class="text-center">
                     <button type="submit" class="bg-kemenag-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-kemenag-light-green transition-colors">
@@ -200,4 +203,5 @@ document.querySelectorAll('.notification').forEach(notification => {
     }, 3000);
 });
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 @endsection

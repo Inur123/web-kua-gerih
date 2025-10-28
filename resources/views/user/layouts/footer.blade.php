@@ -48,20 +48,28 @@
               <div>
                   <h4 class="font-semibold mb-4">Media Sosial</h4>
                   <div class="flex space-x-4">
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                      <a href="https://www.facebook.com/profile.php?id=100011577668728" target="_blank"
+                          rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-facebook text-xl"></i>
                       </a>
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+
+                      <a href="https://www.instagram.com/kuagerih?igsh=amJ0NjBvbGpvOGZq" target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-instagram text-xl"></i>
                       </a>
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                      <a href="#" class="text-gray-300 hover:text-white transition-colors" target="_blank"
+                          rel="noopener noreferrer">
                           <i class="fab fa-twitter text-xl"></i>
                       </a>
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                      <a href="#" class="text-gray-300 hover:text-white transition-colors" target="_blank"
+                          rel="noopener noreferrer">
                           <i class="fab fa-youtube text-xl"></i>
                       </a>
                       <!-- TikTok -->
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                      <a href="https://www.tiktok.com/@kua.gerih?_t=ZS-90VrAiYRkMp&_r=1" target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-tiktok text-xl"></i>
                       </a>
                   </div>

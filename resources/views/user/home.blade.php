@@ -73,11 +73,10 @@
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="text-center md:text-left">
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                        Melayani Dengan Amanah
+                        KUA Gerih – Integritas Pelayanan untuk Maslahat Umat
                     </h2>
                     <p class="text-base md:text-lg mb-6">
-                        Kantor Urusan Agama siap melayani kebutuhan administrasi keagamaan
-                        masyarakat dengan profesional dan terpercaya.
+                       Kantor Urusan Agama siap melayani kebutuhan administrasi keagamaan masyarakat dengan profesional dan terpercaya.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a href="{{ route('layanan.index') }}"
@@ -273,7 +272,7 @@
                         Telepon
                     </h4>
                     <p class="text-xs md:text-sm text-gray-600">
-                        Telp: 08113600791
+                        Telp: 081335852579
                     </p>
                 </div>
                 <div class="text-center p-6">
@@ -285,7 +284,7 @@
                         Email
                     </h4>
                     <p class="text-xs md:text-sm text-gray-600">
-                        kua@kemenag.go.id<br />info@kua-kecamatan.go.id
+                        kua.gerih@gmail.com
                     </p>
                 </div>
             </div>

@@ -33,7 +33,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-1">Telepon</h3>
-                                <p class="text-gray-600">Telp: 08113600791</p>
+                                <p class="text-gray-600">Telp: 081335852579</p>
                             </div>
                         </div>
 
