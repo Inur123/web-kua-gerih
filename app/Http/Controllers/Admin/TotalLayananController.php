@@ -10,11 +10,10 @@ use App\Models\Layanan;
 class TotalLayananController extends Controller
 {
     public function index()
-{
-    // Mengambil 10 data per halaman
-    $totalLayanans = TotalLayanan::with('layanan')->orderBy('tahun', 'desc')->paginate(10);
-    return view('admin.total_layanan.index', compact('totalLayanans'));
-}
+    {
+        $totalLayanans = TotalLayanan::with('layanan')->orderBy('tanggal', 'desc')->paginate(10);
+        return view('admin.total_layanan.index', compact('totalLayanans'));
+    }
 
 
     public function create()
@@ -27,7 +26,7 @@ class TotalLayananController extends Controller
     {
         $request->validate([
             'layanan_id' => 'required|exists:layanans,id',
-            'tahun' => 'required|integer|min:2000|max:2100',
+            'tanggal' => 'required|date',
             'total' => 'required|integer|min:0'
         ]);
 
@@ -46,7 +45,7 @@ class TotalLayananController extends Controller
     {
         $request->validate([
             'layanan_id' => 'required|exists:layanans,id',
-            'tahun' => 'required|integer|min:2000|max:2100',
+            'tanggal' => 'required|date',
             'total' => 'required|integer|min:0'
         ]);
 

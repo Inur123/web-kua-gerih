@@ -81,8 +81,7 @@
                                     value="{{ $syarat->nama }}" placeholder="Nama"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <textarea name="existing_persyaratan[{{ $syarat->id }}][deskripsi]"
-                                    id="existing_persyaratan_deskripsi_{{ $syarat->id }}"
-                                    placeholder="Deskripsi"
+                                    id="existing_persyaratan_deskripsi_{{ $syarat->id }}" placeholder="Deskripsi"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">{{ $syarat->deskripsi }}</textarea>
                                 <input type="url" name="existing_persyaratan[{{ $syarat->id }}][link_download]"
                                     value="{{ $syarat->link_download }}" placeholder="Link Download"
@@ -112,8 +111,7 @@
                                     value="{{ $khusus->nama }}" placeholder="Nama"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">
                                 <textarea name="existing_syarat_khusus[{{ $khusus->id }}][deskripsi]"
-                                    id="existing_syarat_khusus_deskripsi_{{ $khusus->id }}"
-                                    placeholder="Deskripsi"
+                                    id="existing_syarat_khusus_deskripsi_{{ $khusus->id }}" placeholder="Deskripsi"
                                     class="px-3 py-2 border border-kemenag-green rounded-md">{{ $khusus->deskripsi }}</textarea>
                                 <input type="url" name="existing_syarat_khusus[{{ $khusus->id }}][link_download]"
                                     value="{{ $khusus->link_download }}" placeholder="Link Download"
@@ -143,8 +141,7 @@
                                     value="{{ $step->nama }}" placeholder="Nama Prosedur"
                                     class="px-3 py-2 border border-kemenag-green rounded-md w-full">
                                 <textarea name="existing_prosedur[{{ $step->id }}][deskripsi]"
-                                    id="existing_prosedur_deskripsi_{{ $step->id }}"
-                                    placeholder="Deskripsi"
+                                    id="existing_prosedur_deskripsi_{{ $step->id }}" placeholder="Deskripsi"
                                     class="px-3 py-2 border border-kemenag-green rounded-md w-full">{{ $step->deskripsi }}</textarea>
                                 <input type="text" name="existing_prosedur[{{ $step->id }}][link_download]"
                                     value="{{ $step->link_download }}" placeholder="Link Download (Opsional)"
@@ -170,78 +167,79 @@
         </form>
     </div>
 
-   <script src="https://cdn.tiny.cloud/1/mimr482vltcpcta1nd94dwlkgbsdgmcyz4n3tve4ydvf4l83/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/mimr482vltcpcta1nd94dwlkgbsdgmcyz4n3tve4ydvf4l83/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
-<script>
-    let persyaratanCounter = 0;
-    let syaratKhususCounter = 0;
-    let prosedurCounter = 0;
+    <script>
+        let persyaratanCounter = 0;
+        let syaratKhususCounter = 0;
+        let prosedurCounter = 0;
 
-    // === Inisialisasi TinyMCE global ===
-  function initTiny(selector) {
-    tinymce.init({
-        selector: selector,
-        height: 200,
-        menubar: false,
-        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern help emoticons',
-            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
-        setup: (editor) => {
-            editor.on('change', function () {
-                tinymce.triggerSave(); // supaya isi tersimpan ke textarea
+        // === Inisialisasi TinyMCE global ===
+        function initTiny(selector) {
+            tinymce.init({
+                selector: selector,
+                height: 200,
+                menubar: true,
+                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern help emoticons',
+                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
+                setup: (editor) => {
+                    editor.on('change', function() {
+                        tinymce.triggerSave(); // supaya isi tersimpan ke textarea
+                    });
+                }
             });
         }
-    });
-}
 
 
-    // MODIFIED: Initialize TinyMCE for all existing textareas on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        // Main description
+        // MODIFIED: Initialize TinyMCE for all existing textareas on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main description
 
 
-        // Existing Persyaratan descriptions
-        @foreach ($layanan->persyaratans as $syarat)
-            initTiny('#existing_persyaratan_deskripsi_{{ $syarat->id }}');
-        @endforeach
+            // Existing Persyaratan descriptions
+            @foreach ($layanan->persyaratans as $syarat)
+                initTiny('#existing_persyaratan_deskripsi_{{ $syarat->id }}');
+            @endforeach
 
-        // Existing Syarat Khusus descriptions
-        @foreach ($layanan->syaratKhusus as $khusus)
-            initTiny('#existing_syarat_khusus_deskripsi_{{ $khusus->id }}');
-        @endforeach
+            // Existing Syarat Khusus descriptions
+            @foreach ($layanan->syaratKhusus as $khusus)
+                initTiny('#existing_syarat_khusus_deskripsi_{{ $khusus->id }}');
+            @endforeach
 
-        // Existing Prosedur descriptions
-        @foreach ($layanan->prosedurs as $step)
-            initTiny('#existing_prosedur_deskripsi_{{ $step->id }}');
-        @endforeach
-    });
+            // Existing Prosedur descriptions
+            @foreach ($layanan->prosedurs as $step)
+                initTiny('#existing_prosedur_deskripsi_{{ $step->id }}');
+            @endforeach
+        });
 
 
-    function removeItem(button, deleteName, id = null) {
-        const item = button.closest('div.border.rounded-lg'); // Target the parent container more specifically
-        if (id) {
-            // Before removing, check if it's a TinyMCE instance and destroy it
-            const textarea = item.querySelector('textarea');
-            if (textarea && tinymce.get(textarea.id)) {
-                tinymce.get(textarea.id).remove();
+        function removeItem(button, deleteName, id = null) {
+            const item = button.closest('div.border.rounded-lg'); // Target the parent container more specifically
+            if (id) {
+                // Before removing, check if it's a TinyMCE instance and destroy it
+                const textarea = item.querySelector('textarea');
+                if (textarea && tinymce.get(textarea.id)) {
+                    tinymce.get(textarea.id).remove();
+                }
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = `${deleteName}[]`;
+                input.value = id;
+                document.getElementById('layananForm').appendChild(input);
             }
-
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `${deleteName}[]`;
-            input.value = id;
-            document.getElementById('layananForm').appendChild(input);
+            item.remove();
         }
-        item.remove();
-    }
 
 
-    // === Tambah Persyaratan ===
-    function addPersyaratanField() {
-        persyaratanCounter++;
-        const container = document.getElementById('persyaratanContainer');
-        const id = `persyaratan_deskripsi_${persyaratanCounter}`;
+        // === Tambah Persyaratan ===
+        function addPersyaratanField() {
+            persyaratanCounter++;
+            const container = document.getElementById('persyaratanContainer');
+            const id = `persyaratan_deskripsi_${persyaratanCounter}`;
 
-        container.insertAdjacentHTML('beforeend', `
+            container.insertAdjacentHTML('beforeend', `
             <div class="persyaratan-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                     <input type="text" name="new_persyaratan[${persyaratanCounter}][nama]" placeholder="Nama"
@@ -254,16 +252,16 @@
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
         `);
-        initTiny(`#${id}`);
-    }
+            initTiny(`#${id}`);
+        }
 
-    // === Tambah Syarat Khusus ===
-    function addSyaratKhususField() {
-        syaratKhususCounter++;
-        const container = document.getElementById('syaratKhususContainer');
-        const id = `syaratKhusus_deskripsi_${syaratKhususCounter}`;
+        // === Tambah Syarat Khusus ===
+        function addSyaratKhususField() {
+            syaratKhususCounter++;
+            const container = document.getElementById('syaratKhususContainer');
+            const id = `syaratKhusus_deskripsi_${syaratKhususCounter}`;
 
-        container.insertAdjacentHTML('beforeend', `
+            container.insertAdjacentHTML('beforeend', `
             <div class="syarat-khusus-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                     <input type="text" name="new_syarat_khusus[${syaratKhususCounter}][nama]" placeholder="Nama"
@@ -276,16 +274,16 @@
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600">Hapus</button>
             </div>
         `);
-        initTiny(`#${id}`);
-    }
+            initTiny(`#${id}`);
+        }
 
-    // === Tambah Prosedur ===
-    function addProsedurField() {
-        prosedurCounter++;
-        const container = document.getElementById('prosedurContainer');
-        const id = `prosedur_deskripsi_${prosedurCounter}`;
+        // === Tambah Prosedur ===
+        function addProsedurField() {
+            prosedurCounter++;
+            const container = document.getElementById('prosedurContainer');
+            const id = `prosedur_deskripsi_${prosedurCounter}`;
 
-        container.insertAdjacentHTML('beforeend', `
+            container.insertAdjacentHTML('beforeend', `
             <div class="prosedur-item p-3 border border-kemenag-green rounded-lg">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
                     <input type="text" name="new_prosedur[${prosedurCounter}][nama]"
@@ -298,9 +296,9 @@
                 <button type="button" onclick="removeItem(this)" class="text-sm text-red-600 hover:text-red-800">Hapus</button>
             </div>
         `);
-        initTiny(`#${id}`);
-    }
-</script>
+            initTiny(`#${id}`);
+        }
+    </script>
 
     <script>
         const iconInput = document.getElementById('icon-input');

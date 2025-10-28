@@ -12,22 +12,41 @@
                   </p>
               </div>
               <div>
-                  <h4 class="font-semibold mb-4">Layanan</h4>
+                  <h4 class="font-semibold mb-4">Menu</h4>
                   <ul class="text-sm space-y-2 text-gray-300">
                       <li>
-                          <a href="#" class="hover:text-white transition-colors">Pendaftaran Nikah</a>
+                          <a href="{{ route('layanan.index') }}"
+                              class="hover:text-white transition-colors @if (request()->routeIs('layanan.*')) text-white @endif">
+                              Layanan
+                          </a>
                       </li>
                       <li>
-                          <a href="#" class="hover:text-white transition-colors">Rujuk</a>
+                          <a href="{{ route('regulasi.index') }}"
+                              class="hover:text-white transition-colors @if (request()->routeIs('regulasi.*')) text-white @endif">
+                              Regulasi
+                          </a>
                       </li>
                       <li>
-                          <a href="#" class="hover:text-white transition-colors">Wakaf</a>
+                          <a href="{{ route('berita.index') }}"
+                              class="hover:text-white transition-colors @if (request()->routeIs('berita.*')) text-white @endif">
+                              Berita
+                          </a>
                       </li>
                       <li>
-                          <a href="#" class="hover:text-white transition-colors">Haji & Umrah</a>
+                          <a href="{{ route('survey.index') }}"
+                              class="hover:text-white transition-colors @if (request()->routeIs('survey.*')) text-white @endif">
+                              Survei Kepuasan
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('kontak.index') }}"
+                              class="hover:text-white transition-colors @if (request()->routeIs('kontak.index')) text-white @endif">
+                              Kontak
+                          </a>
                       </li>
                   </ul>
               </div>
+
               <div>
                   <h4 class="font-semibold mb-4">Informasi</h4>
                   <ul class="text-sm space-y-2 text-gray-300">
@@ -54,22 +73,21 @@
                       </a>
 
                       <a href="https://www.instagram.com/kuagerih?igsh=amJ0NjBvbGpvOGZq" target="_blank"
-                          rel="noopener noreferrer"
-                          class="text-gray-300 hover:text-white transition-colors">
+                          rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-instagram text-xl"></i>
                       </a>
                       <a href="#" class="text-gray-300 hover:text-white transition-colors" target="_blank"
                           rel="noopener noreferrer">
                           <i class="fab fa-twitter text-xl"></i>
                       </a>
-                      <a href="#" class="text-gray-300 hover:text-white transition-colors" target="_blank"
+                      <a href="https://youtube.com/@kuagerih3423?si=ualdIEHzY4-6Om87"
+                          class="text-gray-300 hover:text-white transition-colors" target="_blank"
                           rel="noopener noreferrer">
                           <i class="fab fa-youtube text-xl"></i>
                       </a>
                       <!-- TikTok -->
                       <a href="https://www.tiktok.com/@kua.gerih?_t=ZS-90VrAiYRkMp&_r=1" target="_blank"
-                          rel="noopener noreferrer"
-                          class="text-gray-300 hover:text-white transition-colors">
+                          rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors">
                           <i class="fab fa-tiktok text-xl"></i>
                       </a>
                   </div>

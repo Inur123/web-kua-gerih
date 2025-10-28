@@ -76,7 +76,8 @@
                         KUA Gerih – Integritas Pelayanan untuk Maslahat Umat
                     </h2>
                     <p class="text-base md:text-lg mb-6">
-                       Kantor Urusan Agama siap melayani kebutuhan administrasi keagamaan masyarakat dengan profesional dan terpercaya.
+                        Kantor Urusan Agama siap melayani kebutuhan administrasi keagamaan masyarakat dengan profesional dan
+                        terpercaya.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a href="{{ route('layanan.index') }}"
@@ -189,60 +190,59 @@
         </div>
     </section>
     <section class="py-12 md:py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-8 md:mb-12">
-            <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
-                Statistik Survey Kepuasan
-            </h3>
-            <p class="text-gray-600 text-sm md:text-base">
-                Rekap data survey kepuasan layanan KUA Gerih
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <!-- Total Survey -->
-            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 flex flex-col items-center justify-center">
-                <div class="text-sm text-gray-500 mb-2">Total Survey</div>
-                <div class="text-3xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8 md:mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
+                    Statistik Survey Kepuasan
+                </h3>
+                <p class="text-gray-600 text-sm md:text-base">
+                    Rekap data survey kepuasan layanan KUA Gerih
+                </p>
             </div>
 
-            <!-- Rata-rata Rating -->
-            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 flex flex-col items-center justify-center">
-                <div class="text-sm text-gray-500 mb-2">Rata-rata Rating</div>
-                @php
-                    $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
-                    $avg = round($stat['avg'] ?? 0);
-                @endphp
-                <div class="flex items-center gap-2 text-xl font-bold text-blue-700">
-                    <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
-                    <span>{{ number_format($stat['avg'], 2) ?? 0 }}</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Total Survey -->
+                <div
+                    class="bg-green-50 border-l-4 border-green-500 rounded-lg p-6 flex flex-col items-center justify-center">
+                    <div class="text-sm text-gray-500 mb-2">Total Survey</div>
+                    <div class="text-3xl font-bold text-green-700">{{ $stat['total'] ?? 0 }}</div>
+                </div>
+
+                <!-- Rata-rata Rating -->
+                <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 flex flex-col items-center justify-center">
+                    <div class="text-sm text-gray-500 mb-2">Rata-rata Rating</div>
+                    @php
+                        $emojis = [1 => '😡', 2 => '😞', 3 => '😐', 4 => '😊', 5 => '😍'];
+                        $avg = round($stat['avg'] ?? 0);
+                    @endphp
+                    <div class="flex items-center gap-2 text-xl font-bold text-blue-700">
+                        <span class="text-2xl">{{ $emojis[$avg] ?? '😐' }}</span>
+                        <span>{{ number_format($stat['avg'], 2) ?? 0 }}</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-    <!-- Statistics -->
+    </section>
     <section class="py-12 md:py-16 bg-kemenag-green text-white">
         <div class="container mx-auto px-4">
             <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
                 Statistik Pelayanan
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-                @foreach ($hit as $nama => $total)
+                @foreach ($hit as $nama => $data)
                     <div>
                         <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-kemenag-gold mb-2">
-                            {{ $total }}
+                            {{ $data['total'] }}
                         </div>
                         <p class="text-xs md:text-sm">{{ $nama }}</p>
+                        <p class="text-xs md:text-sm text-gray-200">
+                            {{ \Carbon\Carbon::parse($data['tanggal'])->isoFormat('MMMM YYYY') }}
+                        </p>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
-
-
-
     <!-- Contact Info -->
     <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -272,7 +272,7 @@
                         Telepon
                     </h4>
                     <p class="text-xs md:text-sm text-gray-600">
-                        Telp: 081335852579
+                        Telp: 085784020366
                     </p>
                 </div>
                 <div class="text-center p-6">

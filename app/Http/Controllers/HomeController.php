@@ -39,17 +39,15 @@ class HomeController extends Controller
         ];
         // Ambil tahun terbaru dari total_layanans
         $layanans = Layanan::all();
-        $hit = [];
-
-        foreach ($layanans as $layanan) {
-            // Ambil record terbaru untuk layanan ini
-            $total = TotalLayanan::where('layanan_id', $layanan->id)
-                ->orderByDesc('tahun')
-                ->limit(1)
-                ->value('total'); // ambil total terbaru
-
-            $hit[$layanan->nama] = $total ?? 0; // jika tidak ada data, isi 0
-        }
+      $hit = TotalLayanan::with('layanan')
+    ->orderByDesc('tanggal') // ambil yang terbaru dulu
+    ->get()
+    ->groupBy(fn($item) => $item->layanan->nama) // kelompokkan berdasarkan nama layanan
+    ->map(fn($items) => [
+        'total' => $items->first()->total,          // total terbaru
+        'tanggal' => $items->first()->tanggal,      // tanggal terbaru
+    ])
+    ->toArray();
 
         return view('user.home', compact('posts', 'banner', 'stat', 'layanans', 'hit'));
     }

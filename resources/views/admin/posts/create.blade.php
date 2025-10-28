@@ -6,7 +6,6 @@
         <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {{-- Kiri --}}
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Judul</label>
@@ -53,8 +52,8 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Isi Berita</label>
-                        <textarea id="content" name="content" required
-                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent  @error('content')  @enderror"
+                        <textarea id="content" name="content"
+                            class="w-full px-4 py-3 border border-kemenag-green rounded-lg focus:ring-2 focus:ring-kemenag-green focus:border-transparent @error('content') @enderror"
                             placeholder="Masukkan isi berita">{{ old('content') }}</textarea>
                         @error('content')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -62,7 +61,6 @@
                     </div>
 
                 </div>
-                {{-- Kanan --}}
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tags (pisahkan dengan koma)</label>
@@ -107,13 +105,10 @@
                 </div>
             </div>
             <div class="mt-8 flex justify-end space-x-3">
-                <!-- Tombol Batal -->
                 <a href="{{ route('posts.index') }}"
                     class="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">
                     Batal
                 </a>
-
-                <!-- Tombol Simpan -->
                 <button type="submit"
                     class="bg-kemenag-green text-white px-6 py-3 rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">
                     Simpan
@@ -138,10 +133,8 @@
                 preview.classList.add('hidden');
             }
         }
-
         function previewImage(input) {
             const imagesPreview = document.getElementById('images-preview');
-            // Remove previous preview for this input
             if (input._previewEl) {
                 input._previewEl.remove();
             }
@@ -175,14 +168,11 @@
         }
 
         function removeImageInput(btn) {
-            // Remove preview if exists
             const input = btn.closest('.flex.items-center').querySelector('input[type=file]');
             if (input && input._previewEl) {
                 input._previewEl.remove();
             }
             btn.closest('.flex.items-center').remove();
-
-            // Jika tidak ada input tersisa, tampilkan tombol tambah saja
             const inputGroups = document.querySelectorAll('#image-input-group > div');
             if (inputGroups.length === 0) {
                 const group = document.getElementById('image-input-group');
@@ -198,10 +188,10 @@
         referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: '#content', // target textarea
-            menubar: true, // menubar atas
+            selector: '#content',
+            menubar: true,
             plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern help emoticons',
-            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media link anchor codesample | ltr rtl',
             toolbar_sticky: true,
             height: 400,
             autosave_ask_before_unload: true,
@@ -209,7 +199,21 @@
             autosave_prefix: "{path}{query}-{id}-",
             image_advtab: true,
             importcss_append: true,
-            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            setup: function(editor) {
+                editor.on('change', function() {
+                    editor.save();
+                });
+            }
+        });
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            tinymce.triggerSave();
+            const content = document.getElementById('content').value.trim();
+            if (!content) {
+                e.preventDefault();
+                alert('Isi berita tidak boleh kosong!');
+                tinymce.get('content').focus();
+            }
         });
     </script>
 @endsection

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('total_layanans', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('layanan_id')->constrained()->onDelete('cascade');
-            $table->year('tahun');
-            $table->integer('total')->default(0);
-            $table->timestamps();
-        });
+      Schema::create('total_layanans', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('layanan_id')->constrained()->onDelete('cascade');
+    $table->date('tanggal');
+    $table->integer('total')->default(0);
+    $table->timestamps();
+});
     }
 
     /**

@@ -1,36 +1,36 @@
 <script>
       // Deteksi klik kanan
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
+        // document.addEventListener('contextmenu', function(e) {
+        //     e.preventDefault();
 
-            // Cek apakah sudah ada notifikasi klik kanan
-            if (!document.querySelector('.notification.right-click-warning')) {
-                const container = document.querySelector('.notification-container');
+        //     // Cek apakah sudah ada notifikasi klik kanan
+        //     if (!document.querySelector('.notification.right-click-warning')) {
+        //         const container = document.querySelector('.notification-container');
 
-                const notif = document.createElement('div');
-                notif.className = 'notification right-click-warning bg-yellow-50 text-yellow-700 border-l-4 border-yellow-500';
-                notif.innerHTML = `
-                    <i class="notification-icon fas fa-ban"></i>
-                    <div>
-                        <p class="font-medium">Aksi Diblokir</p>
-                        <p class="mt-1 text-sm">Klik kanan dinonaktifkan di halaman ini.</p>
-                    </div>
-                    <button class="notification-close"><i class="fas fa-times"></i></button>
-                `;
+        //         const notif = document.createElement('div');
+        //         notif.className = 'notification right-click-warning bg-yellow-50 text-yellow-700 border-l-4 border-yellow-500';
+        //         notif.innerHTML = `
+        //             <i class="notification-icon fas fa-ban"></i>
+        //             <div>
+        //                 <p class="font-medium">Aksi Diblokir</p>
+        //                 <p class="mt-1 text-sm">Klik kanan dinonaktifkan di halaman ini.</p>
+        //             </div>
+        //             <button class="notification-close"><i class="fas fa-times"></i></button>
+        //         `;
 
-                container.appendChild(notif);
+        //         container.appendChild(notif);
 
-                // Event untuk tombol close
-                notif.querySelector('.notification-close').addEventListener('click', () => notif.remove());
+        //         // Event untuk tombol close
+        //         notif.querySelector('.notification-close').addEventListener('click', () => notif.remove());
 
-                // Auto-close
-                setTimeout(() => {
-                    notif.style.transition = 'opacity 0.5s ease';
-                    notif.style.opacity = '0';
-                    setTimeout(() => notif.remove(), 500);
-                }, 3000);
-            }
-        });
+        //         // Auto-close
+        //         setTimeout(() => {
+        //             notif.style.transition = 'opacity 0.5s ease';
+        //             notif.style.opacity = '0';
+        //             setTimeout(() => notif.remove(), 500);
+        //         }, 3000);
+        //     }
+        // });
     // Sidebar mobile toggle
     const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
     const sidebarMobile = document.getElementById("sidebarMobile");
