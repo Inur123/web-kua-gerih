@@ -24,7 +24,7 @@
                     @forelse($layanans as $layanan)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3 whitespace-nowrap">
-                                <p class="text-sm  text-gray-800">{{ $loop->iteration }}</p>
+                                 {{ ($layanans->currentPage() - 1) * $layanans->perPage() + $loop->iteration }}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="text-sm  text-gray-800">{{ $layanan->nama }}</div>
@@ -64,6 +64,67 @@
                     @endforelse
                 </tbody>
             </table>
+            <!-- Pagination -->
+<div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-gray-600">
+            Menampilkan <span class="font-medium">{{ $layanans->firstItem() }}</span> -
+            <span class="font-medium">{{ $layanans->lastItem() }}</span> dari
+            <span class="font-medium">{{ $layanans->total() }}</span> layanan
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <!-- Previous Page Link -->
+            @if ($layanans->onFirstPage())
+                <span class="px-3 py-1 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            @else
+                <a href="{{ $layanans->previousPageUrl() }}"
+                   class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            @endif
+
+            <!-- Pagination Numbers -->
+            <div class="hidden sm:flex space-x-2">
+                @foreach ($layanans->getUrlRange(max(1, $layanans->currentPage() - 2), min($layanans->lastPage(), $layanans->currentPage() + 2)) as $page => $url)
+                    @if ($page == $layanans->currentPage())
+                        <span class="px-3 py-1 rounded-md bg-kemenag-green text-white font-medium">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}"
+                           class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">{{ $page }}</a>
+                    @endif
+                @endforeach
+                @if ($layanans->currentPage() < $layanans->lastPage() - 2)
+                    <span class="px-2 py-1 text-gray-500">...</span>
+                    <a href="{{ $layanans->url($layanans->lastPage()) }}"
+                       class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">{{ $layanans->lastPage() }}</a>
+                @endif
+            </div>
+
+            <!-- Mobile Pagination -->
+            <div class="sm:hidden flex items-center">
+                <span class="px-3 py-1 rounded-md bg-gray-100 text-gray-700">{{ $layanans->currentPage() }}</span>
+                <span class="mx-1 text-gray-500">/</span>
+                <span class="text-gray-600">{{ $layanans->lastPage() }}</span>
+            </div>
+
+            <!-- Next Page Link -->
+            @if ($layanans->hasMorePages())
+                <a href="{{ $layanans->nextPageUrl() }}"
+                   class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            @else
+                <span class="px-3 py-1 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            @endif
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 @endsection

@@ -20,9 +20,10 @@
     @if($post->thumbnail)
         <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="Thumbnail" class="mb-4 rounded shadow h-48 object-cover">
     @endif
-    <div class="prose max-w-none mb-4">
-        {!! nl2br(e($post->content)) !!}
-    </div>
+   <div class="prose max-w-none mb-4">
+    {!! nl2br(strip_tags($post->content)) !!}
+</div>
+
     @if($post->images->count())
         <div class="mb-4">
             <h4 class="font-semibold mb-2">Gambar Lain:</h4>

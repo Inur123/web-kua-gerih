@@ -35,7 +35,7 @@
                 <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-sm flex flex-col gap-1">
                     <span class="font-medium text-kemenag-green">{{ $syarat->nama }}</span>
                     @if($syarat->deskripsi)
-                        <span class="text-sm text-gray-600">{{ $syarat->deskripsi }}</span>
+                      <span class="text-sm text-gray-600">{!! $syarat->deskripsi !!}</span>
                     @endif
                     @if($syarat->link_download)
                         <a href="{{ $syarat->link_download }}" target="_blank" class="text-blue-500 text-xs hover:underline">Download</a>
@@ -57,7 +57,7 @@
                 <div class="border border-gray-300 rounded-lg p-4 bg-white shadow-sm flex flex-col gap-1">
                     <span class="font-medium text-kemenag-green">{{ $syarat->nama }}</span>
                     @if($syarat->deskripsi)
-                        <span class="text-sm text-gray-600">{{ $syarat->deskripsi }}</span>
+                       <span class="text-sm text-gray-600">{!! $syarat->deskripsi !!}</span>
                     @endif
                     @if($syarat->link_download)
                         <a href="{{ $syarat->link_download }}" target="_blank" class="text-blue-500 text-xs hover:underline">Download</a>
@@ -79,7 +79,7 @@
                     <li>
                         <span class="font-medium text-kemenag-green">{{ $step->nama }}</span>
                         @if($step->deskripsi)
-                            <div class="text-sm text-gray-600">{{ $step->deskripsi }}</div>
+                            <div class="text-sm text-gray-600">{!! $step->deskripsi !!}</div>
                         @endif
                         @if($step->link_download)
                             <a href="{{ $step->link_download }}" target="_blank" class="text-blue-500 text-xs hover:underline">Download</a>

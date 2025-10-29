@@ -87,48 +87,50 @@
                                     {!! $post->content !!}
                                 </div>
 
-                              {{-- Gallery --}}
-{{-- Gallery --}}
-@if ($post->images && $post->images->count())
-    <div class="mb-6">
-        <h4 class="font-semibold text-kemenag-green mb-3">Galeri Foto</h4>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            @foreach ($post->images as $img)
-                <img src="{{ asset('storage/' . $img->image) }}" alt="Gambar Berita"
-                     class="cursor-pointer rounded shadow gallery-image">
-            @endforeach
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <button id="modal-close"
-                class="absolute top-4 right-4 text-white text-3xl font-bold z-50">&times;</button>
-        <img id="modal-img" class="max-h-[80vh] max-w-[80vw] w-auto h-auto rounded shadow-lg">
-    </div>
+                                {{-- Gallery --}}
+                                @if ($post->images && $post->images->count())
+                                    <div class="mb-6">
+                                        <h4 class="font-semibold text-kemenag-green mb-3">Galeri Foto</h4>
+                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                            @foreach ($post->images as $img)
+                                                <img src="{{ asset('storage/' . $img->image) }}" alt="Gambar Berita"
+                                                    class="cursor-pointer rounded shadow gallery-image">
+                                            @endforeach
+                                        </div>
+                                    </div>
 
-    <script>
-        const images = document.querySelectorAll('.gallery-image');
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalClose = document.getElementById('modal-close');
+                                    <!-- Modal -->
+                                    <div id="modal"
+                                        class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+                                        <button id="modal-close"
+                                            class="absolute top-4 right-4 text-white text-3xl font-bold z-50 cursor-pointer">&times;</button>
+                                        <img id="modal-img"
+                                            class="max-h-[80vh] max-w-[80vw] w-auto h-auto rounded shadow-lg">
+                                    </div>
 
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                modal.style.display = 'flex';
-                modalImg.src = img.src;
-            });
-        });
+                                    <script>
+                                        const images = document.querySelectorAll('.gallery-image');
+                                        const modal = document.getElementById('modal');
+                                        const modalImg = document.getElementById('modal-img');
+                                        const modalClose = document.getElementById('modal-close');
 
-        modalClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+                                        images.forEach(img => {
+                                            img.addEventListener('click', () => {
+                                                modal.style.display = 'flex';
+                                                modalImg.src = img.src;
+                                            });
+                                        });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.style.display = 'none';
-        });
-    </script>
-@endif
+                                        modalClose.addEventListener('click', () => {
+                                            modal.style.display = 'none';
+                                        });
+
+                                        modal.addEventListener('click', (e) => {
+                                            if (e.target === modal) modal.style.display = 'none';
+                                        });
+                                    </script>
+                                @endif
 
 
 

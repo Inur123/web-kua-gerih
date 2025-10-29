@@ -56,6 +56,11 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
+                <p class="text-sm text-gray-500 mt-1">
+                    Masukkan kode SVG dari <a href="https://heroicons.com/" target="_blank"
+                        class="text-kemenag-green underline">Heroicons</a>.
+                </p>
+
                 <p class="text-sm text-gray-500 mt-1">Preview:</p>
                 <div id="icon-preview"
                     class="mt-2 border border-kemenag-green rounded-md p-2 flex items-center justify-center"
@@ -63,6 +68,7 @@
                     {!! old('icon', $layanan->icon) !!}
                 </div>
             </div>
+
 
             <div class="mt-6">
                 <div class="flex justify-between items-center mb-2">

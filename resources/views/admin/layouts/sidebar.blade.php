@@ -57,6 +57,12 @@
                     <i class="fas fa-poll w-5"></i>
                     <span>Survey Layanan</span>
                 </a>
+                <a href="{{ route('galeri_pamflet.index') }}"
+    class="flex items-center space-x-3 {{ request()->routeIs('admin.galeri_pamflet.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-image w-5"></i>
+    <span>Galeri Pamflet</span>
+</a>
+
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">
@@ -153,6 +159,12 @@
                     <i class="fas fa-poll w-5"></i>
                     <span>Survey Layanan</span>
                 </a>
+                <a href="{{ route('galeri_pamflet.index') }}"
+    class="flex items-center space-x-3 {{ request()->routeIs('admin.galeri_pamflet.*') ? 'bg-kemenag-light-green' : 'hover:bg-kemenag-light-green' }} p-3 rounded-lg">
+    <i class="fas fa-image w-5"></i>
+    <span>Galeri Pamflet</span>
+</a>
+
                 <div class="dropdown-group">
                     <button
                         class="dropdown-btn flex items-center justify-between w-full hover:bg-kemenag-light-green p-3 rounded-lg">

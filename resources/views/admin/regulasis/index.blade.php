@@ -25,7 +25,7 @@
                     @forelse($regulasis as $regulasi)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3 whitespace-nowrap">
-                                <p class="text-sm  text-gray-800">{{ $loop->iteration }}</p>
+                                {{ ($regulasis->currentPage() - 1) * $regulasis->perPage() + $loop->iteration }}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="text-sm  text-gray-800">{{ $regulasi->nama }}</div>
@@ -66,6 +66,67 @@
                     @endforelse
                 </tbody>
             </table>
+            <!-- Pagination -->
+<div class="px-4 py-3 border-t border-gray-200">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-gray-600">
+            Menampilkan <span class="font-medium">{{ $regulasis->firstItem() }}</span> -
+            <span class="font-medium">{{ $regulasis->lastItem() }}</span> dari
+            <span class="font-medium">{{ $regulasis->total() }}</span> regulasi
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <!-- Previous Page Link -->
+            @if ($regulasis->onFirstPage())
+                <span class="px-3 py-1 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            @else
+                <a href="{{ $regulasis->previousPageUrl() }}"
+                   class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            @endif
+
+            <!-- Pagination Numbers -->
+            <div class="hidden sm:flex space-x-2">
+                @foreach ($regulasis->getUrlRange(max(1, $regulasis->currentPage() - 2), min($regulasis->lastPage(), $regulasis->currentPage() + 2)) as $page => $url)
+                    @if ($page == $regulasis->currentPage())
+                        <span class="px-3 py-1 rounded-md bg-kemenag-green text-white font-medium">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}"
+                           class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">{{ $page }}</a>
+                    @endif
+                @endforeach
+                @if ($regulasis->currentPage() < $regulasis->lastPage() - 2)
+                    <span class="px-2 py-1 text-gray-500">...</span>
+                    <a href="{{ $regulasis->url($regulasis->lastPage()) }}"
+                       class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">{{ $regulasis->lastPage() }}</a>
+                @endif
+            </div>
+
+            <!-- Mobile Pagination -->
+            <div class="sm:hidden flex items-center">
+                <span class="px-3 py-1 rounded-md bg-gray-100 text-gray-700">{{ $regulasis->currentPage() }}</span>
+                <span class="mx-1 text-gray-500">/</span>
+                <span class="text-gray-600">{{ $regulasis->lastPage() }}</span>
+            </div>
+
+            <!-- Next Page Link -->
+            @if ($regulasis->hasMorePages())
+                <a href="{{ $regulasis->nextPageUrl() }}"
+                   class="px-3 py-1 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            @else
+                <span class="px-3 py-1 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            @endif
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 @endsection

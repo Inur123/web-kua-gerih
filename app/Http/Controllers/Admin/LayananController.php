@@ -9,10 +9,10 @@ use Illuminate\Support\Str;
 
 class LayananController extends Controller
 {
-    // Menampilkan semua layanan (dashboard)
+
     public function index()
     {
-        $layanans = Layanan::all();
+        $layanans = Layanan::latest()->paginate(10);
         return view('admin.layanans.index', compact('layanans'));
     }
 

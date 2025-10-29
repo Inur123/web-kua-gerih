@@ -42,4 +42,6 @@ class Layanan extends Model
     {
         return $this->hasMany(Survey::class);
     }
+
+
 }

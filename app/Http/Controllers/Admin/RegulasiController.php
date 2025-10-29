@@ -12,7 +12,7 @@ class RegulasiController extends Controller
     // Menampilkan semua regulasi
     public function index()
     {
-        $regulasis = Regulasi::all();
+        $regulasis = Regulasi::latest()->paginate(10);
         return view('admin.regulasis.index', compact('regulasis'));
     }
 

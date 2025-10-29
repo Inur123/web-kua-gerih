@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('total_layanans', function (Blueprint $table) {
+        Schema::create('galeri_pamflet', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('layanan_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->string('gambar');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->date('tanggal');
-            $table->integer('total')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('total_layanans');
+        Schema::dropIfExists('galeri_pamflet');
     }
 };

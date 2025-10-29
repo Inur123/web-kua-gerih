@@ -7,8 +7,7 @@
     <title>Dashboard KUA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('images/logo-kua.png') }}" type="image/x-icon" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet" />
     <style>
         .sidebar-overlay::-webkit-scrollbar {
             display: none;

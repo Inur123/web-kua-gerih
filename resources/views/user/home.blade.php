@@ -66,6 +66,53 @@
             background-color: rgba(255, 255, 255, 1);
             transform: scale(1.1);
         }
+
+        /* Custom Swiper Navigation Buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 44px !important;
+            height: 44px !important;
+            background: white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: #006633 !important;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: #006633 !important;
+            transform: scale(1.1);
+        }
+
+        .swiper-button-next:hover:after,
+        .swiper-button-prev:hover:after {
+            color: white !important;
+        }
+
+        .swiper-button-disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 10;
+        }
+
+        /* Untuk memastikan posisi relatif ke slider, bukan section */
+        .gallerySwiper {
+            position: relative;
+        }
+
     </style>
     <section
         class="hero-section relative bg-gradient-to-r from-kemenag-green to-kemenag-light-green text-white py-12 md:py-16 lg:py-20">
@@ -132,6 +179,78 @@
     </section>
 
 
+    <!-- Gallery/Pamflet Section -->
+    <section class="py-12 md:py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8 md:mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold text-kemenag-green mb-4">
+                    Galeri & Pamflet
+                </h3>
+                <p class="text-gray-600 text-sm md:text-base">
+                    Informasi visual dan dokumentasi kegiatan KUA Gerih
+                </p>
+            </div>
+
+            <div class="relative px-12">
+                <!-- Swiper Container -->
+                <div class="swiper gallerySwiper overflow-hidden">
+                    <div class="swiper-wrapper">
+                        @foreach ($galeriPamflets as $pamflet)
+                            <div class="swiper-slide">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                                    <div class="aspect-[3/4] overflow-hidden cursor-pointer gallery-pamflet-image">
+                                        <img src="{{ asset('storage/' . $pamflet->gambar) }}" alt="{{ $pamflet->title }}"
+                                            class="w-full h-full object-cover" data-title="{{ $pamflet->title }}"
+                                            data-date="{{ \Carbon\Carbon::parse($pamflet->tanggal)->format('d M Y') }}">
+                                    </div>
+                                    <div class="p-4">
+                                        <h4 class="font-semibold text-kemenag-green text-sm md:text-base mb-2">
+                                            {{ $pamflet->title }}
+                                        </h4>
+                                        <p class="text-xs text-gray-500">
+                                           <p class="text-xs text-gray-500">
+    {{ \Carbon\Carbon::parse($pamflet->tanggal)->translatedFormat('d F Y') }}
+</p>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+
+                <!-- Pagination -->
+                <div class="swiper-pagination !relative !bottom-0 mt-8"></div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Modal Pamflet -->
+<div id="modal-pamflet" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+    <div class="relative max-w-md md:max-w-lg w-full">
+        <!-- Tombol Close di pojok kanan atas, pas di sudut gambar tapi di luar -->
+        <button id="modal-pamflet-close"
+            class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-white text-kemenag-green w-10 h-10 rounded-full font-bold text-2xl z-50 hover:bg-kemenag-green hover:text-white transition-all shadow-lg flex items-center justify-center">
+            &times;
+        </button>
+
+        <!-- Gambar -->
+        <img id="modal-pamflet-img" class="max-h-[80vh] w-full object-contain mx-auto rounded shadow-2xl">
+
+        <!-- Info -->
+        <div class="text-center mt-4 text-white">
+            <h4 id="modal-pamflet-title" class="text-lg md:text-xl font-semibold mb-1"></h4>
+            <p id="modal-pamflet-date" class="text-sm text-gray-300"></p>
+        </div>
+    </div>
+</div>
+
     <!-- News & Features Section -->
     <section class="py-12 md:py-16 bg-gray-100">
         <div class="container mx-auto px-4">
@@ -177,8 +296,6 @@
                     </a>
                 @endforeach
             </div>
-
-
 
             <!-- View All Button -->
             <div class="text-center mt-8 md:mt-12">
@@ -246,6 +363,7 @@
             </div>
         </div>
     </section>
+
     <!-- Contact Info -->
     <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -293,6 +411,7 @@
             </div>
         </div>
     </section>
+
     @if ($banner && $banner->status)
         <div class="popup-overlay active" id="popupBanner">
             <div class="popup-container">
@@ -306,59 +425,120 @@
             </div>
         </div>
     @endif
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const popup = document.getElementById('popupBanner');
             const closeBtn = document.getElementById('closePopup');
 
             if (popup) {
-                popup.classList.add('active'); // tampilkan otomatis saat home
+                popup.classList.add('active');
 
                 closeBtn.addEventListener('click', function() {
                     popup.classList.remove('active');
                 });
 
-                // klik luar container untuk close
                 popup.addEventListener('click', function(e) {
                     if (e.target === popup) {
                         popup.classList.remove('active');
                     }
                 });
             }
+
+            // Modal Pamflet
+            const pamfletImages = document.querySelectorAll('.gallery-pamflet-image img');
+            const modalPamflet = document.getElementById('modal-pamflet');
+            const modalPamfletImg = document.getElementById('modal-pamflet-img');
+            const modalPamfletTitle = document.getElementById('modal-pamflet-title');
+            const modalPamfletDate = document.getElementById('modal-pamflet-date');
+            const modalPamfletClose = document.getElementById('modal-pamflet-close');
+
+            pamfletImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    modalPamflet.classList.remove('hidden');
+                    modalPamfletImg.src = img.src;
+                    modalPamfletTitle.textContent = img.dataset.title;
+                    modalPamfletDate.textContent = img.dataset.date;
+                });
+            });
+
+            // Close dengan tombol X
+            modalPamfletClose.addEventListener('click', () => {
+                modalPamflet.classList.add('hidden');
+            });
+
+            // Close dengan klik di luar modal (backdrop)
+            modalPamflet.addEventListener('click', (e) => {
+                if (e.target === modalPamflet) {
+                    modalPamflet.classList.add('hidden');
+                }
+            });
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('surveyChart').getContext('2d');
-        const surveyChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['😡', '😞', '😐', '😊', '😍'],
-                datasets: [{
-                    label: 'Jumlah Rating',
-                    data: {!! json_encode(array_values($stat['chart'] ?? [0, 0, 0, 0, 0])) !!},
-                    backgroundColor: [
-                        '#f87171', '#fbbf24', '#a3a3a3', '#34d399', '#818cf8'
-                    ],
-                    borderRadius: 6,
-                }]
+
+        // Gallery Swiper (NO AUTOPLAY)
+        const gallerySwiper = new Swiper('.gallerySwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            },
+        });
+
+        // Survey Chart
+        const ctx = document.getElementById('surveyChart')?.getContext('2d');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['😡', '😞', '😐', '😊', '😍'],
+                    datasets: [{
+                        label: 'Jumlah Rating',
+                        data: {!! json_encode(array_values($stat['chart'] ?? [0, 0, 0, 0, 0])) !!},
+                        backgroundColor: ['#f87171', '#fbbf24', '#a3a3a3', '#34d399', '#818cf8'],
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
     </script>
 @endsection

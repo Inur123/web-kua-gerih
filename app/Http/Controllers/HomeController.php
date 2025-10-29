@@ -7,13 +7,18 @@ use App\Models\Banner;
 use App\Models\Survey;
 use App\Models\Layanan;
 use App\Models\TotalLayanan;
-use App\Models\TotalView; // <- Model total view
 use Illuminate\Http\Request;
+use App\Models\GaleriPamflet;
+use App\Models\TotalView; // <- Model total view
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $galeriPamflets = GaleriPamflet::where('status', 'active')
+            ->latest()
+            ->get();
+
         // --- Increment total view ---
         $totalView = TotalView::first();
         if (!$totalView) {
@@ -27,7 +32,7 @@ class HomeController extends Controller
             ->where('status', 'active')
             ->where(function ($query) {
                 $query->whereNull('published_at')
-                      ->orWhere('published_at', '<=', now());
+                    ->orWhere('published_at', '<=', now());
             })
             ->latest()
             ->take(6)
@@ -66,6 +71,6 @@ class HomeController extends Controller
             ->toArray();
 
         // --- Return view dengan semua data ---
-        return view('user.home', compact('posts', 'banner', 'stat', 'layanans', 'hit', 'totalViews'));
+        return view('user.home', compact('posts', 'banner', 'stat', 'layanans', 'hit', 'totalViews', 'galeriPamflets'));
     }
 }
