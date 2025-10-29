@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\TotalView;
 use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
         $popularPosts = Post::orderByDesc('views')->take(5)->get();
         $tags = Tag::all(); // ambil semua tag
         $view->with(compact('categories', 'popularPosts', 'tags'));
+    });
+
+     View::composer('*', function ($view) {
+        $totalViews = TotalView::sum('count') ?? 0;
+        $view->with('totalViews', $totalViews);
     });
 
     Carbon::setLocale('id');
