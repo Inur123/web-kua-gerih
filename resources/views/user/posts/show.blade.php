@@ -3,48 +3,41 @@
 @section('title', $post->title . ' - KUA Gerih')
 
 @section('meta')
-    {{-- SEO META TAGS --}}
+    <meta charset="utf-8">
     <meta name="description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160, '...') }}">
     <meta name="keywords"
         content="{{ $post->tags->pluck('name')->implode(', ') }}, {{ $post->category->name ?? 'Berita' }} KUA Gerih, berita islam {{ $post->category->name ?? '' }}, informasi nikah {{ $post->tags->pluck('name')->implode(' ') }}, Kecamatan Gerih">
-
-    {{-- Open Graph / Facebook / WhatsApp --}}
     <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $post->title }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160, '...') }}">
     <meta property="og:site_name" content="KUA Gerih">
     <meta property="og:locale" content="id_ID">
-
-    {{-- Gambar untuk Open Graph --}}
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ strip_tags($post->title) }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160, '...') }}">
     @php
-        // Pastikan URL yang dihasilkan adalah URL absolut yang bisa diakses publik
-        $thumbnailUrl = $post->thumbnail ? asset('storage/' . $post->thumbnail) : asset('images/logo-kua.png');
+        $thumbnailUrl = $post->thumbnail
+            ? url('storage/' . ltrim($post->thumbnail, '/'))
+            : url('images/logo-kua.png');
     @endphp
     <meta property="og:image" content="{{ $thumbnailUrl }}">
     <meta property="og:image:secure_url" content="{{ $thumbnailUrl }}">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ strip_tags($post->title) }}">
     @if ($post->published_at)
-        <meta property="article:published_time"
-            content="{{ \Carbon\Carbon::parse($post->published_at)->toIso8601String() }}">
+        <meta property="article:published_time" content="{{ \Carbon\Carbon::parse($post->published_at)->toIso8601String() }}">
     @endif
     <meta property="article:section" content="{{ $post->category->name ?? 'Berita' }}">
     @foreach ($post->tags as $tag)
         <meta property="article:tag" content="{{ $tag->name }}">
     @endforeach
-
-    {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $post->title }}">
+    <meta name="twitter:title" content="{{ strip_tags($post->title) }}">
     <meta name="twitter:description" content="{{ Str::limit(strip_tags($post->excerpt ?? $post->content), 160, '...') }}">
     <meta name="twitter:image" content="{{ $thumbnailUrl }}">
 
-    {{-- Canonical URL --}}
     <link rel="canonical" href="{{ url()->current() }}">
 @endsection
-
-
 @section('content')
     <main class="py-12">
         <div class="container mx-auto px-4">

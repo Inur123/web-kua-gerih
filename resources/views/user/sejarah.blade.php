@@ -157,9 +157,8 @@
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h2 class="text-xl font-bold text-kemenag-green mb-4">Jumlah Tempat Ibadah</h2>
                         <ul class="space-y-2 text-gray-700">
-                            <li>Masjid: 47</li>
-                            <li>Mushola: 186</li>
-                            <li>Gereja: 2</li>
+                            <li>Masjid: 51</li>
+                            <li>Mushola: 193</li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-lg shadow-lg p-6">
