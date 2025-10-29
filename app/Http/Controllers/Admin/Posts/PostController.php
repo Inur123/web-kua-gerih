@@ -198,11 +198,11 @@ class PostController extends Controller
         return back()->with('success', 'Berita berhasil dihapus.');
     }
 
-   public function show(Post $post)
-{
-    $post->load(['category', 'tags', 'images']);
-    $tagsString = $post->tags->pluck('name')->implode(', ');
+    public function show(Post $post)
+    {
+        $post->load(['category', 'tags', 'images']);
+        $tagsString = $post->tags->pluck('name')->implode(', ');
 
-    return view('admin.posts.show', compact('post', 'tagsString'));
-}
+        return view('admin.posts.show', compact('post', 'tagsString'));
+    }
 }

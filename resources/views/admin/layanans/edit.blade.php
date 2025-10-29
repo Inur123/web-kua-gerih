@@ -4,9 +4,11 @@
     <div class="bg-white p-4 sm:p-6 rounded-lg shadow-sm mb-8">
         <h3 class="font-semibold text-kemenag-green text-xl sm:text-2xl mb-4">Edit Layanan</h3>
 
-        <form action="{{ route('layanans.update', $layanan) }}" method="POST" id="layananForm" class="space-y-6">
+        <form action="{{ route('layanans.update', $layanan) }}" method="POST" id="layananForm" class="space-y-6"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
 
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Layanan</label>
@@ -159,6 +161,61 @@
                     @endforeach
                 </div>
             </div>
+            <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">
+        Gambar Layanan (bisa tambah/hapus)
+    </label>
+
+    <!-- === Gambar Lama === -->
+    <div class="flex flex-wrap gap-2 sm:gap-3 mt-2" id="existing-images">
+        @foreach ($layanan->images as $img)
+            <div class="relative group" data-image-id="{{ $img->id }}">
+                <img src="{{ asset('storage/' . $img->image) }}" alt="Gambar"
+                    class="h-16 sm:h-20 rounded shadow">
+                <input type="hidden" name="existing_images[]" value="{{ $img->id }}">
+                <button type="button" onclick="removeExistingImage(this)"
+                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    ×
+                </button>
+            </div>
+        @endforeach
+    </div>
+
+    <!-- === Input Upload Baru === -->
+    <div id="image-input-group" class="mt-2">
+        @if (!$layanan->images->isEmpty())
+            <div class="flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-2">
+                <input type="file" name="images[]" accept="image/*"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent"
+                    onchange="previewImage(this)">
+                <div class="flex sm:ml-2 w-full sm:w-auto">
+                    <button type="button" onclick="addImageInput()"
+                        class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+                    <button type="button" onclick="removeImageInput(this)"
+                        class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
+                </div>
+            </div>
+        @else
+            <button type="button" onclick="addImageInput()"
+                class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg transition-colors hover:bg-kemenag-light-green cursor-pointer">
+                + Tambah Gambar Baru
+            </button>
+        @endif
+    </div>
+
+    <!-- === Preview Gambar Baru === -->
+    <div id="images-preview" class="flex flex-wrap gap-2 sm:gap-3 mt-2"></div>
+
+    <!-- === Input Hidden untuk gambar yang dihapus === -->
+    <input type="hidden" name="deleted_images" id="deleted-images-input" value="">
+
+    <!-- === Pesan error validasi === -->
+    @error('images.*')
+        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+
 
             <div class="flex gap-2 mt-6">
                 <button type="submit"
@@ -328,4 +385,84 @@
             }
         });
     </script>
+    <script>
+    // Preview gambar baru
+    function previewImage(input) {
+        const imagesPreview = document.getElementById('images-preview');
+        if (input._previewEl) input._previewEl.remove();
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'h-16 sm:h-20 rounded shadow';
+                imagesPreview.appendChild(img);
+                input._previewEl = img;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Tambah input file baru
+    function addImageInput() {
+        const group = document.getElementById('image-input-group');
+        if (group.innerHTML.includes('Tambah Gambar Baru')) {
+            group.innerHTML = '';
+        }
+
+        const div = document.createElement('div');
+        div.className = 'flex flex-col sm:flex-row items-start sm:items-center mb-2 gap-2';
+        div.innerHTML = `
+            <input type="file" name="images[]" accept="image/*"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kemenag-green focus:border-transparent"
+                   onchange="previewImage(this)">
+            <div class="flex sm:ml-2 w-full sm:w-auto">
+                <button type="button" onclick="addImageInput()"
+                        class="flex-1 sm:flex-none px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-green-700 transition-colors">+</button>
+                <button type="button" onclick="removeImageInput(this)"
+                        class="flex-1 sm:flex-none ml-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors">-</button>
+            </div>
+        `;
+        group.appendChild(div);
+    }
+
+    // Hapus input file baru
+    function removeImageInput(btn) {
+        const wrapper = btn.closest('.flex.flex-col');
+        const input = wrapper.querySelector('input[type=file]');
+        if (input && input._previewEl) input._previewEl.remove();
+        wrapper.remove();
+        checkIfNoImagesLeft();
+    }
+
+    // Hapus gambar lama & tambahkan ke daftar hapus
+    function removeExistingImage(btn) {
+        const container = btn.closest('.relative');
+        const imageId = container.getAttribute('data-image-id');
+        const deletedInput = document.getElementById('deleted-images-input');
+        const deletedImages = deletedInput.value ? deletedInput.value.split(',') : [];
+        deletedImages.push(imageId);
+        deletedInput.value = deletedImages.join(',');
+        container.remove();
+        checkIfNoImagesLeft();
+    }
+
+    // Cek apakah tidak ada gambar/input tersisa
+   // Cek apakah input upload kosong → tampilkan tombol Tambah Gambar Baru
+function checkIfNoImagesLeft() {
+    const group = document.getElementById('image-input-group');
+    const inputGroups = group.querySelectorAll('.flex.flex-col');
+
+    // Kalau tidak ada input upload sama sekali → munculkan tombol tambah lagi
+    if (inputGroups.length === 0) {
+        group.innerHTML = `
+            <button type="button" onclick="addImageInput()"
+                    class="w-full sm:w-auto px-3 py-2 bg-kemenag-green text-white rounded-lg hover:bg-kemenag-light-green transition-colors cursor-pointer">
+                + Tambah Gambar Baru
+            </button>
+        `;
+    }
+}
+
+</script>
 @endsection

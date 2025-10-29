@@ -21,9 +21,28 @@
         </div>
     </div>
 
+    {{-- Deskripsi --}}
     <div class="mb-6">
         <h4 class="font-semibold text-gray-700 mb-2">Deskripsi</h4>
         <div class="bg-gray-50 rounded p-4 text-gray-700">{{ $layanan->deskripsi }}</div>
+    </div>
+
+    {{-- Gambar Layanan --}}
+    <div class="mb-6">
+        <h4 class="font-semibold text-gray-700 mb-2">Gambar Layanan</h4>
+        @if ($layanan->images && $layanan->images->count())
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                @foreach ($layanan->images as $image)
+                    <div class="relative group">
+                        <img src="{{ asset('storage/' . $image->image) }}"
+                             alt="Gambar Layanan"
+                             class="w-full h-40 object-cover rounded-lg shadow-md transition-transform duration-200 group-hover:scale-105">
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-500">Belum ada gambar untuk layanan ini.</p>
+        @endif
     </div>
 
     {{-- Persyaratan --}}

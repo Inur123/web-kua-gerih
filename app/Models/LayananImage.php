@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class LayananImage extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['layanan_id', 'image'];
+
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class);
+    }
+}

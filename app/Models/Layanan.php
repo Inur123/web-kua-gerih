@@ -43,5 +43,10 @@ class Layanan extends Model
         return $this->hasMany(Survey::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(LayananImage::class);
+    }
+
 
 }
